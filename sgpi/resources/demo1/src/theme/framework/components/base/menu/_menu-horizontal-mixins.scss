@@ -1,0 +1,947 @@
+//
+// Horizontal Menu Mixins
+//
+
+
+
+
+// Helpers
+@mixin k-menu-hor-item-base($item) {
+	// item
+	padding: k-get($item, self, padding);
+
+	// link
+	> .k-menu__link {
+		transition: all 0.3s ease;
+		cursor: pointer;
+		padding: k-get($item, link, self, padding);
+
+		&:hover {
+			transition: all 0.3s ease;
+		}
+
+		// link icon
+		.k-menu__link-icon {	
+			font-size: k-get($item, link, icon, font-size);
+			width: k-get($item, link, icon, width);
+			padding: k-get($item, link, icon, padding);
+			line-height: 0;
+		}	
+
+		// link bullet
+		.k-menu__link-bullet {
+			width: k-get($item, link, bullet, self, width);
+
+			@if k-has($item, link, bullet, padding) {
+				padding: k-get($item, link, bullet, padding);
+			}
+
+			> span {
+				vertical-align: middle;
+				display: inline-block;
+			}
+
+			&.k-menu__link-bullet--dot {
+				> span {
+					width: k-get($item, link, bullet, dot, size);
+					height: k-get($item, link, bullet, dot, size);
+					@include k-rounded {
+						border-radius: 100%;
+					}
+				}
+			}
+
+			&.k-menu__link-bullet--line {				
+				> span {
+					width: k-get($item, link, bullet, line, width);
+					height: k-get($item, link, bullet, line, height);
+				}
+			}
+		}
+
+		// link text
+		.k-menu__link-text {
+			font-weight: k-get($item, link, text, font-weight);	
+			font-size: k-get($item, link, text, font-size);
+			text-transform: k-get($item, link, text, font-transform);
+
+			@if k-has($item, link, text, padding) {
+				padding: k-get($item, link, text, padding);
+			}
+		}
+
+		// link badge
+		.k-menu__link-badge {
+			padding: k-get($item, link, badge, padding);
+			justify-content: k-get($item, link, badge, align);
+		}
+
+		// link arrow icon
+		.k-menu__hor-arrow {						
+			font-size: k-get($item, link, arrow, font-size);
+			width: k-get($item, link, arrow, width);
+			justify-content: flex-end;
+
+			@if k-has($item, link, arrow, padding) {
+				padding: k-get($item, link, arrow, padding);
+			}
+		}
+
+		// menu root level "here" arrow
+		.k-menu__item-here {
+			display: none;
+		}
+	}	
+}
+
+@mixin k-menu-hor-item-skin($item) {
+	// item bg color
+	@if k-get($item, self) {
+		&.k-menu__item--hover,
+		&:hover {
+			background-color: k-get($item, self, bg-color, hover);
+		}
+
+		&.k-menu__item--open,
+		&.k-menu__item--active {
+			background-color: k-get($item, self, bg-color, active);
+		}
+	}
+	
+	// link
+	> .k-menu__link {
+		background-color: k-get($item, link, self, bg-color, default);
+
+		// link icon
+		.k-menu__link-icon {	
+			color: k-get($item, link, icon, font-color, default);
+		}	
+
+		// link bullet
+		.k-menu__link-bullet {
+			&.k-menu__link-bullet--dot {
+				> span {
+					background-color: k-get($item, link, bullet, dot, bg-color, default);
+				}
+			}
+
+			&.k-menu__link-bullet--line {				
+				> span {
+					background-color: k-get($item, link, bullet, line, bg-color, default);
+				}
+			}
+		}
+
+		// link text
+		.k-menu__link-text {
+			color: k-get($item, link, text, font-color, default);
+
+			@if k-has($item, link, text, font-weight) {
+				font-weight: k-get($item, link, text, font-weight);
+			}
+		}
+
+		// link arrow icon
+		.k-menu__hor-arrow {						
+			color: k-get($item, link, arrow, font-color, default);
+		}
+	}
+
+	// active state
+	&.k-menu__item--active {					
+		> .k-menu__link {
+			// link bg color
+			background-color: k-get($item, link, self, bg-color, active);
+
+			// link icon
+			.k-menu__link-icon {
+				color: k-get($item, link, icon, font-color, active);
+			}	
+
+			// link bullet
+			.k-menu__link-bullet {
+				&.k-menu__link-bullet--dot {
+					> span {
+						background-color: k-get($item, link, bullet, dot, bg-color, active);
+					}
+				}
+
+				&.k-menu__link-bullet--line {				
+					> span {
+						background-color: k-get($item, link, bullet, line, bg-color, active);
+					}
+				}
+			}
+
+			.k-menu__link-text {
+				color: k-get($item, link, text, font-color, active);
+			}
+
+			// link arrow icon
+			> .k-menu__hor-arrow {						
+				color: k-get($item, link, arrow, font-color, active);
+			}
+		}
+	}
+
+	// here state
+	&.k-menu__item--here {					
+		> .k-menu__link {
+			// link bg color
+			background-color: k-get($item, link, self, bg-color, here);
+
+			// link icon
+			.k-menu__link-icon {
+				color: k-get($item, link, icon, font-color, here);
+			}	
+
+			// link bullet
+			.k-menu__link-bullet {
+				&.k-menu__link-bullet--dot {
+					> span {
+						background-color: k-get($item, link, bullet, dot, bg-color, here);
+					}
+				}
+
+				&.k-menu__link-bullet--line {				
+					> span {
+						background-color: k-get($item, link, bullet, line, bg-color, here);
+					}
+				}
+			}
+
+			.k-menu__link-text {
+				color: k-get($item, link, text, font-color, here);
+			}
+
+			// link arrow icon
+			> .k-menu__hor-arrow {						
+				color: k-get($item, link, arrow, font-color, here);
+			}
+		}
+	}
+
+	// hover state
+	&:hover:not(.k-menu__item--here):not(.k-menu__item--active),
+	&.k-menu__item--hover:not(.k-menu__item--here):not(.k-menu__item--active) {
+		> .k-menu__link {
+			// link bg color
+			background-color: k-get($item, link, self, bg-color, hover);
+			
+			// link icon
+			.k-menu__link-icon {
+				color: k-get($item, link, icon, font-color, hover);
+			}	
+
+			// link bullet
+			.k-menu__link-bullet {
+				&.k-menu__link-bullet--dot {
+					> span {
+						background-color: k-get($item, link, bullet, dot, bg-color, hover);
+					}
+				}
+
+				&.k-menu__link-bullet--line {				
+					> span {
+						background-color: k-get($item, link, bullet, line, bg-color, hover);
+					}
+				}
+			}
+
+			// link text
+			.k-menu__link-text {
+				color: k-get($item, link, text, font-color, hover);
+			}
+
+			// link arrow icon
+			> .k-menu__hor-arrow {						
+				color: k-get($item, link, arrow, font-color, hover);
+			}
+		}
+	}	
+}
+
+@mixin k-menu-hor-item-heading-base($item) {
+	// heading
+	padding: k-get($item, self, padding);
+
+	// text
+	> .k-menu__link-text {
+		font-weight: k-get($item, caption, text, font-weight);	
+		font-size: k-get($item, caption, text, font-size);
+		text-transform: k-get($item, caption, text, font-transform);
+	}
+
+	// icon
+	> .k-menu__link-icon {	
+		font-size: k-get($item, caption, icon, font-size);
+		flex: 0 0 k-get($item, caption, icon, width);
+		justify-content: k-get($item, caption, icon, align);
+		padding: k-get($item, caption, icon, padding);
+	}	
+
+	// badge
+	.k-menu__link-badge {
+		padding: k-get($item, caption, badge, padding);
+		text-align: k-get($item, caption, badge, align);
+	}
+}
+
+@mixin k-menu-hor-item-heading-skin($item) {
+	// text
+	> .k-menu__link-text {
+		color: k-get($item, caption, text, font-color);
+	}
+
+	// icon
+	> .k-menu__link-icon {	
+		color: k-get($item, caption, icon, font-color);
+	}
+}
+
+@mixin k-menu-hor-submenu-width($config) {
+	@include k-media-range(lg, xl) {
+		.#{k-get($config, base, class)} {
+			.k-menu__nav {
+				// menu root item
+				> .k-menu__item {
+					// general submenu
+					.k-menu__submenu {
+						&.k-menu__submenu--full,
+						&.k-menu__submenu--fixed,
+						&.k-menu__submenu--auto,
+						&.k-menu__submenu--auto.k-menu__submenu--mimimal-desktop-wide,
+						&.k-menu__submenu--fixed-xl,
+						&.k-menu__submenu--fixed-xxl {
+							margin: 0 auto;
+							width: auto;
+							left: 20px;
+							right: 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Responsive container widths
+	@each $breakpoint, $breakpoint-width in $k-media-breakpoints {
+	    @media (min-width: $breakpoint-width) {
+	    	.#{k-get($config, base, class)} {
+				.k-menu__nav {
+					// menu root item
+					> .k-menu__item {
+						// general submenu
+						.k-menu__submenu.k-menu__submenu--fixed-#{$breakpoint} {
+					        width: map-get($k-media-breakpoints, $breakpoint) - 60px;
+					    }
+					}
+				}
+			}
+	    }
+	}
+}
+
+@mixin k-menu-hor-base($config) {
+	.#{k-get($config, base, class)} {
+		display: flex;
+		align-items: stretch;
+		height: 100%;
+	    margin: k-get($config, build, layout, self, margin);
+    
+    	// general menu
+		.k-menu__nav {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: stretch;
+
+			// menu root item
+			> .k-menu__item {
+				// general link
+				.k-menu__link {
+					display: flex;
+					text-decoration: none;
+					position: relative;
+					vertical-align: middle;
+					align-items: stretch;
+					outline: none !important;
+					text-decoration: none;
+					cursor: pointer;  				
+					
+					.k-menu__link-text {								
+						display: flex;
+						align-items: center;
+						flex-grow: 1;
+						padding: 0;
+					}
+
+					.k-menu__link-badge {
+						display: flex;
+						align-items: center;
+						line-height: 0;	
+						white-space: nowrap;				
+					}
+
+					// link icon
+					.k-menu__link-icon {
+						display: flex;
+						align-items: center;
+					}	
+
+					// sub menu link arrow icon
+					.k-menu__hor-arrow {						
+						display: flex;
+						align-items: center;
+					}
+
+					// hide sidebar sub menu link arrow icon
+					.k-menu__ver-arrow {
+						display: none;
+					}
+
+					&:hover,
+					&:active,
+					&:focus {
+						text-decoration: none;
+					}
+				}
+
+				// primary link
+				> .k-menu__link {
+					> .k-menu__link-text {	
+						width: auto;
+					}
+				}
+
+				// icon only menu item
+				&.k-menu__item--icon-only {
+					> .k-menu__link {
+						justify-content: center;
+
+						> .k-menu__link-icon {
+							justify-content: center;
+						}
+					}
+				}
+
+				// general submenu
+				.k-menu__submenu {
+					@include k-fix-animation-lags();
+					display: none;
+					z-index: k-get($config, build, layout, item, submenu, self, zindex);		
+					position: absolute;
+					top: 100%;
+
+					.k-menu__subnav {
+						background-color: #eee;		
+						list-style: none !important;
+						padding: 0;
+						margin: 0;
+
+						@include k-rounded {
+							border-radius: k-get($config, build, layout, item, submenu, self, border-radius);
+						}
+					}
+
+					// classic submenu
+					& {
+						width: k-get($config, build, layout, item, submenu, self, width, classic);
+						margin: 0 auto;
+						left: auto;
+		    			right: auto;
+					}
+
+					// full width
+					&.k-menu__submenu--full {
+						margin: 0 auto;
+						width: auto;
+						left: k-get($config, build, layout, item, submenu, self, width, full, offset);
+						right: k-get($config, build, layout, item, submenu, self, width, full, offset);
+					}
+
+					// fixed width options
+					&.k-menu__submenu--fixed {
+						left: auto;
+						right: auto;
+						width: auto;
+					}		
+
+					// alignment right
+					&.k-menu__submenu--right {						
+						right: 0;
+						left: auto;
+
+						&.k-menu__submenu--pull {
+							margin-right: -40px;
+						}
+					}
+
+					// alignment left
+					&.k-menu__submenu--left {
+						right: auto;
+						left: 0;
+
+						&.k-menu__submenu--pull {
+							margin-left: -40px;
+						}
+					}
+
+					// alignment center
+					&.k-menu__submenu--center {
+						margin: 0 auto;
+						left: 0;
+		    			right: 0;
+					}
+
+					// sub menu dropdown
+					> .k-menu__subnav {
+						> .k-menu__item.k-menu__item--submenu {
+							position: relative;
+							padding: 0;
+							margin: 0;
+
+							> .k-menu__submenu {
+								top:0;
+								display: none;
+								margin-top: 0;
+
+								&.k-menu__submenu--left {
+									right: 100%;
+									left: auto;
+								}
+
+								&.k-menu__submenu--right {								
+									left: 100%;		
+									right: auto;			
+								}
+							}
+						}
+					}
+
+					// mega menu content
+					.k-menu__content {
+						display: flex;
+						list-style: none;
+						padding: 0;
+						margin: 0;
+
+						> .k-menu__item {
+							padding: 0;
+							margin: 0;
+							display: flex;
+							flex-direction: column;
+					    	flex-grow: 1;
+
+					    	&:last-child {
+					    		border-right: 0;
+					    	}
+						}
+					}			
+
+					// mega heading
+					.k-menu__heading {
+						display: flex;
+						align-items: center;
+						padding: 0;
+						margin: 0;
+						text-decoration: none;
+						position: relative;
+								
+						.k-menu__link-text {
+							display: flex;
+							align-items: center;
+							flex-grow: 1
+						}
+
+						.k-menu__link-badge {
+							display: flex;
+							align-items: center;
+							white-space: nowrap;				
+						}
+
+						// link icon
+						.k-menu__link-icon {
+							display: flex;
+							align-items: center;
+							font-size: 18px;
+							padding: 0 10px 0 0;
+						}	
+
+						// sub menu link arrow icon
+						.k-menu__hor-arrow {						
+							display: flex;
+							align-items: center;
+							padding: 0 0 0 10px;
+						}
+
+						// hide sidebar sub menu link arrow icon
+						.k-menu__ver-arrow {
+							display: none;
+						}
+					}
+				}
+				
+				.k-menu__inner,
+				.k-menu__subnav {
+					list-style: none;
+					margin: 0;
+					padding: 0;
+			 
+					> .k-menu__item {
+						display: flex;
+						flex-grow: 1;
+						margin: 0; 
+						padding: 10px 20px;
+
+						.k-menu__link {
+							display: flex;
+							align-items: center;
+							flex-grow: 1;
+							text-decoration: none;
+							position: relative;
+
+							&:hover,
+							&:active,
+							&:focus {
+								outline: none;
+								text-decoration: none;
+							}							
+								
+							.k-menu__link-text {
+								display: flex;
+								align-items: center;
+								font-weight: k-get($config, build, layout, item, submenu, item, link, text, font-weight);	
+								color: k-get($config, build, layout, item, submenu, item, link, text, font-color, default);
+								font-size: k-get($config, build, layout, item, submenu, item, link, text, font-size);
+								text-transform: k-get($config, build, layout, item, submenu, item, link, text, font-transform);
+							}
+
+							.k-menu__link-badge {
+								display: flex;
+								align-items: center;	
+								white-space: nowrap;				
+								padding: k-get($config, build, layout, item, submenu, item, link, badge, padding);
+								text-align: k-get($config, build, layout, item, submenu, item, link, badge, align);
+							}
+
+							// link icon
+							.k-menu__link-icon {
+								display: flex;
+								align-items: center;
+								flex: 0 0 k-get($config, build, layout, item, submenu, item, link, icon, width);
+								padding: k-get($config, build, layout, item, submenu, item, link, icon, padding);
+								color: k-get($config, build, layout, item, submenu, item, link, icon, font-color, default);
+								font-size: k-get($config, build, layout, item, submenu, item, link, icon, font-size);
+								text-align: k-get($config, build, layout, item, submenu, item, link, icon, align);
+							}	
+
+							// menu item link's icon part
+							.k-menu__link-bullet {
+								display: flex;
+								align-items: center;
+								line-height: 0;
+							}
+
+							// sub menu link arrow icon
+							.k-menu__hor-arrow {						
+								display: flex;
+								align-items: center;
+								padding: k-get($config, build, layout, item, submenu, item, link, arrow, padding);
+							}
+
+							// hide sidebar sub menu link arrow icon
+							.k-menu__ver-arrow {
+								display: none;
+							}
+						}
+					}
+				}
+
+				.k-menu__inner {
+					padding: 0;
+				}	
+
+				// sub dropdown menu space
+				@if k-has($config, build, layout, item, submenu, self, space) {
+					.k-menu__submenu {
+						.k-menu__submenu {					
+							margin-left: k-get($config, build, layout, item, submenu, self, space);
+
+							&.k-menu__submenu--left {								
+								margin-right: k-get($config, build, layout, item, submenu, self, space);
+							}
+						}
+					}	
+				}							
+
+				// tabs integration
+				&.k-menu__item--submenu.k-menu__item--tabs > .k-menu__submenu > .k-menu__subnav > .k-menu__item.k-menu__item--submenu {
+					> .k-menu__submenu {
+						top:100%;
+
+						&.k-menu__submenu--left {
+							right: 100%;
+							left: 0;
+						}
+
+						&.k-menu__submenu--right {								
+							left: 100%;		
+							right: 0;			
+						}
+					}
+				}
+			}	
+		}
+
+		// root menu
+		.k-menu__nav {
+			> .k-menu__item {		
+				display: flex;
+				align-items: center;
+				padding: k-get($config, build, layout, item, self, padding);
+				
+				// used for classic submenus
+				&.k-menu__item--rel {
+					position: relative;			
+				}
+
+				@include k-menu-hor-item-base( k-get($config, build, layout, item) );
+
+				// submenu
+				.k-menu__submenu {
+					> .k-menu__subnav {
+						padding: k-get($config, build, layout, item, submenu, self, padding, megamenu);	
+
+						@include k-rounded {
+							border-radius: k-get($config, build, layout, item, submenu, self, border-radius);
+						}
+
+						> .k-menu__item {
+							@include k-menu-hor-item-base(k-get($config, build, layout, item, submenu, item));
+						}
+
+						// mega submenu
+						.k-menu__content {
+							align-items: stretch;
+							// separator
+							> .k-menu__item {
+								flex-grow: 1;
+								flex-basis: 0;
+
+								&:last-child {
+									border-right:0 !important;  
+								}
+							}	
+
+							// heading
+							.k-menu__heading {
+								@include k-menu-hor-item-heading-base(k-get($config, build, layout, item, submenu, item, column, heading));
+							}
+
+							// mega menu 
+							.k-menu__inner {
+								padding: k-get($config, build, layout, item, submenu, item, column, self, padding);	
+
+								> .k-menu__item {
+									@include k-menu-hor-item-base(k-get($config, build, layout, item, submenu, item));
+								}
+							}
+						}
+					}
+					
+					&.k-menu__submenu--classic {
+						> .k-menu__subnav {
+							padding: k-get($config, build, layout, item, submenu, self, padding, classic);	
+						}
+					}
+
+					// inline submenu
+					&.k-menu__submenu--inline {
+						display: flex;
+						flex: 0 0 auto;
+
+						> .k-menu__subnav {
+							> .k-menu__item {
+								display: flex;
+								padding: 5px 0;
+							}
+						}						
+					}					
+				}		
+			}
+
+			// general submenu hover effect
+			.k-menu__item {
+				// menu resize item
+				&.k-menu__item--resize {
+					display: none;
+				}
+
+				// menu item hover
+				&.k-menu__item--active-tab,
+				&.k-menu__item--hover {
+					.k-menu__submenu {
+						display: block;
+						animation: #{k-get($config, base, class)}-submenu-fade-in .3s ease 1, #{k-get($config, base, class)}-submenu-move-down .3s ease-out 1;
+						
+						// ie8-11 versions hack
+                    	@include k-hack-ie {
+                        	animation: none;
+                    	}
+
+						> .k-menu__subnav > .k-menu__item.k-menu__item--hover {
+							> .k-menu__submenu {
+								display: block;
+								animation: #{k-get($config, base, class)}-submenu-fade-in .3s ease 1, #{k-get($config, base, class)}-submenu-move-up .3s ease-out 1;
+							
+								// ie8-11 versions hack
+                    			@include k-hack-ie {
+                        			animation: none;
+                    			}
+							}
+						}
+					}
+				}			
+			}
+		}
+	}
+}
+
+@mixin k-menu-hor-skin($base-class, $config) {
+	.#{$base-class} {
+		// root level items
+		@if k-has($config, item, link) {
+			.k-menu__nav {
+				> .k-menu__item {	
+					@if k-get($config, item, self) {
+						&.k-menu__item--hover,
+						&:hover {
+							background-color: k-get($config, item, self, bg-color, hover);
+						}
+
+						&.k-menu__item--open,
+						&.k-menu__item--active {
+							background-color: k-get($config, item, self, bg-color, active);
+						}
+					}
+
+					@include k-menu-hor-item-skin(k-get($config, item));
+				}
+			}
+		}
+	
+		// submenu level items
+		.k-menu__nav {
+			> .k-menu__item {			
+				// classic submenu
+				.k-menu__submenu {
+					> .k-menu__subnav {
+						background-color: k-get($config, item, submenu, self, bg-color);
+						box-shadow: k-get($config, item, submenu, self, box-shadow);
+
+						// submenu item
+						> .k-menu__item {
+							@include k-menu-hor-item-skin(k-get($config, item, submenu, item));
+						}
+
+						// mega submenu
+						.k-menu__content {
+							// separator
+							> .k-menu__item {
+								border-right: k-get($config, item, submenu, item, column, separator, border);
+							}		
+
+							// heading
+							.k-menu__heading {
+								@include k-menu-hor-item-heading-skin(k-get($config, item, submenu, item, column, heading));
+							}
+
+							// mega menu 
+							.k-menu__inner {
+								> .k-menu__item {
+									@include k-menu-hor-item-skin(k-get($config, item, submenu, item));
+								}
+							}
+						}
+					}
+				}				
+			}
+		}
+	}
+}
+
+// Build
+// Build Skin
+@mixin k-menu-hor-build-skin($config, $skin) {
+	$skin-config: ();
+
+	@if ($skin == default) {
+		$skin-config: k-get($config, build, skin);
+	} @else {
+		$skin-config: k-get($config, build, skins, $skin);
+	}
+	
+	// Base vertical menu
+	@if (k-get($config, base, mode) == general) {
+		
+		@include k-menu-hor-skin(k-get($config, base, class), $skin-config);		
+
+	} @else if (k-get($config, base, mode) == desktop) {
+
+		@include k-desktop {
+			@include k-menu-hor-skin(k-get($config, base, class), $skin-config);
+		}
+
+	} @else if (k-get($config, base, mode) == desktop-and-tablet) {		
+
+		@include k-desktop-and-tablet {
+			@include k-menu-hor-skin(k-get($config, base, class), $skin-config);
+		}			
+	}	
+}
+
+// Build Layout
+@mixin k-menu-hor-build-layout($config) {
+	// Base vertical menu
+	@if (k-get($config, base, mode) == general) {
+		
+		@include k-menu-hor-base($config);
+
+	} @else if (k-get($config, base, mode) == desktop) {
+
+		@include k-desktop {
+			@include k-menu-hor-base($config);
+		}
+
+		@include k-menu-hor-submenu-width($config);
+
+	} @else if (k-get($config, base, mode) == desktop-and-tablet) {		
+
+		@include k-desktop-and-tablet {
+			@include k-menu-hor-base($config);
+		}			
+	}	
+	
+	// Horizontal Menu Hoverable Submenu Animations
+	@keyframes #{k-get($config, base, class)}-submenu-fade-out {
+	    from   { opacity: 1; }
+	    to { opacity: 0; }
+	}
+
+	@keyframes #{k-get($config, base, class)}-submenu-fade-in {
+	    from   { opacity: 0; }
+	    to { opacity: 1; }
+	}
+
+	@keyframes #{k-get($config, base, class)}-submenu-move-up {
+	    from   { margin-top: k-get($config, build, layout, item, submenu, self, animation, offset); }
+	    to { margin-top: 0; }
+	}
+
+	@keyframes #{k-get($config, base, class)}-submenu-move-down {
+	    from   { margin-top: -(k-get($config, build, layout, item, submenu, self, animation, offset)); }
+	    to { margin-top: 0; }
+	}
+}

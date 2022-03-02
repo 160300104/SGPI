@@ -1,0 +1,92 @@
+//
+// Iconbox
+//
+
+
+
+
+// General
+.k-iconbox {
+	text-align:center;
+	padding:3.25rem 1.7rem 2rem 1.7rem;
+	background-color: #fff;
+	border: 2px solid;
+	border-color: transparent;
+	@include k-hover-transition;
+
+	@include k-rounded {
+		border-radius: 0.35rem;
+	}
+
+	&.k-iconbox--elevate {
+		box-shadow: $k-elevate-shadow;
+	}
+
+	&.k-iconbox--active{
+		border-color: k-state-color(brand, base);
+	}
+
+	&:hover {
+		box-shadow: $k-elevate-shadow;
+	}
+
+	&.k-iconbox--no-hover{
+
+		&:hover{
+			box-shadow: none;
+		}
+	}
+
+	.k-iconbox__icon{
+		margin-bottom: 2.7rem;
+		color: k-state-color(brand, base);
+		font-size: 5rem;
+		position:relative;
+
+		.k-iconbox__icon-bg{
+    		background-image: url(../../../media/misc/iconbox_bg.png);
+    		background-size: contain;
+    		background-position: center;
+    		background-repeat: no-repeat;
+    		width: 12rem;
+    		height: 12rem;
+    		display:block;
+    		position:absolute;
+    		top: -2.5rem;
+    		left: 0;
+    		right: 0;
+    		margin: auto;
+    		opacity: 0.06;
+    		z-index: 0;    		
+		}
+
+		> i{
+			position: relative;
+			z-index: 1;
+		}
+	}
+
+	.k-iconbox__title{
+		margin-bottom: 1.2rem;
+		color: #464457;
+		font-size:1.2rem;
+		font-weight: 500;
+	}
+
+	.k-iconbox__content{
+		
+	}
+
+	// State colors
+	@each $name, $color in $k-state-colors {
+		&.k-iconbox--#{$name} {
+			&.k-iconbox--active{
+				border-color: k-get($color, base);
+			}
+
+			.k-iconbox__icon{
+				color: k-get($color, base);
+			}
+		}
+	}
+}

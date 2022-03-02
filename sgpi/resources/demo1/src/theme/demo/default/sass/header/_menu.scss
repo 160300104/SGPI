@@ -1,0 +1,40 @@
+//
+// Header Menu
+//
+
+
+
+
+// Desktop Mode
+@include k-menu-hor-build-layout(k-get($k-header-config, menu, desktop));
+
+// Tablet & Mobile Mode
+@include k-menu-ver-build-layout(k-get($k-header-config, menu, tablet-and-mobile));
+@include k-menu-ver-build-skin(k-get($k-header-config, menu, tablet-and-mobile), default);
+
+// Header Menu Mobile Offcanvas
+@include k-offcanvas-build(k-header-menu-wrapper, tablet-and-mobile, k-get($k-header-config, menu, offcanvas-mobile));
+
+@include k-desktop {
+	.k-header-menu {
+		.k-menu__nav {
+			> .k-menu__item {
+				&:first-child {
+					padding-left: 0;
+				}
+
+				> .k-menu__link {
+					border-radius: 3px;
+					padding: 0.65rem 1.1rem;
+				}
+
+				> .k-menu__submenu {
+					> .k-menu__subnav {
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+					}
+				}
+			}
+		}
+	}
+}

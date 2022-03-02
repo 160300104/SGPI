@@ -1,0 +1,48 @@
+//
+// Widget 9
+//
+
+
+
+
+// General Mode
+.k-widget-9 {	 
+	.k-widget-9__panel {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		.k-widget-9__legends {
+			display: flex;
+			align-items: center;
+
+			.k-widget-9__legend {
+				display: flex;
+				align-items: center;
+				padding-right: 2rem;
+
+				.k-widget-9__legend-bullet {
+					width: 15px;
+					height: 5px;
+					border-radius:3px;
+				}
+
+				.k-widget-9__legend-label {
+					padding-left: 0.75rem;
+					font-weight: 500;
+					color: k-base-color(label, 2);
+				}
+			}
+		}
+
+		.k-widget-9__toolhar {
+			padding-left: 0.5rem;
+		}
+	}  
+
+	.k-widget-9__chart {
+		margin-top: 40px;
+		position: relative;
+	}
+}

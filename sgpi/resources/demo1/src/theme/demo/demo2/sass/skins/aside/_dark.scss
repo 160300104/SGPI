@@ -1,0 +1,25 @@
+//
+// Aside Dark Skin
+//
+
+
+
+// Build skin
+.k-aside.k-aside--skin-dark {
+	background-color: #1b2736;
+
+	.k-aside-menu.k-aside-menu--skin-dark {
+		.k-menu__nav {
+			.k-menu__item {
+				&.k-menu__item--active {
+					> .k-menu__link {		
+						background-color: #121f2f;	
+					}				
+				}
+			}
+		}
+	}
+
+	// Scrollbar
+	@include k-perfect-scrollbar-skin( lighten(#1b2736, 18%) );
+}

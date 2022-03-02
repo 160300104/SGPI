@@ -1,0 +1,65 @@
+//
+// Dropzone
+//
+
+
+
+
+// Base
+@mixin k-dropzone-base() {
+    .dropzone {
+        @include k-rounded {
+            border-radius: $k-border-radius;
+        }
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+
+        .dropzone-msg-title {
+        	margin: 0 0 5px 0;
+        	padding: 0;
+        	font-weight: 600;
+        	font-size: 1.1rem;
+        }
+
+        .dropzone-msg-desc {
+        	font-size: 0.9rem;
+        }
+
+        .dz-preview {
+        	.dz-image {
+                @include k-rounded {
+        		  border-radius: $k-border-radius;
+        	    }
+            }
+        }
+    }
+}
+
+// Component Skin
+@mixin k-dropzone-skin() {
+    .dropzone {
+        border: 2px dashed k-base-color(grey, 2);
+
+        .dropzone-msg-title {
+        	color: k-base-color(label, 3);
+        }
+
+        .dropzone-msg-desc {
+        	color: k-base-color(label, 2);
+        }
+    
+        // State colors
+        @each $name, $color in $k-state-colors {
+            &.dropzone-#{$name} {
+                border-color: k-get($color, base);
+            } 
+        }
+    }
+}
+
+// Base
+@include k-dropzone-base();
+
+// Skin
+@include k-dropzone-skin();

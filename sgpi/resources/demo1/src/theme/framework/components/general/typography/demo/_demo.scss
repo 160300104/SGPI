@@ -1,0 +1,33 @@
+.k-demo-icon  {
+    margin-bottom: 20px; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+
+    .k-demo-icon__preview {
+        display: flex;
+        padding-right: 5px;
+        flex: 0 0 40px;  
+        color: k-get-brand-color();
+
+        i {
+            line-height: 0;
+            vertical-align: middle;
+            font-size: 2rem !important; 
+        }
+    }
+
+    .k-demo-icon__class {
+        color: #aaa;
+        display: flex;
+        flex-grow: 1;
+        padding: 0;
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+    &:hover {
+        background-color: k-base-color(grey, 1);
+    }
+}

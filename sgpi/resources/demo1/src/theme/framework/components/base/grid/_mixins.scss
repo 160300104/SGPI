@@ -1,0 +1,117 @@
+//
+// Grid Mixins
+//
+
+
+
+
+@mixin k-grid-generate($mode) {
+	$mode-class: '';
+	$mode-dir: '';
+
+	// Grid mode
+	@if ($mode == general) {
+		$mode-class: ":not(.k-grid--desktop):not(.k-grid--desktop-and-tablet):not(.k-grid--tablet):not(.k-grid--tablet-and-mobile):not(.k-grid--mobile)";
+	} @else {
+		$mode-class: ".k-grid--" + $mode;
+		$mode-dir: "-" + $mode;
+	}
+
+	// Horizontal grid
+	.k-grid.k-grid--hor#{$mode-dir}#{$mode-class} {	
+		display: flex;
+		flex-direction: column;
+
+		&.k-grid--root {
+			flex: 1;
+			-ms-flex: 1 0 0px; // IE10-11 fix
+		}
+		
+		> .k-grid__item {
+			flex: none;
+
+			&.k-grid__item--fluid,
+			&.k-grid__item--fluid#{$mode-dir} {
+				flex: 1 0 auto;
+				//-ms-flex: 1 0 0px;  // IE10-11 fix
+			}	
+		}
+
+		// flex ordering
+		@for $i from 1 through 12 {
+			> .k-grid__item.k-grid__item--order-#{$i}#{$mode-dir} {
+				order: $i;
+			}
+		}
+	}
+
+	// Vertical grid
+	.k-grid.k-grid--ver#{$mode-dir}#{$mode-class} {	
+		display: flex;
+		flex-direction: row;
+
+		&.k-grid--root {
+			flex: 1;
+			-ms-flex: 1 0 0px;  // IE10-11 fix
+		}
+		 
+		> .k-grid__item {
+			flex: 0 0 auto;
+
+			&.k-grid__item--fluid,
+			&.k-grid__item--fluid#{$mode-dir} {
+				flex: 1 auto; 
+				-ms-flex: 1 0 0px;  // IE10-11 fix
+				min-width: 0;
+
+				@include k-hack-ie {
+					min-width: none;  // IE10-11 fix
+				}				
+			}			 
+		}
+
+		// flex ordering
+		@for $i from 1 through 12 {
+			> .k-grid__item.k-grid__item--order-#{$i}#{$mode-dir} {
+				order: $i;
+			}
+		}
+	}	 
+
+	// Grid item order
+	.k-grid {
+		// horizontal items aligment
+		&.k-grid--center {
+			align-content: center;
+		}	
+
+		&.k-grid--stretch {
+			align-items: stretch;
+		}	
+
+		// vertical item alignment
+		> .k-grid__item {		
+			max-width:100%;
+			
+			&.k-grid__item--top {
+				align-self: flex-start;
+			}
+
+			&.k-grid__item--middle {
+				align-self: center;
+			}
+		 
+
+			&.k-grid__item--bottom {
+				align-self: flex-end;
+			}
+		}
+
+		// flex ordering
+		@for $i from 1 through 12 {
+			> .k-grid__item.k-grid__item--order-#{$i} {
+				order: $i;
+			}
+		}
+	}
+}

@@ -1,0 +1,53 @@
+//
+// Brand Brand Skin
+//
+
+
+
+// Include framework config
+@import "../../../../../framework/config";
+
+// Include demo config
+@import "../../config";
+
+// Desktop mode
+@include k-desktop {
+	.k-aside__brand {
+	    background-color: k-get($k-layout-skins, brand);
+    	box-shadow: none;
+
+    	.k-aside__brand-tools {
+			@include k-burger-icon-skin(k-aside__brand-aside-toggler, (default: #8ca0fe, hover: #ffffff, active: #ffffff) );		
+		}
+	}
+}
+
+// Tablet and mobile mode
+@include k-tablet-and-mobile {
+	.k-header-mobile {
+		background-color: k-get($k-layout-skins, brand);
+		box-shadow: 0px 1px 9px -3px rgba(0,0,0,0.1);
+
+		.k-header__topbar--mobile-on & {
+			box-shadow: none;
+		}
+
+		// Toolbar
+		.k-header-mobile__toolbar {
+			@include k-burger-icon-skin(k-header-mobile__toolbar-toggler, (default: #8ca0fe, hover: #ffffff, active: #ffffff) );	
+
+			.k-header-mobile__toolbar-topbar-toggler {
+				i {
+					color: #8ca0fe;
+				}
+
+				&.k-header-mobile__toolbar-topbar-toggler--active,
+				&:hover {
+					i {
+						color: #ffffff;
+					}
+				}
+			}
+		}
+	}
+}

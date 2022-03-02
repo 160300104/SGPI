@@ -1,0 +1,237 @@
+//
+// Bootstrap Datetimepicker
+//
+
+
+
+
+// Component Base
+@mixin k-bootstrap-datetimepicker-base() {
+    .datetimepicker  {
+    	width: 265px;
+    	padding: 10px;
+        left: auto;
+
+        @include k-not-rounded {
+            border-radius: 0 !important;
+        }
+
+    	&.datetimepicker-orient-top {
+    		margin-top: 8px;
+    	}
+
+    	table {
+    		width: 100%;
+    	}
+
+    	td, th {
+    		width: 35px;
+    		height: 35px;
+    		border-radius: 3px;
+    		font-weight: normal;
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+    	}
+
+    	thead {
+    		th {
+                i {
+                    font-size: 1.2rem;
+                }
+
+    			&.prev,
+    			&.switch,
+    			&.next {
+    				font-weight: 500;
+    			}
+
+    			&.dow {
+    				font-weight: 500;
+    			}
+
+    			&.next,
+    			&.prev {
+    				> span {
+    					display: inline-block;
+					    font: normal normal normal 16px/1 "LineAwesome";
+					    font-size: inherit;
+					    text-decoration: inherit;
+					    text-rendering: optimizeLegibility;
+					    text-transform: none;
+					    -moz-osx-font-smoothing: grayscale;
+					    -webkit-font-smoothing: antialiased;
+					    font-smoothing: antialiased;
+                        font-size: 1.2rem;
+    				}
+    			}
+
+    			&.next {
+    				> span {
+    					&:before {
+    						content: "\f112";
+    					}
+    				}
+    			}
+
+    			&.prev {
+    				> span {
+    					&:before {
+    						content: "\f111";
+    					}
+    				}
+    			}
+    		}
+    	}
+
+    	tbody {
+    		tr > td {
+    			&.day {
+
+	    			&.today {
+	    				position: relative;
+
+	    				&:before {
+						  	content: '';
+						  	display: inline-block;
+						  	border: solid transparent;
+						  	border-width: 0 0 7px 7px;
+						  	border-bottom-color: #ffffff;
+						  	border-top-color: rgba(0, 0, 0, 0.2);
+						  	position: absolute;
+						  	bottom: 4px;
+						  	right: 4px;
+						}
+	    			}	
+    			}    				
+    		}
+    	}
+
+    	tfoot {
+    		tr > th {
+    			&.today,
+    			&.clear {
+                    @include k-rounded {
+    				    border-radius: 3px;
+                    }
+    				font-weight: 500;  
+    			}
+    		}
+    	}
+    }
+
+    .input-daterange {
+    	.input-group-addon {
+    		min-width: 44px;
+   		}
+   	}
+}
+
+// Component Skin
+@mixin k-bootstrap-datetimepicker-skin() {
+
+    .datetimepicker  {
+        thead {
+            th {
+                &.prev,
+                &.switch,
+                &.next {
+                    color: k-base-color(label, 2);
+
+                    .glyphicon {
+                        color: k-base-color(label, 2);
+                    }
+
+                    &:hover {
+                        background: k-base-color(grey, 1);
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr > td {
+                span {
+                    color: k-base-color(label, 3);
+                }
+
+                &.day {
+                    color: k-base-color(label, 3);
+
+                    &:hover {
+                        background: k-base-color(grey, 1);
+                    }
+
+                    &.old {
+                        color: k-base-color(label, 2);
+                    }
+
+                    &.new {
+                        color: k-base-color(label, 3);
+                    }    
+
+                    &.selected,
+                    &.active {
+                        background: k-state-color(primary, base);
+                        color: k-state-color(primary, inverse);
+                    }   
+
+                    &.today {
+                        background: lighten(k-state-color(primary, base), 10%);
+                        color: k-state-color(primary, inverse);
+                        position: relative;
+
+                        &:before {
+                            border-bottom-color: #ffffff;
+                            border-top-color: rgba(0, 0, 0, 0.2);
+                        }
+                    }   
+
+                    &.range {
+                        background: k-base-color(grey, 1);
+                    }
+                }       
+
+                span.year,
+                span.hour,
+                span.minute,
+                span.month {
+                    color: k-base-color(label, 3);
+
+                    &.focused,
+                    &:hover {
+                        background: k-base-color(grey, 1);
+                    }
+
+                    &.active:hover,
+                    &.active {
+                        background: k-state-color(primary, base);
+                        color: k-state-color(primary, inverse);
+                    }
+                }               
+            }
+        }
+
+        tfoot {
+            tr > th {
+                &.today,
+                &.clear {
+                    &:hover {
+                        background-color: k-base-color(grey, 1);
+                    }
+                }
+            }
+        }
+
+        &.datetimepicker-inline {
+            border: 1px solid k-base-color(grey, 1);
+        }
+    }
+}
+
+// Component Base
+@include k-bootstrap-datetimepicker-base();
+
+// Component Skin - Light
+@include k-bootstrap-datetimepicker-skin();

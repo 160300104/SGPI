@@ -1,0 +1,154 @@
+//
+// Pricing v1
+//
+
+
+
+
+// Include framework config
+@import "../../../config";
+
+// Component config
+$k-pricing-v1-base-color: #b2afc6;
+$k-pricing-v1-label-color: #9b98af;
+$k-pricing-v1-currency-color: #cccce3;
+
+.k-pricing-v1 {
+	margin: 2rem 0;
+	padding: 0 2rem;
+	border-right: 1px solid #ebebf5;
+
+	@include k-media-below(xl) {
+		@at-root
+		div[class*='col-']{
+			&:nth-child(2n){
+				.k-pricing-v1{
+					border-right-width:0;
+				}
+			}
+		}
+
+		border-right: 0;
+		margin: 0 2rem ;
+		padding: 2rem 0;
+		border-bottom: 1px solid #ebebf5;
+	}
+
+	&--last{
+		border-right: 0;
+
+		@include k-tablet-and-mobile{
+			border-bottom: 0;
+		}
+	}
+
+	.k-pricing-v1__header{
+
+		.k-iconbox__icon{
+			margin-bottom: 3rem;
+		}
+
+		.k-iconbox__title{
+			font-size: 1.7rem;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+	}
+
+	.k-pricing-v1__body{
+		display: flex;
+		flex-direction: column;
+		flex:1;
+		justify-content: center;
+		align-items: center;
+
+		.k-pricing-v1__labels{
+			display:flex;
+			flex-wrap: wrap;
+			flex: 1;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 1.25rem;
+
+			.k-pricing-v1__labels-item{
+				color: $k-pricing-v1-label-color;
+				font-size:1.15rem;
+				font-weight: 500;
+
+				&:after{
+					content: '•';
+					align-self:center;
+					margin: 0 1rem;
+					color: lighten($k-pricing-v1-label-color, 20%);
+				}
+
+				&:first-child{
+					margin-left: 0;
+				}
+
+				&:last-child{
+					padding-right: 0;
+
+					&:after{
+						content: none;
+					}
+				}
+			}
+		}
+
+		.k-pricing-v1__content{
+			color: $k-pricing-v1-base-color;
+			text-align: center;
+			padding: 0 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.k-pricing-v1__price{
+			font-weight: 700;
+			font-size:4rem;
+			text-align: center;
+			margin-bottom: 2rem;
+			display: flex;
+
+			.k-pricing-v1__price-currency{
+				color: $k-pricing-v1-currency-color;
+				font-size:1.75rem;
+				font-weight: 300;
+				align-self:top;
+				margin-top: 1rem;
+				margin-left: 0.4rem;
+			}
+		}
+
+		.k-pricing-v1__button{
+			margin-bottom: 2.75rem;
+		}
+	}		
+
+	// State colors
+	@each $name, $color in $k-state-colors {
+		&.k-pricing-v1--#{$name}{
+			.k-pricing-v1__header{
+
+				.k-iconbox__icon{
+					color: k-get($color, base);
+				}
+			}
+
+			.k-pricing-v1__price .k-pricing-v1__price-currency{
+				color: lighten(k-get($color, base), 20%);
+			}
+
+			.k-pricing-v1__button .btn{
+				background-color: k-get($color, base);
+				color: k-get($color, inverse);
+				border-color: k-get($color, base);
+
+				&:hover,
+				&:focus{
+					background-color: darken(k-get($color, base), 10%);
+				}
+			}
+		}
+	}
+}

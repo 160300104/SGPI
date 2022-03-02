@@ -1,0 +1,106 @@
+//
+// Modal
+//
+
+
+
+
+// Base
+@mixin k-modal-base() {
+    // Base
+    .modal {    
+        .modal-content {
+            @include k-rounded {
+                border-radius: $k-border-radius;
+            }
+
+            .modal-header {                
+                .modal-title {
+                    font-weight: 500;
+                    font-size: 1.3rem;
+                    color: k-base-color(label, 4);
+
+                    small {
+                        font-weight: 400;
+                        font-size: 0.9rem;
+                        color: k-base-color(label, 2);
+                    }
+                }
+
+                .close  {
+                    color: k-base-color(label, 2);
+                    @include k-close-icon();
+                    @include k-hover-transition();
+                    
+                    &:before {
+                        font-size: 1.3rem;
+                    }
+                    
+                    outline:none !important;
+                    span {
+                        display: none;    
+                    }
+
+                    &:hover {
+                        color: k-brand-color();
+                    }
+                }
+            }
+        }    
+    }
+
+    .modal-open {
+        overflow: auto !important;
+        padding: 0 !important;
+    }
+
+    .modal-body {
+        &.modal-body-fit {
+            padding: 0;
+        }
+
+        &.modal-body-x-fit {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &.modal-body-y-fit {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    @include k-media-above(xl) {
+        .modal-dialog.modal-xl { 
+            max-width: k-media-breakpoint(xl) - 100px; 
+        } 
+    }
+}
+
+// Skin
+@mixin k-modal-skin() {
+    .modal {    
+        .modal-content {
+            //box-shadow: ;
+
+            .modal-header {
+                .modal-title {
+                    color: k-base-color(label, 4);
+                }
+
+                .close  {
+                    span {
+                        color: k-base-color(label, 2);
+                    }
+                }
+            }
+        }   
+    }
+}
+
+// Build
+// Base
+@include k-modal-base();
+
+// Skin
+@include k-modal-skin();

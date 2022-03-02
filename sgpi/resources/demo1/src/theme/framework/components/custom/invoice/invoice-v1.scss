@@ -1,0 +1,245 @@
+//
+// Invoice v1
+//
+
+
+
+
+// Include framework config
+@import "../../../config";
+
+// Component config
+$k-invoice1-font-color: #aaabf7;
+$k-invoice1-body-title: #babac6;
+$k-invoice1-body-content: #464457;
+
+.k-invoice-v1 {
+	.k-invoice-v1__header{
+		background-image:url('../../media/misc/invoice1-bg.png');
+		background-size:cover;
+		background-position: center;
+		padding: 10rem 20rem;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 10rem 5rem;
+		}
+
+		.k-invoice-v1__title{
+			font-size: 5rem;
+			font-weight: 700;
+			margin-bottom: 5rem;
+			color: k-state-color(brand, inverse);
+			text-align: center;
+		}
+
+		.k-invoice-v1__brand{
+			display:flex;
+			flex:1;
+			flex-wrap: wrap;
+			padding:0 5rem 5rem 5rem;
+			justify-content:center;
+			align-items:center;
+			margin-bottom: 5rem;
+			border-bottom: 1px solid rgba(255,255,255,0.11);
+
+			.k-invoice-v1__logo{
+				
+				img {
+					display: block;
+					width: 9rem;
+					margin-right:2rem;
+				}
+
+				@include k-tablet-and-mobile{
+					margin-bottom: 1.25rem;
+				}
+			}
+
+			.k-invoice-v1__company-info{
+				color: $k-invoice1-font-color;
+				font-size: 1.25rem;
+				font-weight: 500;
+
+				@include k-tablet-and-mobile{
+					text-align: center;		
+				}
+			}
+		}
+
+		.k-invoice-v1__details{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+
+			.k-invoice-v1__details-left,
+			.k-invoice-v1__details-right{
+
+				.k-invoice-v1__details-label{
+					font-weight: 700;
+					font-size: 1.25rem;
+					color: k-state-color(brand, inverse);
+					margin-bottom: 1.25rem;
+				}
+
+				.k-invoice-v1__details-value{
+					color: $k-invoice1-font-color;
+					font-size:1.25rem;
+					font-weight: 500;
+				}
+			}
+
+			.k-invoice-v1__details-left{
+				@include k-tablet-and-mobile{
+					margin-bottom: 1.25rem;
+				}				
+			}
+
+			.k-invoice-v1__details-right{
+				.k-invoice-v1__details-date,
+				.k-invoice-v1__details-invoiceno{
+					display: flex;
+					flex-direction:row;
+					justify-content:space-between;
+					flex-wrap:wrap;
+
+					.k-invoice-v1__details-label{
+						margin-right: 4rem;
+					}
+				}
+			}
+		}
+	}
+
+	.k-invoice-v1__body{
+		padding: 10rem 20rem;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 10rem 5rem;
+		}
+
+		.k-invoice-v1__summary{
+			width:100%;
+			margin-bottom: 10rem;
+
+			.k-invoice-v1__summary-header{
+				color: $k-invoice1-body-title;
+				font-weight: 700;
+				font-size:1rem;
+				border-bottom: 1px solid #eaebec;
+				margin-bottom: 0.75rem;
+				letter-spacing: 0.1rem;
+
+				> tr{
+
+					> td{
+						text-align: right;
+						padding-bottom: 0.75rem;
+
+						&:first-child{
+							text-align: left;
+						}
+					}
+				}
+			}
+
+			.k-invoice-v1__summary-body{
+				font-size:1.25rem;
+				font-weight: 500;
+				color: $k-invoice1-body-content;
+
+				> tr{
+
+					&:first-child{
+
+						> td{
+							padding-top:2.25rem;
+						}
+					}
+
+					> td{
+						text-align: right;
+						padding: 1rem 0.5rem;
+
+						&:first-child{
+							text-align: left;
+							padding-left:0;
+						}
+
+						&:last-child{
+							padding-right:0;
+							color: k-state-color(brand, base);
+						}
+					}
+				}
+			}
+		}
+
+		.k-invoice-v1__payment{
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+
+			.k-invoice-v1__payment-title{
+				color: $k-invoice1-body-title;
+				font-weight: 700;
+				font-size:1rem;
+				margin-bottom: 1.5rem;
+				letter-spacing: 0.1rem;
+			}
+
+			.k-invoice-v1__payment-left,
+			.k-invoice-v1__payment-right{
+
+				.k-invoice-v1__payment-label{
+					font-size:1.25rem;
+					font-weight: 500;
+					color: $k-invoice1-body-content;
+				}
+
+				.k-invoice-v1__payment-value{
+					font-size:1.25rem;
+					font-weight: 400;
+					color: #7a8091;
+				}
+			}
+
+			.k-invoice-v1__payment-left{
+				margin-bottom: 1.25rem;
+
+				.k-invoice-v1__payment-account{
+					display:flex;
+					flex-wrap:wrap;
+					flex-direction:row;
+					justify-content: space-between;
+					margin-bottom: 1.25rem;
+
+					.k-invoice-v1__payment-label{
+						margin-right:5rem;
+					}
+				}
+			}
+
+			.k-invoice-v1__payment-right{
+				text-align: right;
+
+				.k-invoice-v1__payment-total{
+					font-size: 2.5rem;
+					color: k-state-color(brand, base);
+					font-weight: 600;
+				}
+
+				.k-invoice-v1__payment-tax{
+					color: $k-invoice1-body-title;
+					font-weight: 700;
+					font-size:1rem;
+					margin-bottom: 0.75rem;
+					letter-spacing: 0.1rem;
+				}
+
+				@include k-tablet-and-mobile{
+					flex: 1;		
+				}
+			}
+		}
+	}
+}

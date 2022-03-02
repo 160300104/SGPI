@@ -1,0 +1,59 @@
+//
+// Error 404 v1
+//
+
+
+
+// Include framework config
+@import "../../../config";
+
+// Component config
+$k-error404-v1-title-color: #fb2f73;
+
+.k-error404-v1{	
+	display:flex;
+	flex:1;
+	justify-content:center;
+	align-items:center;
+	flex-wrap:wrap;
+
+	@include k-mobile{
+		padding: 2rem;
+		align-items:stretch;
+	}	
+
+	.k-error404-v1__content{
+		display: flex;
+		justify-content: flex-start;
+		flex-direction:column;
+
+		@include k-mobile{
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.k-error404-v1__title{
+			font-size: 12rem;
+			color: $k-error404-v1-title-color;
+			font-weight: 700;
+		}
+
+		.k-error404-v1__desc{
+			font-size: 1.5rem;
+		}
+	}
+
+	.k-error404-v1__image{
+		width:50%;
+		position:relative;
+
+		@include k-mobile{
+			width:100%;
+			flex-basis: 100%;
+		}
+
+		.k-error404-v1__image-content{
+			width:100%;
+		}
+	}
+}

@@ -1,0 +1,228 @@
+//
+// Quick Panel
+//
+
+
+// Base
+.k-demo-panel-toggle {
+	background-color: #fff;
+	cursor: pointer;
+	position: fixed;
+	z-index:  k-get($k-demo-panel, self, offcanvas, layout, self, zindex) - 1;
+	right: 0;
+	top: 200px;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding:  1.5rem 0;
+	box-shadow: k-get($k-demo-panel, self, shadow);
+
+	span {
+		writing-mode: vertical-rl;
+		text-orientation: mixed;
+		font-size: 1.3rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: k-brand-color();
+		letter-spacing: 3px;
+	}
+
+	@include k-rounded {
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+	}
+}
+
+.k-demo-panel {
+	background-color: k-get($k-demo-panel, self, bg-color);
+	box-shadow: k-get($k-demo-panel, self, shadow);
+	padding: 2.5rem;
+
+	// Head
+	.k-demo-panel__head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 3rem;
+
+		.k-demo-panel__title {
+			font-size:  1.4rem;
+			font-weight: 500;
+			color: k-base-color(label, 4);
+			margin: 0;
+			padding: 0;
+
+			small {
+				color: k-base-color(label, 2);
+				font-size: 1.1rem;
+			}
+		}
+
+		.k-demo-panel__close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 28px;
+			height: 28px;
+			background-color: k-base-color(grey, 1);
+			@include k-transition();
+
+			i {
+				@include k-transition();
+				font-size: 0.8rem;
+				color: k-base-color(label, 2);
+			}
+
+			@include k-rounded {
+				border-radius: 4px;
+			}
+
+			&:hover {
+				@include k-transition();
+				background-color: k-brand-color();
+
+				i {
+					@include k-transition();
+					color: k-brand-color(inverse);
+				}
+			}
+		}
+	}	
+
+	// Content
+	.k-demo-panel__body {
+		position: relative;
+
+		.ps__rail-y {
+			opacity: 1;
+		}
+
+		.k-demo-panel__item {
+			display: block;
+			margin-bottom: 2rem;
+			outline: 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&:hover {
+				text-decoration: none;
+			}
+
+			.k-demo-panel__item-title {
+				font-size: 1.1rem;
+				font-weight: 500;
+				color: k-base-color(label, 3);
+				text-align: center;
+				margin-bottom: 0.5rem;
+			}
+
+			.k-demo-panel__item-preview {		
+				overflow: hidden;
+				position: relative;
+				@include k-transition();		
+				border: 4px solid k-base-color(grey, 2);
+
+				img {
+					width: 100%;
+				}
+
+				.k-demo-panel__item-preview-overlay {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: rgba(#000, 0.15);
+					@include k-transition();
+					opacity: 0;
+
+					.btn {
+						margin-right: 5px;
+
+						&:last-child {
+							margin-right: 0;
+						}
+
+						&.btn-light {
+							background-color: #fff;
+							color: k-base-color(label, 2);
+
+							&:hover {
+								background-color: #fff;
+								color: k-base-color(label, 3);
+							}
+						}
+					}
+				}
+
+				@include k-rounded {
+					border-radius: 4px;
+				}
+			}
+
+			&.k-demo-panel__item--active {
+				.k-demo-panel__item-preview {
+					@include k-transition();
+					border: 4px solid k-brand-color();
+				}
+			}
+
+			&:hover {
+				.k-demo-panel__item-preview {
+					@include k-transition();
+				
+					.k-demo-panel__item-preview-overlay {
+						@include k-transition();
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		.k-demo-panel__purchase {
+			margin-bottom: 2rem;
+			display: block;
+		}
+	}
+}
+
+// Desktop view
+@include k-desktop {
+	.k-demo-panel {
+		.k-demo-panel__body {
+			padding-right: 1.5rem;
+			margin-right: -1.5rem;
+		}
+	}
+}
+
+// Build offcanvas mode
+@include k-offcanvas-build(k-demo-panel, default, k-get($k-demo-panel, self, offcanvas) );
+
+// Mobile view
+@include k-tablet-and-mobile {
+	.k-demo-panel-toggle {
+		width: 30px;
+		padding: 1rem 0;
+
+		span {
+			font-size: 1.2rem;
+			font-weight: 600;
+			letter-spacing: 2px;
+		}
+	}
+
+	.k-demo-panel {
+		padding: 1rem;
+	}
+
+	.k-demo-panel-toggle {
+		top: 20%;
+	}
+}

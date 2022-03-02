@@ -1,0 +1,61 @@
+//
+// Error 404 v4
+//
+
+
+
+// Include framework config
+@import "../../../config";
+
+// Component config
+$k-error404-v4-btn-color: #f7098f;
+
+.k-error404-v4--enabled {
+	background-size:cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.k-error404-v4{
+	display:flex;
+	flex:1;
+	justify-content:center;
+	align-items:flex-end;
+
+	@include k-mobile{
+		padding: 2rem;
+	}	
+
+	.k-error404-v4__content{
+		margin-bottom: 7rem;
+		display: flex;
+		justify-content: center;
+		flex-direction:column;
+		align-items: center;
+		text-align:center;
+		
+		.k-error404-v4__title{
+			font-size: 3rem;
+			color: k-state-color(brand, inverse);
+			font-weight: 600;
+			margin-bottom:3rem;
+		}
+
+		.k-error404-v4__button{
+			color: k-state-color(brand, inverse);
+			background-color: $k-error404-v4-btn-color;
+
+			&:hover{
+				color: k-state-color(brand, inverse);
+			}
+		}
+	}
+}
+
+.k-bg-error404-v4{
+	background-image:url('../../media/misc/404-bg4.jpg');
+
+	@include k-mobile{
+		background-image:url('../../media/misc/bg-mobile-4.jpg') !important;
+	}
+}

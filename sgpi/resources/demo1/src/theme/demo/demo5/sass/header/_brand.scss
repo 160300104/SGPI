@@ -1,0 +1,23 @@
+//
+// Brand
+//
+
+
+
+
+@include k-desktop {
+	.k-header__brand {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 0;
+		background-color: k-brand-color();
+		padding: 0 k-get($k-page-padding, desktop);
+	}
+}
+
+@include k-tablet-and-mobile {
+	.k-header__brand {
+		display: none;
+	}
+}

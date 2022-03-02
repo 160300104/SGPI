@@ -1,0 +1,88 @@
+//
+// Aside
+//
+
+
+
+
+// Aside
+.k-aside {
+	width: k-get($k-aside-config, base, default, width);
+	background-color: k-get($k-aside-config, base, default, bg-color);
+	box-shadow: k-get($k-aside-config, base, default, shadow);
+	transition: k-get($k-aside-config, base, minimize, transition);
+
+	// Menu
+	.k-aside-menu {
+		.ps__rail-y {
+			right: 2px;
+		}
+	}
+}
+
+@include k-desktop {
+	.k-aside {
+		// Fixed
+		.k-aside--fixed & {
+			position: fixed;
+			overflow: hidden;
+			top: k-get($k-page-margin, desktop);
+			bottom: k-get($k-page-margin, desktop);
+			left: k-get($k-page-margin, desktop);
+			z-index: k-get($k-aside-config, base, fixed, zindex);
+		}
+
+		@include k-rounded {
+			border-radius: $k-border-radius;
+		}
+
+		.k-aside--static & {
+			position: relative;
+			z-index: 1;
+		}
+
+		.k-header--fixed.k-aside--static & {
+			padding-top: k-get($k-header-config, base, desktop, default, height);
+		}
+
+		// Minimize
+		.k-aside--minimize & {
+			width: k-get($k-aside-config, base, minimize, width);	
+			transition: k-get($k-aside-config, base, minimize, transition);
+		}
+
+		.k-aside--minimizing & {
+			.k-aside-menu {
+				.k-menu__nav  {
+					width: k-get($k-aside-config, base, default, width);
+					overflow: hidden;
+				}
+			}
+		}
+
+		// Scroll
+		@include k-perfect-scrollbar-ver-size(k-get($k-aside-config, base, fixed, scroll, width));
+		//@include k-perfect-scrollbar-skin(k-get($k-aside-config, fixed, scroll, color));
+	}
+
+	// Fixed & Minimize Aside hover
+	.k-aside--fixed.k-aside--minimize-hover {
+		.k-aside {
+			width: k-get($k-aside-config, base, default, width);
+			transition: k-get($k-aside-config, base, minimize, transition);
+		}
+
+		.k-header {
+			transition: k-get($k-aside-config, base, minimize, transition);
+			left: k-get($k-aside-config, base, minimize, width);
+		}
+
+		.k-wrapper {
+			transition: k-get($k-aside-config, base, minimize, transition);
+			padding-left: k-get($k-aside-config, base, minimize, width);
+		}
+	}
+}
+
+// Aside offcanvas panel for mobile mode
+@include k-offcanvas-build(k-aside, tablet-and-mobile, k-get($k-aside-config, base, offcanvas-mobile));

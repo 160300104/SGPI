@@ -1,0 +1,62 @@
+//
+// Blog - Grid
+//
+
+
+
+// Include framework config
+@import "../../../config";
+
+$k-blog-grid-font-color: #918ea7;
+.k-blog-grid{
+
+	.k-blog-grid__head{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.k-blog-grid__thumb-link{
+			flex: 1;
+
+			.k-blog-grid__image{
+				width:100%;
+				height:100%;
+			}
+		}		
+	}
+
+	.k-blog-grid__body{
+
+		.k-blog-grid__date{
+			color: $k-blog-grid-font-color;
+			margin-bottom: 0.75rem;
+			font-weight: 400;
+		}
+
+		.k-blog-grid__title{
+			font-size: 1.5rem;
+			font-weight: 500;
+			margin-bottom: 1.25rem;			
+			line-height: 2.25rem;
+		}
+
+		.k-blog-grid__content{
+			font-size: 1.1rem;
+			font-weight: 400;
+			color: $k-blog-grid-font-color;
+			margin-bottom: 1.25rem;
+		}
+
+		.k-blog-grid__link{
+			color: k-state-color(brand, base);
+			font-weight: 500;
+			font-size: 1.1rem;
+			@include k-transition;
+
+			&:hover,
+			&:focus{
+				color: darken( k-state-color(brand, base), 20%);
+			}
+		}
+	}
+}

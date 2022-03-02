@@ -1,0 +1,103 @@
+//
+// Search
+//
+
+
+
+
+.k-search {
+	.k-search__form {
+		padding-bottom: 1rem;
+
+		.form-control {
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+			padding: 0;
+			border-radius: 0;
+			font-size: 1.1rem;
+			font-weight: 500;
+		}
+	}
+
+	.k-search__result {
+		.k-search__section {
+			font-size: 1.3rem;
+    		font-weight: 500;
+    		color: #5d5b6f;  
+    		margin: 2rem 0 1rem 0;
+		}
+
+		.k-search__item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 1.25rem;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			.k-search__item-icon {	
+				display:flex;
+				justify-content: center;		 
+				align-items: center;
+				background-color: #f0f0f4;		 
+				width: 50px;
+				height: 50px;
+		    	border-radius: 50%;
+
+				> i {
+					font-size: 1.5rem;
+				}
+			}  
+
+			.k-search__item-img {	
+				display:flex;
+				justify-content: flex-start;		 
+				align-items: center;	 
+				width: 50px;
+				height: 50px;
+
+				> img {
+					max-width: 50px;
+					max-height: 50px;
+					border-radius: 50%;
+				}
+
+		    	&.k-search__item-img--file {
+		    		width: 40px;
+
+		    		> img {
+						max-width: 40px;
+						border-radius: 0;
+					}
+		    	}
+			}
+
+			.k-search__item-wrapper {
+				padding-left: 1.25rem;
+				flex: 1 1 auto;
+
+				.k-search__item-title {
+					font-size: 1.1rem;
+    				font-weight: 500;
+    				color: #5d5b6f;  
+    				text-decoration: none;
+    				@include k-transition();
+
+    				&:hover {
+    					color: k-brand-color();
+    					@include k-transition();
+    				}
+				}
+
+				.k-search__item-desc {
+					font-size: 1rem;
+				    font-weight: 400;
+				    color: #b3b1c2;
+				}
+			}
+		}
+	}
+} 
+ 

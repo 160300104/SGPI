@@ -1,0 +1,136 @@
+//
+// Avatar
+//
+
+
+
+// Base
+.k-avatar {
+	position: relative;
+	display: inline-block;
+
+	.k-avatar__holder {
+		width: 120px;
+		height: 120px;
+		border-radius: 3px;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+
+	.k-avatar__upload {
+		cursor: pointer;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		right: -10px;
+		top: -10px;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		background-color: #ffffff;
+		box-shadow: 0px 0px 13px 0px rgba(#000000, 0.1);
+
+		input {
+			width: 0 !important;
+			height: 0 !important;
+			overflow: hidden;
+			opacity: 0;
+		}
+
+		i {
+			color: k-brand-color();
+			font-size: 0.9rem;
+		}
+
+
+		@include k-transition();
+		&:hover{
+			@include k-transition();
+			background-color: k-brand-color();
+
+			i {
+				color: k-brand-color(inverse);
+			}
+		}
+	}
+
+	.k-avatar__cancel {
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: auto;
+		right: -10px;
+		bottom: -5px;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background-color: #ffffff;
+		box-shadow: 0px 0px 13px 0px rgba(#000000, 0.1);
+		display: none;
+
+		i {
+			@include k-transition();
+			color: k-base-color(label, 2);
+			font-size: 0.9rem;
+		}
+		
+		&:hover{
+			i {
+				@include k-transition();
+				color: k-brand-color();
+			}
+		}
+	}
+
+	&.k-avatar--changed {
+		.k-avatar__cancel {
+			display: flex;
+		}
+	}
+
+	// States
+	@each $name, $color in $k-state-colors {
+		&.k-avatar--#{$name} {
+			.k-avatar__upload {
+				i {
+					color: k-get($color, base);
+				}
+
+				&:hover{
+					background-color: k-get($color, base);
+
+					i {
+						color: k-get($color, inverse);
+					}
+				}
+			}	
+		}
+	}
+
+	// Circle style
+	&.k-avatar--circle {
+		.k-avatar__holder {
+			border-radius: 50%;
+		}
+
+		.k-avatar__upload {
+			right: 0px;
+			top: 5px;
+		}
+
+		.k-avatar__cancel {
+			right: 3px;
+			bottom: 10px;
+		}
+	}
+
+	// Bordered style
+	&.k-avatar--outline {
+		.k-avatar__holder {
+			border: 3px solid #ffffff;
+			box-shadow: 0px 0px 13px 0px rgba(#000000, 0.1);
+		}
+	}
+}

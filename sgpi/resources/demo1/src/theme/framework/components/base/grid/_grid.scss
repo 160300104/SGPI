@@ -1,0 +1,32 @@
+//
+// Grid
+//
+
+
+
+
+@include k-grid-generate(general);
+
+@include k-desktop {
+	@include k-grid-generate(desktop);
+}
+
+@include k-desktop-xl {
+	@include k-grid-generate(desktop-xl);
+}
+
+@include k-desktop-and-tablet {
+	@include k-grid-generate(desktop-and-tablet);
+}
+
+@include k-tablet {
+	@include k-grid-generate(tablet);
+}
+
+@include k-tablet-and-mobile {
+	@include k-grid-generate(tablet-and-mobile);
+}
+
+@include k-mobile {
+	@include k-grid-generate(mobile);
+}

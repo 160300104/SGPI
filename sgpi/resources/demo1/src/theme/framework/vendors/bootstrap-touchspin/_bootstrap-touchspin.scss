@@ -1,0 +1,169 @@
+//
+// Bootstrap Timepicker Component
+//
+
+
+
+
+// Base
+@mixin k-bootstrap-touchspin-base() {
+   	.bootstrap-touchspin {
+        @include k-rounded {
+            border-top-left-radius: $input-border-radius;
+            border-bottom-left-radius: $input-border-radius;
+        }
+
+        @include k-not-rounded {
+            border-radius: 0 !important;
+        }
+
+        .form-control.bootstrap-touchspin-vertical-btn {
+            @include k-rounded {
+                border-top-left-radius: $input-border-radius !important;
+                border-bottom-left-radius: $input-border-radius !important;
+            }
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+        }
+
+   		.input-group-btn-vertical {
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .btn {
+                padding: 0.13rem 0.3rem; 
+                line-height: 1;
+                flex-grow:1;
+                margin-left: 0;
+                border-left: 0;
+
+                @include k-not-rounded {
+                    border-radius: 0 !important;
+                }
+
+                &.bootstrap-touchspin-down {
+                    margin-top: -1px;
+                }
+            }
+
+            i {
+                top: 0;
+                left: 0;
+                text-align: center;
+                font-size: .9rem;
+                vertical-align: middle;
+                position: static;
+                line-height: 0;
+                padding: 0;
+            }
+        }
+
+        .input-group-addon {
+            padding: $input-btn-padding-y $input-btn-padding-x;
+            line-height: $input-btn-line-height;
+
+            > i {
+                line-height: 0;
+                vertical-align: middle;
+                padding: 0;
+            }
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+        }
+
+        .input-group-btn {
+            display: flex;
+            align-items: stretch;
+            
+            &:first-child {
+                .btn {
+                    @include k-rounded {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0; 
+                    }
+                    border-right: 0;
+
+                    @include k-not-rounded {
+                        border-radius: 0 !important;
+                    }
+                }
+
+                & + .input-group-addon {
+                    border-right: 0 !important;
+                }
+            }
+
+            &:last-child {
+                .btn {
+                    border-left: 0;
+                    @include k-rounded {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+
+                    @include k-not-rounded {
+                        border-radius: 0 !important;
+                    }
+                }
+            }
+        }
+
+        .form-control + .input-group-addon {
+            border-left: 0 !important;
+        }
+   	}
+}
+
+// Skin
+@mixin k-bootstrap-touchspin-skin() {
+    .bootstrap-touchspin {
+        .input-group-btn-vertical {
+            .btn {
+                &.focus,
+                &:focus,
+                &:hover {
+                    background: k-base-color(grey, 1);
+                    border-color: k-base-color(grey, 1);
+                }
+            }
+        }
+
+        .input-group-addon {
+            border: 1px solid $input-border-color;
+        }
+    }
+}
+
+// Validation
+@mixin k-bootstrap-touchspin-validation($state, $color) {
+    .k-form--state {
+        .has-#{$state} {
+            .bootstrap-touchspin {
+                .input-group-btn-vertical {
+                    .btn {
+                        border-color: $color;
+                        
+                        &.focus,
+                        &:focus,
+                        &:hover {
+                            border-color: $color;
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
+
+// Build Base
+@include k-bootstrap-touchspin-base();
+
+// Build Skin
+@include k-bootstrap-touchspin-skin();

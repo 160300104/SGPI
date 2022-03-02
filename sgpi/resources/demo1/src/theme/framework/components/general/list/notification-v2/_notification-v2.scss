@@ -1,0 +1,62 @@
+//
+// Notification-v2
+//
+
+
+
+
+.k-notification-v2 {
+	margin: 0;
+
+	.k-notification-v2__item {
+		display: flex;
+		align-items: center;
+		padding: 1rem;	
+		text-decoration: none;	
+
+		.k-notification-v2__item-icon {
+			display:flex;
+			justify-content: center;		 
+			align-items: center;
+			background-color: #f0f0f4;		 
+			height: 50px;
+	    	width: 50px;
+	    	min-width: 50px;
+	    	border-radius: 50%;
+
+			i {
+				font-size: 1.5rem;
+			}
+		}
+
+		.k-notification-v2__item-wrapper {
+			padding-left: 1.5rem;
+			flex: 1 1 auto;
+
+			.k-notification-v2__item-title {
+				font-size: 1.1rem;
+    			font-weight: 500;
+    			color: #5d5b6f;    			     			 
+			}
+
+			.k-notification-v2__item-desc {
+				font-size: 1rem;
+			    font-weight: 300;
+			    color: #b3b1c2;
+			}
+		}
+
+		@include k-transition();
+
+		&:hover {
+			background-color: k-base-color(grey, 1);	
+			border-radius: 5px;			
+			@include k-transition();
+
+			.k-notification-v2__item-icon  {
+				background-color: #fff;
+				@include k-transition();
+			}
+		}
+	}
+}

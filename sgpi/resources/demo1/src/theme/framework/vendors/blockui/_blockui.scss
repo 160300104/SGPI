@@ -1,0 +1,52 @@
+//
+// BlockUI
+//
+
+
+
+
+// Base
+@mixin k-blockui-base() {
+    .blockui {
+        @include k-rounded {
+            border-radius: $k-border-radius;
+        }
+        display: table;
+        table-layout: fixed;
+
+        > span {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0.75rem 1.2rem;                  
+            font-size: 1rem;
+            font-weight: 400;
+
+            > .k-loader,
+            > .k-spinner {
+                margin-right: 1.25rem;
+            }
+        }       
+    }
+}
+
+// Skin
+@mixin k-blockui-skin() {
+    .blockui {
+        background: #fff;
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+
+        &.blockui-noshadow {
+            box-shadow: none;
+        }
+
+        > span {
+            color: k-base-color(label, 2);
+        }
+    }
+}
+
+// Build
+// Base
+@include k-blockui-base();
+// Skin
+@include k-blockui-skin();

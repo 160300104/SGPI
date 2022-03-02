@@ -1,0 +1,32 @@
+//
+// Config
+//
+
+
+
+
+$k-checkbox-base-color: k-base-color(grey, 1);
+
+$k-checkbox-config: (
+	self: (
+		transition: all 0.3s ease,
+		size: 18px,
+		tick: 6px
+	),
+	
+	outline: (
+		border: (
+			default: darken($k-checkbox-base-color, 12%),
+			checked: darken($k-checkbox-base-color, 15%)
+		),
+		tick: darken($k-checkbox-base-color, 18%)
+	),
+
+	solid: (
+		bg: (
+			default: darken($k-checkbox-base-color, 6%),
+			checked: darken($k-checkbox-base-color, 8%)
+		),
+		tick: darken($k-checkbox-base-color, 30%)
+	)
+);

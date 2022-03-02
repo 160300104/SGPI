@@ -1,0 +1,474 @@
+//
+// Nav
+//
+
+
+
+
+// Base
+@mixin k-nav-base() {
+	// Base
+	.k-nav  {
+		display: block;
+		padding: 0.5rem 0;
+		margin: 0; 
+		list-style: none;
+		border: 0;
+
+		.k-nav__item {
+			display: block;
+
+			> .k-nav__link {
+				display: flex;
+				flex-grow: 1;
+				align-items: center;
+				padding: 0.55rem 1.75rem; 
+				cursor: pointer;
+
+				// menu item link's text part
+				.k-nav__link-text {                                
+					font-weight: 500;
+					flex-grow: 1;
+					font-size: 1rem;
+				}
+
+				// menu item link's icon
+				.k-nav__link-icon {
+					flex: 0 0 30px;
+					font-size: 1.25rem;
+					line-height: 0;
+				}
+
+				// menu item link's bullet
+				.k-nav__link-bullet {
+					text-align: center;
+					flex: 0 0 10px;
+					margin-right: 10px;
+
+					> span {
+						vertical-align: middle;
+						display: inline-block;
+					}
+
+					&.k-nav__link-bullet--dot {
+						> span {
+							width: 4px;
+							height: 4px;
+							border-radius: 100%;
+						}
+					}
+
+					&.k-nav__link-bullet--line {               
+						> span {
+							width: 8px;
+							height: 2px;
+							border-radius: 2px;
+						}
+					}
+				}
+
+				// menu item link's icon part
+				.k-nav__link-badge {
+					padding: 0px 0px 0px 5px;
+				}
+
+				// menu item link's arrow part
+				.k-nav__link-arrow {
+					text-align: right;
+					flex: 0 0 20px;
+					font-size: 0.8rem;       
+
+					@include k-la-icon( k-get($k-action-icons, down) );
+
+					&:before {      
+						display: inline-block;
+						transition: all 0.3s ease;
+					}
+				}
+
+				&.collapsed {
+					.k-nav__link-arrow {
+						@include k-la-icon( k-get($k-action-icons, right) ); 
+
+						&:before {      
+							transition: all 0.3s ease;
+						}
+					}
+				}
+			}
+
+			> .k-nav__sub {   
+				padding: 0;
+				margin: 0;
+
+				.k-nav__item {              
+					> .k-nav__link {
+						padding: 0.5rem 1.5rem 0.5rem 2.5rem; 
+					}   
+				}
+			}   
+
+			&.k-nav__item--last {
+				padding-bottom: 0;
+			}
+
+			&.k-nav__item--custom {
+				padding: 0.5rem 1.75rem; 
+			}
+		}
+
+		.k-nav__section {
+			margin-top: 1rem;
+			padding: 0 1.75rem;
+
+			&.k-nav__section--first {
+				margin-top: 0;
+			}
+
+			.k-nav__section-text {
+				font-weight: 600;
+				font-size: 0.8rem;
+				text-transform: uppercase;
+			}
+		}
+
+		.k-nav__separator {      
+			margin: 0.75rem 0 1.35rem 0;
+			height: 0;
+			display: block;
+		}
+
+		// Fit
+		&.k-nav--fit {
+			padding: 0;
+
+			.k-nav__item {
+				> .k-nav__link {
+					padding-left: 0;
+					padding-right: 0; 
+				}
+			}
+		}
+
+		// Margins
+		&.k-nav--lg-space {
+			.k-nav__item {
+				margin: 1rem 0;
+				
+				.k-nav__link{
+					padding-top: 1rem;
+					padding-bottom: 1rem;
+				}
+
+				&:first-child{
+					margin-top: 0;
+				}
+
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		&.k-nav--md-space{
+			.k-nav__item {
+				margin: 0.75rem 0;
+
+				.k-nav__link{
+					padding-top: 0.5rem;
+					padding-bottom: 0.5rem;
+				}
+
+				&:first-child{
+					margin-top: 0;
+				}
+
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		// font weight
+		&.k-nav--bold{
+			.k-nav__item {
+				.k-nav__link{
+					.k-nav__link-text{
+						font-weight: 500;
+					}
+				}
+			}
+		}
+
+		&.k-nav--thin{
+			.k-nav__item {
+				.k-nav__link{
+					.k-nav__link-text{
+						font-weight: 300;
+					}
+				}
+			}
+		}
+
+		// font-size
+		&.k-nav--lg-font{
+			.k-nav__item {
+				.k-nav__link{
+					.k-nav__link-text{
+						font-size: 1.15rem;
+					}
+				}
+			}
+		}
+
+		&.k-nav--xl-font{
+			.k-nav__item {
+				.k-nav__link{
+					.k-nav__link-text{
+						font-size: 1.25rem;
+					}
+				}
+			}
+		}
+	}
+
+	// Version 2
+	.k-nav  {
+		&.k-nav--v2 {			
+			.k-nav__item {
+				border-radius: 2rem;
+				overflow:hidden;
+
+				&.k-nav__item--active {
+					.k-nav__link {
+						background-color: k-state-color(brand, base);
+						
+						.k-nav__link-text{
+							color: k-state-color(brand, inverse);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Version 3
+	.k-nav  {
+		&.k-nav--v3 {			
+			.k-nav__item {
+				margin: 0;
+
+				.k-nav__link {
+					@include k-transition();
+					padding-top: 1rem;
+    				padding-bottom: 1rem;
+					border-left: 2px solid transparent;
+
+					&.active,
+					&.k-nav__link--active {
+						@include k-transition();
+						background-color: k-base-color(grey, 1);
+						border-left: 2px solid k-state-color(brand);
+						
+						.k-nav__link-text{
+							color: k-state-color(brand);
+						}
+					}
+
+					&:hover {
+						@include k-transition();
+						background-color: k-base-color(grey, 1);
+						
+						.k-nav__link-text{
+							color: k-state-color(brand);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// SKin
+@mixin k-nav-skin() {
+    // Base
+    .k-nav {
+        .k-nav__item {
+            // Nav link
+            > .k-nav__link {
+                @include k-transition();
+
+                .k-nav__link-text {                            
+                    color: k-base-color(label, 3);   
+                    font-weight: 400;
+                }                
+
+                .k-nav__link-arrow {
+                    color: k-base-color(label, 2);
+                } 
+
+                .k-nav__link-icon {
+                    color: k-base-color(label, 1);
+                }
+
+                .k-nav__link-bullet {
+                    &.k-nav__link-bullet--line,
+                    &.k-nav__link-bullet--dot {
+                        > span {
+                            background-color: k-base-color(label, 1);
+                        }
+                    }
+                }
+            }              
+
+            &.k-nav__item--active,
+            &:hover:not(.k-nav__item--disabled):not(.k-nav__item--sub) {
+                > .k-nav__link {       
+                    background-color: k-base-color(grey, 1);
+                    @include k-transition();
+
+                    .k-nav__link-icon,         
+                    .k-nav__link-text, 
+                    .k-nav__link-arrow {                                
+                        color: k-state-color(brand, base);
+                    }
+
+                    .k-nav__link-bullet {
+                        &.k-nav__link-bullet--line,
+                        &.k-nav__link-bullet--dot {                    
+                            > span {
+                                background-color: k-state-color(brand, base);
+                            }
+                        }
+                    }     
+                }
+            }
+
+            &:hover:not(.k-nav__item--disabled).k-nav__item--sub {
+                > .k-nav__link.collapsed {       
+                    background-color: k-base-color(grey, 1);
+                    @include k-transition();
+
+                    .k-nav__link-icon,         
+                    .k-nav__link-text, 
+                    .k-nav__link-arrow {                                
+                        color: k-state-color(brand, base);
+                    }
+
+                    .k-nav__link-bullet {
+                        &.k-nav__link-bullet--line,
+                        &.k-nav__link-bullet--dot {                    
+                            > span {
+                                background-color: k-state-color(brand, base);
+                            }
+                        }
+                    }     
+                }
+            }
+
+            &.k-nav__item--disabled {
+                opacity: 0.7;
+            }  
+        }               
+
+        .k-nav__section {
+            .k-nav__section-text {
+                color:  k-state-color(brand, base);
+            }
+
+            .k-nav__section-icon {
+                color: k-base-color(label, 1);
+            }
+        }
+
+        .k-nav__separator {      
+            border-bottom: 1px solid k-base-color(grey, 1);
+
+            &.k-nav__separator--dashed {      
+                border-bottom: 1px dashed k-base-color(grey, 1);
+            }
+        }
+    }
+
+    // Version 2
+    .k-nav  {
+        &.k-nav--v2 {
+             .k-nav__item {
+             	> .k-nav__link {   
+             		@include transition(none);
+             	}
+
+	           	&:hover:not(.k-nav__item--disabled):not(.k-nav__item--sub):not(.k-nav__item--active) {
+	           		> .k-nav__link {       
+	                    background-color: #f4f4f9;
+	                    @include transition(none);
+
+	                    .k-nav__link-icon,         
+	                    .k-nav__link-text, 
+	                    .k-nav__link-arrow {                                
+	                        color: k-state-color(brand, base);
+	                    }
+
+	                    .k-nav__link-bullet {
+	                        &.k-nav__link-bullet--line,
+	                        &.k-nav__link-bullet--dot {                    
+	                            > span {
+	                                background-color: #f4f4f9;
+	                            }
+	                        }
+	                    } 
+             		}
+             	}
+
+             	&.k-nav__item--active {
+	                > .k-nav__link {       
+	                    background-color: k-state-color(brand, base);
+	                    @include transition(none);
+
+	                    .k-nav__link-icon,         
+	                    .k-nav__link-text, 
+	                    .k-nav__link-arrow {                                
+	                        color: k-state-color(brand, inverse);
+	                    }
+
+	                    .k-nav__link-bullet {
+	                        &.k-nav__link-bullet--line,
+	                        &.k-nav__link-bullet--dot {                    
+	                            > span {
+	                                background-color: k-state-color(brand, inverse);
+	                            }
+	                        }
+	                    }     
+	                }
+
+	                &:hover{
+	                	> .k-nav__link {   
+	                		background-color: k-state-color(brand, base);
+
+	                		.k-nav__link-icon,         
+		                    .k-nav__link-text, 
+		                    .k-nav__link-arrow {                                
+		                        color: k-state-color(brand, inverse);
+		                    }
+
+		                    .k-nav__link-bullet {
+		                        &.k-nav__link-bullet--line,
+		                        &.k-nav__link-bullet--dot {                    
+		                            > span {
+		                                background-color: k-state-color(brand, inverse);
+		                            }
+		                        }
+		                    }     
+	                	}
+	                }
+	            }
+            }
+        }
+    }
+}
+
+// Base
+@include k-nav-base();
+
+// Skin
+@include k-nav-skin();

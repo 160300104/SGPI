@@ -1,0 +1,175 @@
+//
+// Header Light Skin
+//
+
+
+
+
+// Include framework config
+@import "../../../../../../framework/config";
+
+// Include demo config
+@import "../../../config";
+
+
+$k-header-item-font-color: #ffffff;
+$k-header-item-icon-color: #b4b8ce;
+$k-header-item-hover-bg: #f0f3ff;
+
+// Desktop mode
+@include k-desktop {
+	.k-header {
+		background-color: k-get($k-layout-skins, light);
+		box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1);
+
+		// Menu
+		.k-header-menu {
+			.k-menu__nav {
+				> .k-menu__item {
+					> .k-menu__link {
+						border-radius: 4px;
+
+						.k-menu__link-text {
+							color: #6c7293;
+							font-weight: 500;
+						}
+
+						.k-menu__hor-arrow {
+							color: #c8cde8;
+						}
+
+						.k-menu__hor-icon {
+							color: #c8cde8;
+						}
+					}
+
+					&.k-menu__item--here,
+					&.k-menu__item--active,
+					&:hover {
+						> .k-menu__link {
+							background-color: $k-header-item-hover-bg;
+								
+							.k-menu__link-text {
+								color: k-brand-color();
+							}
+
+							.k-menu__hor-arrow {
+								color: k-brand-color();
+							}
+
+							.k-menu__hor-icon {
+								color: k-brand-color();
+							}
+						}	
+					}
+				}
+			}
+		}
+	}
+}
+		
+// General mode
+.k-header {
+	.k-header__topbar {
+		.k-aside-secondary--enabled & {
+			padding-right: 0;
+		}
+
+		.k-header__topbar-item {
+			.k-header__topbar-icon { 
+				i {
+					@include k-transition();
+					color: $k-header-item-icon-color;
+				}
+			}
+
+			// User profile
+			&.k-header__topbar-item--user {
+				.k-header__topbar-user {
+					.k-header__topbar-welcome {
+						@include k-transition();
+						color: #959cb6;
+					}
+
+					.k-header__topbar-username {
+						@include k-transition();
+						color: #6c7293;
+					}
+				}	
+			}		
+
+			// Quick panel 
+			&.k-header__topbar-item--quick-panel {
+				.k-header__topbar-icon {
+					i {
+						color: k-brand-color();
+					}
+				}
+			}
+
+			&:hover,
+			&.show {
+				.k-header__topbar-icon {
+					@include k-transition();
+					background-color: $k-header-item-hover-bg;
+
+					i {
+						@include k-transition();
+						color: k-brand-color();
+					}	
+				}
+
+				&.k-header__topbar-item--user {
+					.k-header__topbar-user {
+						@include k-transition();
+						background-color: $k-header-item-hover-bg;
+					}
+				}
+
+				&.k-header__topbar-item--quick-panel {
+					.k-aside-secondary--enabled & {
+						@include k-transition();
+						background-color: k-brand-color();
+
+						.k-header__topbar-icon {
+							@include k-transition();
+							background-color: transparent !important;
+
+							i {
+								@include k-transition();
+								color: k-brand-color(inverse);
+							}
+						}
+					}
+				}
+			}		
+
+			// Search
+			&.k-header__topbar-item--search {
+				.k-input-icon {
+					.k-input-icon__icon {
+						i {
+							color: k-base-color(label, 2);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Mobile mode
+@include k-tablet-and-mobile {
+	// Topbar
+	.k-header__topbar {
+		background-color: #ffffff;
+		box-shadow: none;
+	}
+
+	.k-header__topbar--mobile-on {
+		.k-header__topbar {
+			box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1);
+			border-top: 1px solid k-base-color(grey, 2);
+		}
+	}
+}

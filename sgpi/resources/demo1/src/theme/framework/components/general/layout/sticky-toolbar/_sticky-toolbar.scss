@@ -1,0 +1,122 @@
+//
+// Sticky Toolbar
+//
+
+
+
+.k-sticky-toolbar {
+    width: 46px;
+    position: fixed;
+    top: 30%;
+    right: 0;
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    z-index: 50;
+    background: #fff;
+    box-shadow: $k-dropdown-shadow;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @include k-rounded {
+        border-radius: 3px 0 0 3px;
+    }
+
+    .k-sticky-toolbar__item {
+        margin:0;
+        padding: 5px;
+        text-align: center; 
+
+        > a {      
+            background: #f4f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+
+            @include k-rounded {
+                border-radius: 3px;
+            }
+
+            @include k-transition();
+            
+            > i {
+                @include k-transition();
+                font-size: 1.3rem;
+            }          
+
+            &:hover {
+                @include k-transition();
+
+                > i {
+                    @include k-transition();
+                }
+            }
+        }
+
+        &.k-sticky-toolbar__item--builder {
+            > a {   
+                > i {
+                    color: k-state-color(success);
+                }
+            }
+
+            &:hover {
+                > a {
+                    background: k-state-color(success);
+
+                    > i {                        
+                        color: k-state-color(success, inverse);
+                    }
+                }
+            }
+        }
+
+        &.k-sticky-toolbar__item--docs {
+            > a {   
+                > i {
+                    color: darken(#f4f4f8, 30%);
+                }
+            }
+
+            &:hover {
+                > a {
+                    background: darken(#f4f4f8, 30%);
+
+                    > i {                        
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+        &.k-sticky-toolbar__item--demo-toggle {
+            > a {
+                padding: 8px 0;
+                height: 90px;
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                font-size: 1.3rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                color: k-brand-color();
+                letter-spacing: 2px;
+
+                > i {
+                    color: k-state-color(brand);
+                }
+            }
+
+            &:hover {
+                > a {
+                    background: k-state-color(brand);
+                    color: k-state-color(brand, inverse);
+                }
+            }
+        }
+    }
+}

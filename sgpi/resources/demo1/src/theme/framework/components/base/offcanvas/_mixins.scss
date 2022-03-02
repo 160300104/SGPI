@@ -1,0 +1,204 @@
+//
+// Offcanvas Mixins
+//
+
+
+
+
+@mixin k-offcanvas-base($class, $layout) {
+	$width: k-get($layout, self, width);
+
+	.#{$class} {
+		display: block !important;
+		z-index: k-get($layout, self, zindex);
+		position: fixed;
+		-webkit-overflow-scrolling: touch;
+		top: 0;
+		bottom: 0;
+		overflow-y: auto; 				
+		-webkit-transform: translate3d(0, 0, 0);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		width: $width !important;
+		transition: k-get($layout, self, transition);
+
+		// IE10 & IE11 Fixe
+		@include k-hack-ie() {
+			display: none !important;
+		}
+
+		@if (k-get($layout, self, direction) == right) {
+			right: -($width + 20px);
+		}
+
+		@if (k-get($layout, self, direction) == left) {
+			left: -($width + 20px);
+		} 
+
+		&.#{$class}--on {
+			@include k-hack-ie() {
+				display: block !important;
+			}
+			
+			transition: k-get($layout, self, transition);
+
+			@if (k-get($layout, self, direction) == right) {
+				right: 0;
+			}
+
+			@if (k-get($layout, self, direction) == left) {
+				left: 0;
+			} 
+		}
+	}
+
+	.#{$class}-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		overflow: hidden;
+		z-index: k-get($layout, self, zindex) - 1;
+		background: rgba(#000000, 0.1);
+		animation: k-animate-fade-in .3s linear 1;
+	}
+
+	@if k-get($layout, close) != null {
+		// Mobile close button
+		.#{$class}-close {
+			@if (k-get($layout, self, direction) == left) {
+				left: - (k-get($layout, close, size));
+			}
+
+			@if (k-get($layout, self, direction) == right) {
+				right: - (k-get($layout, close, size));
+			}
+
+			width:  k-get($layout, close, size);
+			height: k-get($layout, close, size);	
+			top: 1px;
+			z-index: k-get($layout, self, zindex) + 1;
+			transition: k-get($layout, self, transition);
+			position: fixed;
+			border: 0;
+			box-shadow: none;
+			@include k-rounded {
+				border-radius: 3px; 
+			}			
+			cursor: pointer;
+			outline: none !important;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:hover {
+				text-decoration: none;
+			}
+
+			> i {					
+				line-height: 0;
+				font-size: k-get($layout, close, font-size);
+			}
+
+			.#{$class}--on & {			
+				transition: k-get($layout, self, transition);
+
+				@if (k-get($layout, self, direction) == left) {
+					left: $width - k-get($layout, close, size) - 1px;
+				}
+
+				@if (k-get($layout, self, direction) == right) {
+					right: $width - k-get($layout, close, size) - 1px;
+				}
+			}
+		}
+	}
+}
+
+@mixin k-offcanvas-skin($class, $skin) {
+	.#{$class} {
+		@if (k-has($skin, self, bg-color)) {
+			background: k-get($skin, self, bg-color);
+		}
+
+		@if (k-has($skin, self, shadow)) {
+			box-shadow: k-get($skin, self, shadow);
+		}
+	}
+
+	.#{$class}-overlay {
+		background: k-get($skin, overlay, bg-color);
+	}
+
+	@if (k-has($skin, close)) {
+		.#{$class}-close {
+			background-color: k-get($skin, close, bg-color, default);
+
+			> i {
+				color: k-get($skin, close, icon-color, default);
+			}
+
+			&:hover {
+				background-color: k-get($skin, close, bg-color, hover);
+
+				> i {
+					color: k-get($skin, close, icon-color, hover);
+				}
+			}
+		}
+	}
+}
+
+@mixin k-offcanvas-build($class, $mode, $config) {
+	// close icon
+	.#{$class}-close {
+		display: none;
+	}
+
+	@if $mode == default {
+		@include k-offcanvas-base($class, k-get($config, layout));
+		@include k-offcanvas-skin($class, k-get($config, skin));
+	}
+
+	@if $mode == desktop {
+		@include k-desktop {
+			@include k-offcanvas-base($class, k-get($config, layout));
+			@include k-offcanvas-skin($class, k-get($config, skin));
+		}
+	}
+
+	@if $mode == desktop-and-tablet {
+		@include k-desktop-and-tablet {
+			@include k-offcanvas-base($class, k-get($config, layout));
+			@include k-offcanvas-skin($class, k-get($config, skin));
+		}
+	}
+
+	@if $mode == tablet {
+		@include k-tablet {
+			@include k-offcanvas-base($class, k-get($config, layout));
+			@include k-offcanvas-skin($class, k-get($config, skin));
+		}
+	}
+
+	@if $mode == tablet-and-mobile {
+		@include k-tablet-and-mobile {
+			@include k-offcanvas-base($class, k-get($config, layout));
+			@include k-offcanvas-skin($class, k-get($config, skin));
+		}
+	}
+
+	@if $mode == mobile {
+		@include k-mobile {
+			@include k-offcanvas-base($class, k-get($config, layout));
+			@include k-offcanvas-skin($class, k-get($config, skin));
+		}
+	}
+
+	@include k-responsive-below(k-get($config, layout, self, width) + 50px) {
+		.#{$class} {
+			width: 90% !important;
+		}
+	}
+}

@@ -1,0 +1,117 @@
+//
+// Scroll Mixins
+//
+
+
+
+// Skin
+@mixin k-perfect-scrollbar-skin($color) {
+    .ps {
+        > .ps__rail-x {
+            background: transparent !important;
+
+            &:hover,
+            &:focus {
+                opacity: 1;
+                background: transparent !important;
+
+                > .ps__thumb-x {
+                    opacity: 1;
+                }
+            } 
+
+            > .ps__thumb-x {
+                background: $color;
+                opacity: 1;
+                //border-radius:  2px;
+
+                &:hover,
+                &:focus {
+                    opacity: 1;
+                    background: $color;
+                } 
+            }
+        }
+
+        > .ps__rail-y {
+            background: transparent !important;
+
+            &:hover,
+            &:focus {
+                background: transparent !important;
+                opacity: 1;
+
+                > .ps__thumb-y {
+                    opacity: 1;
+                }
+            } 
+
+            > .ps__thumb-y {
+                background: $color;
+                opacity: 1;
+                //border-radius:  2px;
+
+                &:hover,
+                &:focus {
+                    opacity: 1;
+                    background: $color;
+                } 
+            }
+        }
+    }
+}
+
+@mixin k-perfect-scrollbar-ver-size($size) {
+    .ps {
+        > .ps__rail-y {
+            //right: $size !important;
+            width: $size !important;
+
+            &:hover,
+            &:focus {
+                width: $size !important;
+            } 
+
+            > .ps__thumb-y {
+                //right: 0 !important;
+                width: $size !important;
+
+                &:hover,
+                &:focus {
+                    //right: 0 !important;
+                    width: $size !important;
+                } 
+            }           
+        }
+    }
+}
+
+@mixin k-perfect-scrollbar-hor-size($size) {
+    .ps {
+        > .ps__rail-x {
+            height: $size !important;
+
+            &:hover,
+            &:focus {
+                height: $size !important;
+            } 
+
+            > .ps__thumb-x {
+                top: 0 !important;
+                height: $size !important;
+
+                &:hover,
+                &:focus {
+                    top: 0 !important;
+                    height: $size !important;
+                } 
+            }
+        }
+    }
+}
+
+// Base
+@mixin k-perfect-scrollbar-base() {
+  @include k-perfect-scrollbar-ver-size(5px);
+  @include k-perfect-scrollbar-hor-size(5px);
+}

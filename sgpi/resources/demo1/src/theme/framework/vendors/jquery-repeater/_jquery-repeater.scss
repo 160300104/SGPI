@@ -1,0 +1,54 @@
+//
+// jQuery Repeater
+//
+
+
+
+.k-repeater{
+	.k-repeater__row{
+		display:flex;
+		flex-wrap:wrap;
+
+		> input {
+			flex: 1;
+		}
+
+		.k-repeater__close{
+			background-color: transparent;
+			border: none;
+		}
+
+		.form-text {
+			flex-basis: 100%;
+		}
+	}
+
+	.k-repeater__item{
+		position:relative;
+
+		.btn-icon{
+			height: auto;
+		}
+
+		&:first-child{
+
+			.form-control{
+				border-top-right-radius: 0.25rem;
+				border-bottom-right-radius: 0.25rem;
+			}
+
+			.input-group-append{
+				display:none;
+			}
+		}
+	}
+
+	.k-repeater__close{
+		
+		&--align-right{
+			position: absolute;
+			top: 0;
+			right:0;
+		}		
+	}
+}

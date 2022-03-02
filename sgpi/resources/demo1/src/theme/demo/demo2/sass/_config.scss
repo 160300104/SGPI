@@ -1,0 +1,35 @@
+//
+// Demo Config
+//
+
+
+
+
+// Layout
+$k-aside-default-width: 280px;
+$k-aside-minimize-width: 78px;
+$k-aside-offcanvas-width: 255px;
+
+$k-page-padding: (
+	desktop: 25px,
+	mobile: 15px
+);
+
+$k-page-margin: (
+	desktop: 30px,
+	mobile: 0
+);
+
+// Brand Color
+$k-brand-color: #5578eb !default;
+$k-brand-inverse-color: #ffffff !default;
+
+// Body color
+$k-page-body-bg-color: #efeff5;
+
+// Layout Skins
+$k-layout-skins: (
+	brand: #506ee4,
+	navy: #242939,
+	light: #ffffff
+);

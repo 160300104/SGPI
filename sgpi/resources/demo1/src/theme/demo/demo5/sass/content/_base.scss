@@ -1,0 +1,15 @@
+//
+// Content
+//
+
+
+
+.k-content {
+	padding: k-get($k-page-padding, desktop);
+}
+
+@include k-tablet-and-mobile {
+	.k-content {
+		padding: k-get($k-page-padding, mobile);
+	}
+}

@@ -1,0 +1,67 @@
+//
+// Aside Brand
+//
+
+
+
+
+.k-aside__brand {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	padding: 0 k-get($k-page-padding, desktop);
+	height: k-get($k-header-config, base, desktop, default, height);
+	background-color: k-get($k-aside-config, base, default, bg-color);
+	position: relative;
+	height: 70px;
+
+	@include k-rounded {
+		border-top-left-radius: $k-border-radius;
+		border-top-right-radius: $k-border-radius;
+	}
+
+	.k-aside__brand-logo {
+		display: flex;
+		justify-content: flex-begin;
+
+		img {
+			.k-aside--minimize & {
+				display: none;
+			}
+		}
+	}
+
+	.k-aside__brand-tools {
+		display: flex;
+		justify-content: flex-end;
+
+		@include k-burger-icon-build(k-aside__brand-aside-toggler, k-get($k-aside-config, brand, aside-toggler));
+		//@include k-burger-icon-skin(k-aside__brand-aside-toggler,  k-get($k-aside-brand-config, aside-toggler, color));		
+	}	
+}
+
+@include k-desktop {
+	.k-aside__brand {
+		transition: k-get($k-aside-config, base, minimize, transition);
+
+		.k-header--fixed.k-aside--static & {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: k-get($k-aside-config, base, default, width);	
+			z-index: k-get($k-aside-config, base, fixed, zindex);
+		}
+
+		.k-header--fixed.k-aside--static.k-aside--minimize & {
+			transition: k-get($k-aside-config, base, minimize, transition);
+			width: k-get($k-aside-config, base, minimize, width);	
+		}
+	}
+}
+
+@include k-tablet-and-mobile {
+	.k-aside__brand {
+		display: none;
+	}
+}

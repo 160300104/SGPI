@@ -1,0 +1,62 @@
+//
+// Loader
+//
+
+
+
+
+// Base
+@mixin k-loader-base() {
+	// Spinner markup
+	.k-loader {
+	    display: inline-block;
+	    width: k-get($k-loader-config, default, size);
+	    height: k-get($k-loader-config, default, size);
+	    margin: 0 auto;
+	    border-radius: 100%;  
+	    background-color: k-base-color(grey, 1);
+	    opacity: 0;
+	    animation: k-loader-scaleout 0.9s infinite ease-in-out;
+
+	    &.k-loader--lg {
+			width: k-get($k-loader-config, lg, size);
+	    	height: k-get($k-loader-config, lg, size);
+		}
+
+		&.k-loader--sm {
+			width: k-get($k-loader-config, sm, size);
+	    	height: k-get($k-loader-config, sm, size);
+		}
+
+		.btn & {
+			position: relative;
+			line-height: 0;
+		}
+	}
+
+	// States
+	@each $name, $color in $k-state-colors {
+        .k-loader.k-loader--#{$name} {
+            background-color: k-get($color, base);
+        }
+    }
+
+	// Spinner animation
+	@keyframes k-loader-scaleout {
+	    0% { 
+	        opacity: 0.3;
+	        transform: scale(0);
+	    } 
+	    100% {        
+	        opacity: 1;
+	        transform: scale(1.0);
+	    }
+	}
+}
+
+@mixin k-loader-skin($color) {
+	background-color: $color;
+}
+
+// Build
+@include k-loader-base();

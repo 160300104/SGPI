@@ -1,0 +1,154 @@
+//
+// Content
+//
+
+
+
+
+// General mode
+.k-content {
+	padding: k-get($k-page-padding, desktop);
+
+	// Page fluid mode(below $k-page-container-width)
+	@include k-page-fluid-mode {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.k-content__head {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: 0 0 1.5rem 0;
+
+		.k-content__head-main {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			align-items: center;
+			padding: 0.5rem 0;
+
+			.k-content__head-title {
+				margin: 0;
+				padding: 0.25rem 1.25rem 0.25rem 0;
+				font-size: 1.6rem;
+				font-weight: 500;
+				color: #333;
+			}
+
+			.k-content__head-breadcrumbs {
+				display: flex;
+				align-items: center;
+				list-style-type: none;
+				flex-wrap: wrap;
+				margin: 0;
+				padding: 0.25rem 0;
+
+				.k-content__head-breadcrumb-home {
+					padding: 0px 0.75rem 0px 0px;
+					@include k-transition();
+
+					> i {
+						font-size: 1.15rem;
+						color: #aba7c9;
+					}
+
+					&:hover {
+						> i {
+							@include k-transition();
+							color: k-brand-color();
+						}
+					}
+
+					&.k-content__head-breadcrumb-home--active {
+						> i {
+							color: k-brand-color();
+						}
+					}
+				}
+
+				.k-content__head-breadcrumb-link {
+					padding: 0 0.75rem 0 0;
+					font-size: 1rem;
+					font-weight: 500;
+					color: #aba7c9;
+
+					&:hover {
+						color: k-brand-color();
+					}
+
+					&.k-content__head-breadcrumb-link--active {
+						color: k-brand-color();
+					}
+
+					@include k-hover-transition();
+				}
+
+				.k-content__head-breadcrumb-separator {
+					display: flex;
+					justify-content: content;
+					align-items: center;
+					padding: 0 0.75rem 0 0;
+
+					&:after {
+						display: block;
+						width: 4px;
+						height: 4px;
+						border-radius: 50%;
+						content: " ";
+						background: #d6d4e4;
+					}
+				}
+			}
+		}
+
+		.k-content__head-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;	
+			padding: 0.25rem 0;	
+
+			.k-content__head-toolbar-daterange {
+				box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);
+
+				&:hover,
+				&:active {
+					background: k-brand-color();
+					color: k-brand-color(inverse);		
+					box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);		
+				}
+			}
+		}
+	}
+
+	.k-content__body {
+		padding: 0 15px 0 0 0;
+	}
+}
+
+@include k-page-fluid-mode {
+	.k-content {
+		padding-left: 0;
+		padding-right: 0;
+
+		.k-aside--enabled & {
+			padding-left: k-get($k-page-padding, desktop);
+		}
+	}
+}
+
+// Desktop mode(1024px and above)
+@include k-media-above(lg) {
+	.k-content {
+		padding-top: 20px;
+	}
+}
+
+// Tablet & mobile mode(1024px and below)
+@include k-media-below(lg) {
+	.k-aside--enabled .k-content,
+	.k-content {
+		padding: k-get($k-page-padding, mobile) 0;
+	}
+}

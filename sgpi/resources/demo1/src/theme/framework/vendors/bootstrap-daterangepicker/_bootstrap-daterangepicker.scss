@@ -1,0 +1,392 @@
+//
+// Bootstrap Daterangepicker
+//
+
+
+
+
+// Component Base
+@mixin k-bootstrap-daterangepicker-base() {
+   	.daterangepicker {
+        padding: 0;
+        margin: 0;
+        width: auto;
+
+        @include k-not-rounded {
+            border-radius: 0 !important;
+        }
+
+   	    .daterangepicker_input {
+            .input-mini {
+                height: auto;
+                padding: $input-btn-padding-y-sm $input-btn-padding-y-sm;
+                padding-left: $input-btn-padding-x-sm + 1.2rem;
+                line-height: $input-btn-line-height-sm;  
+
+                @include k-not-rounded {
+                    border-radius: 0 !important;
+                }
+            }
+
+            i {
+                top: 0.75rem; 
+            }
+        }	
+
+        td, th {
+            width: 33px;
+            height: 33px;
+
+            border-radius: 3px;
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+            font-weight: normal;
+            border: 0;
+            vertical-align: middle;
+            line-height: 0;
+        }
+
+        thead {
+            .fa.fa-chevron-right,
+            .fa.fa-chevron-left {
+                display: inline-block;
+                font: normal normal normal 16px/1 "LineAwesome";
+                font-size: inherit;
+                text-decoration: inherit;
+                text-rendering: optimizeLegibility;
+                text-transform: none;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font-smoothing: antialiased;
+                font-size: 1.2rem;
+            }
+
+            .fa.fa-chevron-left:before {
+                content: "\f111"#{'/*rtl:"\f112"*/'};
+            }
+
+            .fa.fa-chevron-right:before {
+                content: "\f112"#{'/*rtl:"\f111"*/'};
+            }
+
+            th {
+                font-weight: 500;
+
+                &.month {
+                    
+                }
+
+                &.prev,
+                &.next {
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            td {
+
+                &.in-range {
+                    &.start-date {
+                        &.today {
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                        }
+                    }
+
+                    &.end-date {
+                        &.today {
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 0;
+                        }
+                    }
+                }
+
+                &.today.in-range,
+                &.today {
+                    border-radius: 3px;
+                    position: relative;
+                        
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        border: solid transparent;
+                        border-width: 0 0 7px 7px;
+                        border-bottom-color: #ffffff;
+                        border-top-color: rgba(0, 0, 0, 0.2);
+                        position: absolute;
+                        bottom: 4px;
+                        right: 4px;
+                    }
+                }   
+            }
+        }
+
+        select.monthselect,
+        select.yearselect,
+        select.hourselect,
+        select.minuteselect,
+        select.ampmselect {
+            border-radius: 3px;
+            padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
+            outline: none !important;
+
+            @include k-not-rounded {
+                border-radius: 0 !important;
+            }
+        }
+
+        .calendar {
+            margin: 0;
+            padding: 1.25rem 0 1rem 0;
+
+            &.left {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            &.right {
+                padding-right: 1.25rem;   
+            }
+        }
+
+        .calendar-time {
+            margin: 15px 0 5px 0;
+
+            select.hourselect,
+            select.minuteselect,
+            select.ampmselect {
+                width: 60px;
+                padding: 0.2rem 0.3rem;
+
+                @include k-not-rounded {
+                    border-radius: 0 !important;
+                }
+            }
+
+            i {
+                top: 0.5rem;
+                left: 0.75rem;
+                display: inline-block;
+                font: normal normal normal 16px/1 "LineAwesome";
+                font-size: 1.2rem;
+                text-decoration: inherit;
+                text-rendering: optimizeLegibility;
+                text-transform: none;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font-smoothing: antialiased;
+
+                &:before {
+                    content: "\f18f";
+                }
+            }
+        }
+
+        .ranges {
+            padding: 1.25rem 0;
+            margin: 0;
+            
+            ul {
+                width: 210px;
+                padding: 0 0 1rem 0;
+
+                li {
+                    border-radius: 0;
+
+                    @include k-not-rounded {
+                        border-radius: 0 !important;
+                    }
+
+                    background: transparent;
+                    padding: 0.5rem 1.25rem;
+                    margin-bottom: 0.25rem;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    border-color: transparent;
+                }
+            } 
+
+            .range_inputs {
+                margin-top: 0;
+                padding: 0 1.25rem;
+
+                @include k-not-rounded {
+                    border-radius: 0 !important;
+                }
+
+                .btn {
+                    margin-right: 6px;
+                }
+            }
+        }
+
+        &.single {
+            .calendar {
+                padding: 1rem;
+
+                select.yearselect {
+                    width: 70px;
+                }
+
+                select.monthselect {
+                    width: 70px;
+                }
+            }
+        }
+
+        @include k-desktop {
+            &.show-calendar {
+                .calendar.right {
+                    border-right: 1px solid k-base-color(grey, 2);
+                }
+            }
+        }        
+   	}
+}
+
+// Component Skin
+@mixin k-bootstrap-daterangepicker-skin() {
+    .daterangepicker {        
+        z-index: $k-dropdown-zindex;
+
+        .daterangepicker_input {
+            .input-mini {
+                height: auto;
+                border: 1px solid $input-border-color;  
+
+                &.active,
+                &:focus {
+                    border: 1px solid $input-focus-border-color;  
+                }
+            }
+
+            i {
+                color: $input-group-icon-color;
+            }
+        }   
+
+        thead {
+            th {
+                color: k-base-color(label, 3);
+
+                &.prev,
+                &.next {
+                    color: k-base-color(label, 2);
+
+                    &:hover {
+                        background: k-base-color(grey, 1);
+                    }
+                }
+
+                &.datepicker-switch {
+                    color: k-base-color(label, 3);
+                }
+            }
+        }
+
+        tbody {
+            td {
+                &.available:hover,
+                &:hover {
+                    background: k-base-color(grey, 1);
+                }
+
+                &.available {
+                    color: k-base-color(label, 3);
+                }
+
+                &.available.off,
+                &.off {
+                    color: k-base-color(label, 1);
+                }
+
+                &.today {
+                    background: lighten(k-state-color(brand, base), 10%);
+                    color: k-state-color(brand, inverse);
+                        
+                    &:before {
+                        border-bottom-color: #ffffff;
+                        border-top-color: rgba(0, 0, 0, 0.2);
+                    }
+
+                    &.in-range {
+                        border-radius: 0;
+                    }
+                }
+
+                &.in-range, 
+                &.active {
+                    background: k-state-color(brand, base);
+                    color: k-state-color(brand, inverse);
+
+                    &:hover {
+                        background: k-state-color(brand, base);
+                        color: k-state-color(brand, inverse);
+                    }
+                } 
+            }
+        }
+
+        select.monthselect,
+        select.yearselect,
+        select.hourselect,
+        select.minuteselect,
+        select.ampmselect {
+            border: 1px solid $input-border-color;  
+           
+            &.active,
+            &:focus {
+                border: 1px solid $input-focus-border-color;  
+            }
+        }
+
+        .calendar-time {
+            i {
+                color: k-base-color(label, 3);
+            }
+        }
+
+        .ranges {
+            li {
+                border: 1px solid k-base-color(grey, 2);
+                color: k-base-color(label, 2);
+
+                &:hover {
+                    color: k-brand-color();
+                    background: transparent;
+                }
+
+                &.active {
+                    color: k-brand-color();
+                    background: k-base-color(grey, 1);
+                }
+            }
+        }
+
+        &.show-calendar {
+            .ranges {
+                li {
+                    &.active {
+                        color: k-brand-color();
+                        background: transparent;
+                    }
+
+                    &:last-child {
+                        color: k-brand-color();
+                        background: k-base-color(grey, 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Component Base
+@include k-bootstrap-daterangepicker-base();
+
+// Component Skin
+@include k-bootstrap-daterangepicker-skin();

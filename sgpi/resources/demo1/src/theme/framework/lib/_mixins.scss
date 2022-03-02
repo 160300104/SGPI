@@ -1,0 +1,371 @@
+//
+// Global Mixins
+//
+
+
+
+
+@mixin k-clearfix() {
+	&:before, 
+	&:after {
+		content: " "; // 1
+		display: table; // 2
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin k-button-reset() {
+    appearance: none;
+    box-shadow: none;
+    border-radius: none; 
+    border: none;
+    cursor: pointer;
+    background: none;
+    outline: none !important; 
+    margin: 0;
+    padding: 0;
+}
+    
+@mixin k-input-reset() {
+	border: 0;
+	background: none;
+	outline: none !important;
+	box-shadow: none;
+}
+
+@mixin k-btn-reset() {
+    border: 0;
+    background: none;
+    outline: none !important;
+    box-shadow: none;
+    outline: none !important;
+}
+
+@mixin k-fix-fixed-position-lags() {
+	// webkit hack for smooth font view on fixed positioned elements
+	-webkit-backface-visibility:hidden; 
+	backface-visibility:hidden; 
+}
+
+@mixin k-fix-animation-lags() {
+    transform: translateZ(0); 
+    -webkit-transform-style: preserve-3d;
+}
+
+@mixin k-attr($attr, $value, $important: '') {
+    @if  $value != null  {
+        #{$attr}: #{$value} #{$important}; 
+    } 
+}
+
+@mixin k-hack-ie {
+	@media screen\0 {
+		@content;
+	}
+}
+
+@mixin k-hack-edge-all {
+	@supports (-ms-ime-align:auto) {
+		@content;
+	}
+}
+
+@mixin k-rounded {
+    @if $k-rounded == true {
+      @content;
+    }
+}
+
+@mixin k-not-rounded {
+    @if $k-rounded == false {
+        @content;
+    }
+}
+
+// Input placeholder color
+@mixin k-input-placeholder($color) {
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+    // See https://github.com/twbs/bootstrap/pull/11526
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+    // Internet Explorer 10+
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+    // Safari and Chrome
+}
+
+@mixin k-hover-transition {
+    transition: $k-transition;
+
+    &:hover {
+        transition: $k-transition;
+    }
+}
+
+@mixin k-transition {
+    transition: $k-transition;
+}
+
+// Icon Sizing
+// SASS Map:  (lineawesome: 1.1rem, fontawesome: 1.2rem, flaticon: 1.1rem)
+@mixin k-icons-size($config) {
+    // Lineawesome
+    > [class^="la-"], 
+    > [class*=" la-"] {
+        font-size: k-get($config, lineawesome);
+    } 
+
+    // Fontawesome 
+    > [class^="fa-"], 
+    > [class*=" fa-"] {
+        font-size: k-get($config, fontawesome);
+    } 
+
+    // Flaticon 
+    > [class^="flaticon-"], 
+    > [class*=" flaticon-"],
+    > [class^="flaticon2-"], 
+    > [class*=" flaticon2-"] {
+        font-size: k-get($config, flaticon);
+    }
+}
+
+// Icon attr
+// SASS Map:  (lineawesome: 1.1rem, fontawesome: 1.2rem, flaticon: 1.1rem)
+@mixin k-icons-style($attr, $config) {
+    // lineawesome
+    > [class^="la-"], 
+    > [class*=" la-"] {
+        #{$attr}: k-get($config, lineawesome);
+    } 
+
+    // Fontawesome 
+    > [class^="fa-"], 
+    > [class*=" fa-"] {
+        #{$attr}: k-get($config, fontawesome);
+    } 
+
+    // Flaticon 
+    > [class^="flaticon-"], 
+    > [class*=" flaticon-"],
+    > [class^="flaticon2-"], 
+    > [class*=" flaticon2-"] {
+        #{$attr}: k-get($config, flaticon);
+    }
+}
+
+// SASS Map:  (lineawesome: 1.1rem, fontawesome: 1.2rem, flaticon: 1.1rem)
+@mixin k-icons {
+    [class^="la-"], 
+    [class*=" la-"],
+    [class^="fa-"], 
+    [class*=" fa-"],
+    [class^="flaticon-"], 
+    [class*=" flaticon-"],
+    [class^="flaticon2-"], 
+    [class*=" flaticon2-"] {
+        @content;
+    }
+}
+
+// Lineawesome icon
+@mixin k-la-icon($icon) {
+    font-family: "LineAwesome";
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    
+    &:before {
+        content: "#{$icon}";
+    }
+}
+
+@mixin k-la-icon-change($icon) {
+    &:before {
+        content: "#{$icon}";
+    }
+}
+
+// Lineawesome icon
+@mixin k-la-icon-self($icon) {
+    font-family: "LineAwesome";
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    content: "#{$icon}";
+}
+
+// Close icon
+@mixin k-close-icon($self:null) {
+    @if $self == true {
+        @include k-la-icon-self( k-get($k-action-icons, close) );
+    } @else {
+        @include k-la-icon( k-get($k-action-icons, close) );
+    }
+}
+
+// Arrow icon
+@mixin k-arrow-icon($dir, $self:null) {
+    @if $dir == down {
+        @if $self == true {
+            @include k-la-icon-self( k-get($k-action-icons, down) );
+        } @else {
+            @include k-la-icon( k-get($k-action-icons, down) );
+        }
+    }
+
+    @if $dir == up {
+        @if $self == true {
+            @include k-la-icon-self( k-get($k-action-icons, up) );
+        } @else {
+            @include k-la-icon( k-get($k-action-icons, up) );
+        }
+    }
+
+    @if $dir == left {
+        @if $self == true {
+            @include k-la-icon-self( k-get($k-action-icons, left) );
+        } @else {
+            @include k-la-icon( k-get($k-action-icons, left) );
+        }
+    }
+
+    @if $dir == right {
+        @if $self == true {
+            @include k-la-icon-self( k-get($k-action-icons, right) );
+        } @else {
+            @include k-la-icon( k-get($k-action-icons, right) );
+        }
+    }
+}
+
+// Breakpoint mixins
+// Layout Breakpoints
+// Define the minimum and maximum dimensions at which your layout will change, adapting to different screen sizes, for use in media queries.
+/*
+$k-media-breakpoints: (
+    // Small screen / phone
+    sm: 576px,
+    
+    // Medium screen / tablet
+    md: 768px,
+    
+    // Large screen / desktop
+    lg: 1024px,
+    
+    // Extra large screen / wide desktop
+    xl: 1200px,
+
+    // Extra large screen / wide desktop
+    xxl: 1600px
+)!default;
+*/
+
+@mixin k-media-below($width) {
+    @media (max-width: #{k-media-breakpoint($width)}) {
+        @content;
+    }
+}
+
+@mixin k-media-above($width) {
+    @media (min-width: #{k-media-breakpoint($width) + 1px}) {
+        @content;
+    }
+}
+
+@mixin k-media-range($from, $to) {
+    @media (min-width: #{k-media-breakpoint($from) + 1px}) and (max-width: #{k-media-breakpoint($to)}) {
+        @content;
+    }
+}
+
+@mixin k-minimal-desktop {
+    @media (min-width: #{k-media-breakpoint(lg) + 1px}) and (max-width: #{k-media-breakpoint(xl)}) {
+        @content;
+    }
+}
+
+@mixin k-minimal-desktop-and-below {
+    @media (max-width: #{k-media-breakpoint(xl)}) {
+        @content;
+    }
+}
+
+@mixin k-desktop {
+    @media (min-width: #{k-media-breakpoint(lg) + 1px}) {
+        @content;
+    }
+}
+
+@mixin k-desktop-xl {
+    @media (min-width: #{k-media-breakpoint(xl) + 1px}) {
+        @content;
+    }
+}
+
+@mixin k-desktop-xxl {
+    @media (min-width: #{k-media-breakpoint(xxl) + 1px}) {
+        @content;
+    }
+}
+
+@mixin k-desktop-and-tablet {
+    @media (min-width: #{k-media-breakpoint(md) + 1px}) {
+        @content;
+    }
+}
+
+@mixin k-tablet {
+    @media (min-width: #{k-media-breakpoint(md) + 1px}) and (max-width: #{k-media-breakpoint(lg)}) {
+        @content;
+    }
+}
+
+@mixin k-tablet-and-mobile {
+    @media (max-width: #{k-media-breakpoint(lg)}) {
+        @content;
+    }
+}
+
+@mixin k-mobile {
+    @media (max-width: #{k-media-breakpoint(md)}) {
+        @content;
+    }
+} 
+
+@mixin k-mobile-sm {
+    @media (max-width: #{k-media-breakpoint(sm)}) {
+        @content;
+    }
+} 
+
+@mixin k-responsive-below($width) {
+    @media (max-width: #{$width}) {
+      @content;
+    }
+}
+
+@mixin k-responsive-above($width) {
+    @media (min-width: #{$width}) {
+      @content;
+    }
+}
+
+@mixin k-responsive-range($from, $to) {
+    @media (min-width: #{$from}) and (max-width: #{$to}) {
+      @content;
+    }
+}

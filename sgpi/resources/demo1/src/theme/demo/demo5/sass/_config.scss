@@ -1,0 +1,59 @@
+//
+// Demo Config
+//
+
+
+
+
+// Layout
+$k-aside-default-width: 325px;
+$k-aside-minimize-width: 78px;
+$k-aside-offcanvas-width: 255px;
+
+// Page Padding
+$k-page-padding: (
+	desktop: 25px,
+    mobile: 15px
+);
+
+// Brand Color
+$k-brand-color: #1cac81;
+$k-brand-inverse-color: #ffffff; 
+
+// Base colors
+$k-base-colors: (
+    label: (
+        1: #b9bdc1,
+        2: #aeb2b7,
+        3: #414b4c,
+        4: #343d3e
+    ),
+    shape: (
+        1: #eef4f3,
+        2: #e0e9e6, 
+        3: #80c3af,
+        4: #41675c
+    ),    
+    grey: (
+        1: #f7f8fa,
+        2: #ebedf2,
+        3: darken(#ebedf2, 3%),
+        4: darken(#ebedf2, 6%)
+    )    
+);
+
+// Layout Colors
+$k-page-body-bg-color: #f0f0f4;  // page body bg color
+$k-page-content-width: 1380px; //  fixed page width
+
+// Layout Skins
+$k-layout-skins: (
+	navy: #2f2e38,
+	light: #ffffff
+);
+
+// Root Font Settings
+$k-font-families: (
+    regular: 'Poppins',  
+    heading: 'Raleway'
+); 

@@ -1,0 +1,49 @@
+//
+// Toastr
+//
+
+
+
+
+// Base
+@mixin k-toastr-base() {
+    .toast {
+        background-position: 15px center #{'/*rtl:calc(100% - 15px) center*/'} !important;
+
+    	.toast-close-button {
+			@include k-close-icon();
+       		outline: none !important;
+    	    font-size: 0;
+    	    content: " ";
+            &:before {
+            	font-size: 0.9rem;
+            }
+    	}
+    }
+}
+
+@mixin k-toastr-state($name, $color) {
+	.toast-#{$name} {
+	    background-color: k-get($color, base);
+	    color: k-get($color, inverse);
+	    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+	}
+
+    #toast-container > div:hover {
+    	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.125);
+    }
+}
+
+@mixin k-toastr-skin() {
+	@include k-toastr-state(success, k-get($k-state-colors, success));
+	@include k-toastr-state(warning, k-get($k-state-colors, warning));
+	@include k-toastr-state(info, k-get($k-state-colors, info));
+	@include k-toastr-state(error, k-get($k-state-colors, danger));
+}
+
+// Build
+// Base
+@include k-toastr-base();
+
+// Skin
+@include k-toastr-skin();

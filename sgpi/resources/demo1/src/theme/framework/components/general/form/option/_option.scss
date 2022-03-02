@@ -1,0 +1,119 @@
+
+//
+// Option
+//
+
+
+
+
+// Base
+@mixin k-option-base() {
+    .k-option  {
+        display: flex;       
+        padding: 1.4em;        
+        border: 1px solid k-base-color(grey, 2); 
+
+        @include k-rounded {
+            border-radius: $k-border-radius;
+        }
+        
+        .k-option__control {        	  
+        	width: 2.7rem;
+            padding-top: 0.1rem;      	
+
+        	.k-radio {
+        		display: block;
+        	}
+        }
+
+        .k-option__label {        	 
+            width: 100%;
+
+        	.k-option__head {
+        		display: flex;
+                justify-content: space-between;                
+
+        		.k-option__title {          			  
+        			font-size: 1.1rem;    
+                    font-weight: 400;     	
+                    color: k-base-color(label, 3);  	
+        		}
+
+        		.k-option__focus {        			
+        			font-size: 1.1rem;
+    				font-weight: 500; 		
+                    color: k-base-color(label, 4);	      			
+        		}
+        	}
+
+        	.k-option__body {
+        		display: block;
+        		padding-top: 0.7rem; 
+        		font-size: 0.9rem;     	
+                color: k-base-color(label, 2);
+        	}
+        }
+
+        &.k-option--plain {     
+            border: 0;
+            padding: 0; 
+            margin-top: -0.2rem;
+            margin-bottom: 2rem; 
+            align-items: center;      
+
+            .k-option__control {                        
+                vertical-align: middle;                                               
+                width: 2.7rem;
+
+                .k-radio {                    
+                    margin-bottom: 1.6rem;                     
+                }
+            }
+
+            .k-option__label {
+                .k-option__head {  
+                    .k-option__title {
+                                                           
+                    }                    
+                }
+
+                .k-option__body {                    
+                    padding-top: 0.2rem;                              
+                }
+            }
+        }
+
+        // Validation 
+        .is-valid & {
+            border-color: k-state-color(success, base); 
+        }
+
+        .is-invalid & {
+            border-color: k-state-color(danger, base); 
+        }
+    }     
+
+
+}
+
+// Validation State
+@mixin k-option-validation-state($state, $color) {
+    .has-#{$state} {
+        .k-option {
+            .k-option__label {
+                .k-option__head {
+                    .k-option__title {
+                        color: $color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Base
+@include k-option-base(); 
+
+// Validation States
+@include k-option-validation-state(success, k-get($k-state-colors, success, base));
+@include k-option-validation-state(error, k-get($k-state-colors, warning, base));

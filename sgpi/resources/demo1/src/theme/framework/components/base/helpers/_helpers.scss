@@ -1,0 +1,425 @@
+//
+// Helpers
+//
+
+
+
+
+// Margin & Padding Helpers
+@mixin k-margin-and-padding($mode) {
+	@if $mode == general {
+		$mode: '';
+	} @else {
+		$mode: "-" + $mode;
+	}
+
+	@for $i from 0 through 20 {
+		$num: $i * 5;
+
+		.k-margin-#{$num}#{$mode} {
+			margin: #{$num}px !important;
+		}
+
+		.k-margin-t-#{$num}#{$mode} {
+			margin-top: #{$num}px !important;
+		}
+
+		.k-margin-b-#{$num}#{$mode} {
+			margin-bottom: #{$num}px !important;
+		}
+
+		.k-margin-l-#{$num}#{$mode} {
+			margin-left: #{$num}px !important;
+		}
+
+		.k-margin-r-#{$num}#{$mode} {
+			margin-right: #{$num}px !important;
+		}
+
+		.k-padding-#{$num}#{$mode} {
+			padding: #{$num}px !important;
+		}
+
+		.k-padding-t-#{$num}#{$mode} {
+			padding-top: #{$num}px !important;
+		}
+
+		.k-padding-b-#{$num}#{$mode} {
+			padding-bottom: #{$num}px !important;
+		}
+
+		.k-padding-l-#{$num}#{$mode} {
+			padding-left: #{$num}px !important;
+		}
+
+		.k-padding-r-#{$num}#{$mode} {
+			padding-right: #{$num}px !important;
+		}
+	}
+}
+
+@include k-margin-and-padding(general);
+
+@include k-desktop {
+	@include k-margin-and-padding(desktop);
+}
+
+@include k-tablet {
+	@include k-margin-and-padding(tablet);
+}
+
+@include k-tablet-and-mobile {
+	@include k-margin-and-padding(tablet-and-mobile);
+}
+
+@include k-mobile {
+	@include k-margin-and-padding(mobile);
+}
+
+// Opacity
+@mixin k-opacity {
+	@for $i from 1 through 9 {
+		.k-opacity-#{$i} {
+			opacity: #{$i * 0.1};
+		} 
+	}
+}
+
+@include k-opacity();
+
+
+// General helpers
+.k-valign-top {
+	vertical-align: top;
+} 
+
+.k-space-5 {
+	display: block;
+	height: 0;
+	margin-bottom: 5px;
+}
+
+.k-space-10 {
+	display: block;
+	height: 0;
+	margin-bottom: 10px;
+}
+
+.k-space-15 {
+	display: block;
+	height: 0;
+	margin-bottom: 15px;
+}
+
+.k-space-20 {
+	display: block;
+	height: 0;
+	margin-bottom: 20px;
+}
+
+.k-space-30 {
+	display: block;
+	height: 0;
+	margin-bottom: 30px;
+}
+
+.k-space-40 {
+	display: block;
+	height: 0;
+	margin-bottom: 40px;
+}
+
+.k-valign-middle {
+	vertical-align: middle;
+}
+
+.k-valign-bottom {
+	vertical-align: bottom;
+}
+
+.k-block-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.k-align-right {
+	text-align: right;
+}
+
+.k-align-left {
+	text-align: left;
+}
+
+.k-align-center {
+	text-align: center;
+}
+
+.k-pull-right {
+	float: right;
+}
+
+.k-pull-left {
+	float: left;
+}
+
+.k-img-rounded {
+	border-radius: 50% !important;
+}
+
+.k-block-inline {
+	display: inline-block;
+}
+
+.k-icon-middle {
+	&:before {
+		vertical-align: middle;
+	}
+}
+
+.k-hidden,
+.k-hide {
+	display: none !important;
+}
+
+.k-font-sm {
+	font-size: 0.8rem;
+}
+
+.k-font-md {
+	font-size: 0.9rem;
+}
+
+.k-font-lg {
+	font-size: 1.2rem;
+}
+
+.k-font-xl {
+	font-size: 1.5rem;
+}
+
+.k-clearfix {
+	@include clearfix();
+}
+
+.k-marginless {
+	margin: 0 !important;
+}
+
+.k-img-centered {
+	text-align: center;
+}
+
+// Text Transform
+.k-font-transform-u {
+	text-transform: uppercase;
+}
+
+.k-font-transform-l {
+	text-transform: lowercase;
+}
+
+.k-font-transform-c {
+	text-transform: capitalize;
+}
+
+.k-font-transform-i {
+	text-transform: initial;
+}
+
+// Font Weights
+.k-font-regular {
+	font-weight: 400 !important;
+}
+.k-font-bold {
+	font-weight: 500 !important;
+}
+
+.k-font-bolder {
+	font-weight: 600 !important;
+}
+
+.k-font-boldest {
+	font-weight: 700 !important;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+// State font color
+@each $name, $color in $k-state-colors {
+	.k-font-#{$name} {
+		color: k-get($color, base) !important; 
+	}
+
+	.k-font-hover-#{$name}{
+		&:hover{
+			color: darken(k-get($color, base),20%); 
+		}
+	}
+
+	.k-font-inverse-#{$name} {
+		color: k-get($color, inverse) !important; 
+	}
+
+	.k-bg-#{$name} {
+		background-color: k-get($color, base) !important; 
+	}
+
+	.k-bg-fill-#{$name} {
+		background-color: k-get($color, base) !important; 
+		color: k-get($color, inverse) !important; 
+	}
+}
+
+// Base colors
+@each $name, $color in k-get($k-base-colors, label) {
+	.k-label-font-color-#{$name} {
+		color: $color !important; 
+	}
+
+	.k-label-bg-color-#{$name} {
+		background-color: $color !important; 
+	}
+}
+
+@each $name, $color in k-get($k-base-colors, shape) {
+	.k-shape-font-color-#{$name} {
+		color: $color !important; 
+	}
+
+	.k-shape-bg-color-#{$name} {
+		background-color: $color !important; 
+	}
+}
+
+// Responsive Helpers
+.k-visible-desktop,
+.k-visible-desktop-inline-block,
+.k-visible-desktop-inline,
+.k-visible-desktop-table,
+.k-visible-desktop-table-cell,
+
+.k-visible-tablet,
+.k-visible-tablet-inline-block,
+.k-visible-tablet-inline,
+.k-visible-tablet-table,
+.k-visible-tablet-table-cell,
+
+.k-visible-tablet-and-mobile,
+.k-visible-tablet-and-mobile-inline-block,
+.k-visible-tablet-and-mobile-inline,
+.k-visible-tablet-and-mobile-table,
+.k-visible-tablet-and-mobile-table-cell,
+
+.k-visible-mobile,
+.k-visible-mobile-inline-block,
+.k-visible-mobile-inline,
+.k-visible-mobile-table,
+.k-visible-mobile-table-cell {
+	display: none !important;
+}
+
+@include k-desktop {
+	.k-visible-desktop {
+		display: block !important;
+	}
+
+	.k-visible-desktop-inline-block {
+		display: inline-block !important;
+	}
+
+	.k-visible-desktop-inline {
+		display: inline !important;
+	}
+
+	.k-visible-desktop-table {
+		display: table !important;
+	}	
+
+	.k-visible-desktop-table-cell {
+		display: table-cell !important;
+	}	
+
+	.k-hidden-desktop {
+		display: none !important;
+	}
+}
+
+@include k-tablet {
+	.k-visible-tablet {
+		display: block !important;
+	}
+
+	.k-visible-tablet-inline-block {
+		display: inline-block !important;
+	}
+
+	.k-visible-tablet-inline {
+		display: inline !important;
+	}
+
+	.k-visible-tablet-table {
+		display: table !important;
+	}	
+
+	.k-visible-tablet-table-cell {
+		display: table-cell !important;
+	}	
+
+	.k-hidden-tablet {
+		display: none !important;
+	}
+}
+
+@include k-tablet-and-mobile {
+	.k-visible-tablet-and-mobile {
+		display: block !important;
+	}
+
+	.k-visible-tablet-and-mobile-inline-block {
+		display: inline-block !important;
+	}
+
+	.k-visible-tablet-and-mobile-inline {
+		display: inline !important;
+	}
+
+	.k-visible-tablet-and-mobile-table {
+		display: table !important;
+	}	
+
+	.k-visible-tablet-and-mobile-table-cell {
+		display: table-cell !important;
+	}	
+
+	.k-hidden-tablet-and-mobile {
+		display: none !important;
+	}
+}
+
+@include k-mobile {
+	.k-visible-mobile {
+		display: block !important;
+	}
+
+	.k-visible-mobile-inline-block {
+		display: inline-block !important;
+	}
+
+	.k-visible-mobile-inline {
+		display: inline !important;
+	}
+
+	.k-visible-mobile-table {
+		display: table !important;
+	}	
+
+	.k-visible-mobile-table-cell {
+		display: table-cell !important;
+	}	
+
+	.k-hidden-mobile {
+		display: none !important;
+	}
+}

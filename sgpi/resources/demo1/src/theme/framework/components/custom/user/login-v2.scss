@@ -1,0 +1,367 @@
+//
+// Login v2
+//
+
+
+
+
+// Include framework config
+@import "../../../config";
+
+.k-login-v2--enabled {
+	background-color: #fff;
+}
+
+.k-login-v2 { 	
+	padding: 3rem;
+	 
+	// Head 
+	.k-login-v2__head {
+		display: flex;
+  		justify-content: space-between;
+  		align-items: center; 
+  		flex-flow: row wrap;  	
+
+  		// Logo
+		.k-login-v2__head-logo {
+			> a { 
+				display: inline-block; 
+			}
+		}
+
+		// Signup
+		.k-login-v2__head-signup {
+		  	display: flex;
+		  	align-items: center;
+		   
+
+		  	> span {
+		  		margin-bottom: 0;
+		  		color: #9D9FB1;
+		  		font-size: 1.1rem;
+		  		padding-right: 0.5rem;	
+		  		font-weight: 500;	  	
+		  	}
+
+		  	> a {
+		  		font-weight: 500;
+		  		font-size: 1.1rem;		  		 
+		  	}
+		}
+	}
+
+	// Body
+	.k-login-v2__body {
+		width: 100%;
+		display: flex;
+		align-items: center;		
+
+		//  Wrapper
+		.k-login-v2__body-wrapper {
+			width: 50%;
+			justify-content: flex-end;
+			display: flex;	
+
+			// Container
+			.k-login-v2__body-container {
+				width: 100%;
+				max-width: 500px;				
+				-webkit-box-shadow: 0px 0px 80px 0px rgba(77,84,124,0.09);
+                -moz-box-shadow: 0px 0px 80px 0px rgba(77,84,124,0.09);
+				box-shadow: 0px 0px 80px 0px rgba(77,84,124,0.09);
+				border-radius: 0.6rem;
+
+				// Title
+				.k-login-v2__body-title {
+					text-align: center;
+				> h3 {
+						color: #636576;					
+						margin-top: 3rem;
+						font-size: 1.5rem;	
+					}
+				}
+
+				// Form
+				.k-login-v2__body-form {
+					padding: 3rem 4rem;
+
+					&.k-login-v2__body-form--border {
+						.form-group {
+							.form-control {								 
+								border-top: 0;
+								border-left: 0;
+								border-right: 0;
+								border-radius: 0;
+								padding-left: 0;
+							}						 					 
+						}
+					}
+				}
+
+				// Action
+				.k-login-v2__body-action {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					width: 100%;
+					padding: 0 4rem;
+
+					a {						 
+						display: inline-block; 
+
+						span {
+							font-size: 1rem;
+							font-weight: 500; 					
+						}						
+					}
+
+					.btn {
+						padding: 1rem 3.5rem;
+						border-radius: 60px;
+						color: #fff;						 
+						font-size: 1.1rem;
+					}		
+				}
+
+				.k-login-v2__body-subtitle {					 
+					text-align: center;		
+					color: #A5A7BB;		
+					font-size: 1.3rem;				 
+				}
+				 
+
+				// Options
+				.k-login-v2__body-options {
+					display: flex;
+					justify-content: space-between;
+					padding: 2rem 4rem 3rem 4rem;
+
+					> a {
+						border-radius: 60px;
+						background-color: #202374;					
+						flex: 1;  
+						font-weight: 600;	
+						font-size: 1rem;	
+						padding: 1rem 0;									
+
+						> i {
+							font-size: 1.2rem;
+							color: #fff;
+							padding-right: 0.4rem;
+							font-weight: 900;
+						}
+
+						&:not(:first-child):not(:last-child) {						
+							margin: 0 2rem;						
+						}	
+					}
+				}
+			}
+		}	
+
+		// Pic
+		.k-login-v2__body-pic {
+			width: 50%;
+			margin-left: 8rem;
+			justify-content: flex-start;
+			display: flex;	
+
+			> img {
+				width: 100%;
+				max-width: 500px;
+			}		 	 		  
+		}		 	
+	} 
+
+	// Footer
+	.k-login-v2__footer {
+		display: flex;
+  		justify-content: space-between;
+  		align-items: center;
+
+  		// Info
+		.k-login-v2__footer-info {
+			> a {			
+				font-weight: 500;
+				font-size: 1rem;
+				color: #A5A7BB;		
+			}
+		}
+
+		// Link
+		.k-login-v2__footer-link {
+			order: 2;
+
+			> a {
+				color: #9C9FB1;	
+				font-weight: 500;				
+				font-size: 0.93rem;					
+				
+				&:not(:first-child):not(:last-child) {						
+					margin: 0 2rem;						
+				}				 
+			}
+		}
+	}
+
+	// State font color
+	@each $name, $color in $k-state-colors {
+
+		.k-login-v2__body {	 
+			.k-login-v2__body-wrapper {
+				.k-login-v2__body-container {
+					.k-login-v2__body-options {
+						.k-login-v2__body-option--#{$name} {						
+							background-color: lighten(k-get($color, base), 33%);
+
+							&:hover {
+								background-color: lighten(k-get($color, base), 28%);
+							}
+						}
+					}
+				}
+			}			
+		} 	 	
+	}
+}  
+ 
+
+// Tablet & Mobile Mode
+@include k-tablet-and-mobile {
+	.k-login-v2 { 	
+		padding: 3rem 1rem 2rem 1rem; 		 
+
+		.k-login-v2__head {		
+  			.k-login-v2__head-logo {
+  				
+  			}
+
+		  	.k-login-v2__head-signup {	
+		  		> span {
+		  			padding-left: 1rem;		  			
+		  		} 	
+
+		  		> a {
+
+		  		}		
+		  	}
+		}
+
+		.k-login-v2__body {	
+			display: flex;
+  			flex-direction: column;	
+  			margin-top: 3rem;			
+			 
+			.k-login-v2__body-wrapper {
+				padding-left: 0;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+
+				.k-login-v2__body-container {
+					margin-left: 0;
+
+					.k-login-v2__body-title {
+						padding-top: 1rem;	 				 
+					}
+
+					.k-login-v2__body-form {
+						padding: 3rem 1rem;
+					}
+
+					.k-login-v2__body-action {
+						padding: 0 1rem;
+					}
+
+					 
+					.k-login-v2__body-options {
+						margin-top: 3rem;
+						padding: 2rem 1rem;
+
+						> a {
+							> i {
+								padding: 0.4rem 0.3rem 0.4rem 0;
+							}
+
+							&:not(:first-child):not(:last-child) {						
+								margin: 0 1rem;						
+							}
+						}		
+					}	 
+				}
+			}
+
+			.k-login-v2__body-pic {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				margin-left: 0;
+				padding: 4rem 0;
+
+				> img {
+					width: 100%;
+					max-width: 500px;	
+					height: 100%;								
+				}
+			}		
+		} 
+
+		.k-login-v2__footer {
+			padding-bottom: 2rem;			
+
+			.k-login-v2__footer-info {
+				> a {
+					padding-right: 0.5rem;
+				}
+			}
+
+			.k-login-v2__footer-link {	
+				> a {
+					&:not(:first-child):not(:last-child) {						
+						margin: 0 1rem;
+					} 	
+				}
+			}
+		} 				
+	}	
+}
+
+// Mobile Mode
+@include k-mobile {
+	.k-login-v2 { 	
+		.k-login-v2__head {		
+			display: flex;  
+  			flex-flow: row wrap;   
+  			justify-content: space-between; 		
+
+  			.k-login-v2__head-logo {
+  				flex: 1 100%;
+  				padding-left: 3rem;
+  			}
+
+		  	.k-login-v2__head-signup {		  		
+		  		flex: 1 100%;
+		  		text-align: right;		
+		  		padding: 3rem 0 0 3rem;  		 
+
+		  		> span {
+		  			padding-left: 0;	
+		  		}		  			
+		  	}
+		}	
+
+		.k-login-v2__footer {
+			flex-flow: column;
+
+			.k-login-v2__footer-info {
+				
+			}
+
+			.k-login-v2__footer-link {
+				order: 0;
+				margin-bottom: 1rem;					
+			}
+		} 										
+	}	
+}
+
