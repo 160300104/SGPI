@@ -1,0 +1,94 @@
+//
+// Widget 16
+//
+
+
+
+
+.k-widget-16{
+	padding-top: 0.7rem;
+
+	.k-widget-16__item{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+
+		&:last-child{
+			margin-bottom: 0;
+		}
+
+		.k-widget-16__labels {
+			flex:1;
+
+			.k-widget-16__title{
+				font-size: 1.1rem;
+				font-weight: 500;
+				color: k-base-color(label, 4);
+				@include k-transition();
+
+				&:hover {
+					@include k-transition();
+					color: k-brand-color();
+				}
+			}
+
+			.k-widget-16__desc{
+				color: k-base-color(label, 2);
+				font-weight: 500;
+			}
+		}
+
+		.k-widget-16__data{
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+
+			.k-widget-16__numbers{
+				margin-left: 1.25rem;
+				text-align: center;
+
+				@include k-mobile-sm{
+					margin-left: 0.5rem;
+				}
+
+				.k-widget-16__numbers-total{
+					font-size: 1.1rem;
+					font-weight: 600;
+					color: k-base-color(label, 3);
+				}
+
+				.k-widget-16__numbers-change{
+					background-color: rgba(k-state-color(brand, base), 0.1);
+					color: k-state-color(brand, base);
+					font-weight: 500;
+					padding: 0.2rem 0.5rem;
+					border-radius: 5px;
+				}
+			}
+		}
+
+		// States
+		@each $name, $color in $k-state-colors {
+	 		&.k-widget-16__item--#{$name}{
+	 			.k-widget-16__labels{
+	 				.k-widget-16__title{
+		 				&:hover{
+		 					color: k-get($color, base);
+		 				}
+		 			}
+	 			}
+
+	 			.k-widget-16__data{
+	 				.k-widget-16__numbers{
+	 					.k-widget-16__numbers-change{
+	 						background-color: rgba(k-get($color, base), 0.1);
+							color: k-get($color, base);
+	 					}
+	 				}		 			
+				}
+	 		}
+		}	
+	}
+}

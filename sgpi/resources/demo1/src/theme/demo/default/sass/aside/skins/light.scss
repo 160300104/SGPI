@@ -1,0 +1,76 @@
+//
+// Aside Light Skin
+//
+
+
+
+
+// Include framework config
+@import "../../../../../framework/config";
+
+// Include demo config
+@import "../../config";
+
+// Include header config
+@import "../../header/config";
+
+// Include aside config
+@import "../../aside/config";
+
+// Aside
+.k-aside {
+	background-color: k-get($k-layout-skins, light);
+	box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.08);
+
+	// Scrollbar
+	@include k-perfect-scrollbar-skin(#e0e2f0);
+
+	// Footer
+	.k-aside__footer {
+		background-color: #f6f7fd;
+
+		.btn {
+			@include k-transition();
+			background-color: transparent;
+			
+			i {
+				@include k-transition();
+				color: #99a7df;
+			}
+		}
+
+		.show .btn,
+		.btn:hover {
+			@include k-transition();
+			background-color: darken(#f6f7fd, 6%);
+
+			i {
+				@include k-transition();
+				color: k-brand-color();
+			}
+		}
+	}
+}
+
+// Build Aside Menu Skin
+@include k-menu-ver-build-skin(k-get($k-aside-config, menu), light);
+
+// Modify icon color for flaticon2 icons
+.k-aside {
+	.k-aside-menu {
+		> .k-menu__nav {
+			.k-menu__item {
+				> .k-menu__link {			
+					.k-menu__link-text {
+						font-weight: 500;
+					}	
+		
+					[class^="flaticon2-"],
+					[class*=" flaticon2-"] {
+						//color: #cacad2;
+					}
+				}
+			}
+		}
+	}
+}

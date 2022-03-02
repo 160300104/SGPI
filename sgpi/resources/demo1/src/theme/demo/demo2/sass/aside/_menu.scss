@@ -1,0 +1,51 @@
+//
+// Aside Menu
+//
+
+
+
+
+// Aside
+.k-aside {
+	// Aside menu
+	.k-aside-menu {
+		.k-menu__nav {
+			.k-menu__item {
+				&.k-menu__item--active {
+					> .k-menu__link {
+						border-radius: 2rem;		
+					}				
+				}
+			}
+		}
+	}
+}
+
+@include k-desktop {
+	.k-aside {
+		// Aside menu
+		.k-aside-menu {
+			margin: 15px 0;
+
+			@include k-rounded {
+				border-radius: $k-border-radius;
+			}
+
+			.k-aside--minimize & {
+				> .k-menu__nav  {
+					> .k-menu__item {		
+						&.k-menu__item--active,
+						&.k-menu__item--here {
+							.k-menu__link {
+								border-radius: $k-border-radius;		
+							}				
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Build aside menu
+@include k-menu-ver-build-layout(k-get($k-aside-config, menu));

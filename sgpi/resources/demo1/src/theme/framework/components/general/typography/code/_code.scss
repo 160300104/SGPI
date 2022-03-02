@@ -1,0 +1,15 @@
+//
+//  Code
+//
+
+
+
+code {
+	color: #e83e8c;
+	background: k-base-color(grey, 1);
+	padding: 0.25rem 0.5rem;
+
+	@include k-rounded {
+		border-radius: 2px;
+	}
+}

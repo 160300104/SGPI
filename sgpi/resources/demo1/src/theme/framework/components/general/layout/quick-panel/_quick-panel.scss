@@ -1,0 +1,137 @@
+//
+// Quick Panel
+//
+
+
+// Base
+.k-quick-panel {
+	background-color: k-get($k-quick-panel, self, bg-color);
+	box-shadow: k-get($k-quick-panel, self, shadow);
+	padding: k-get($k-quick-panel, self, padding);
+
+	// Nav
+	.k-quick-panel__nav {
+		display: flex;
+		position: relative;
+		padding: 1.5rem;
+		align-items: center;
+		border-bottom: 1px solid k-base-color(grey, 2);
+
+		.nav {
+			margin: 0;
+			
+			.nav-item {
+				margin-right: 0.5rem;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+
+			.nav-link {
+				background: k-base-color(grey, 1);
+				color: k-base-color(label, 2);
+				font-size: 0.9rem;
+				font-weight: 500;
+				text-transform: uppercase;
+				padding: 0.75rem 1rem;
+
+				@include k-transition();
+
+				&:hover {
+					@include k-transition();
+					background: k-base-color(grey, 2);
+					color: k-base-color(label, 3);
+				}
+
+				&.active {
+					@include k-transition();
+					background: k-brand-color();
+					color: k-brand-color(inverse);
+				}
+			}
+		}
+
+		// Close
+		.k-quick-panel__close {
+			padding: 0;
+			right: 1.5rem !important;
+			position: absolute;
+			cursor: pointer;
+			line-height: 0;
+			border: 0;
+			box-shadow: none !important;
+			background: transparent !important;
+			color: k-base-color(label, 2);
+
+			i {
+				font-size: 1.25rem;
+			}
+
+			@include k-transition();
+			&:hover {
+				@include k-transition();
+				color: k-brand-color();
+			}
+		}
+	}	
+
+	// Content
+	.k-quick-panel__content {
+		padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+
+		.tab-pane {
+			padding-right: 1rem;
+		}
+
+		.ps {
+			> .ps__rail-y {
+    			right: 0 !important;
+    		}
+    	}
+	}
+}
+
+// Build offcanvas mode
+@include k-offcanvas-build(k-quick-panel, default, k-get($k-quick-panel, self, offcanvas) );
+
+// Mobile view
+@include k-tablet-and-mobile {
+	// Base
+	.k-quick-panel {
+
+		// Nav
+		.k-quick-panel__nav {
+			padding: 1rem;
+
+			.nav {
+				.nav-item {
+					margin-right: 0.5rem;
+				}
+
+				.nav-link {
+					padding: 0.75rem 0.75rem;
+					font-size: 0.9rem;
+					font-weight: 500;
+					text-transform: uppercase;
+				}
+			}
+
+			// Close
+			.k-quick-panel__close {
+				i {
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		// Content
+		.k-quick-panel__content {
+			padding: 1rem 0.5rem 1rem 1rem;
+
+			.tab-pane {
+				padding-right: 0.5rem;
+			}
+		}
+	}
+}

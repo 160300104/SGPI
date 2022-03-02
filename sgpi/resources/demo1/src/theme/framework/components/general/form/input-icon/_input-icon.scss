@@ -1,0 +1,107 @@
+// 
+// Input Icon
+//
+
+
+
+
+.k-input-icon {
+    position: relative;
+    padding: 0;
+    width: 100%;
+
+    // icon input sizing
+    > .k-input-icon__icon {
+        position: absolute;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        top: 0;
+        width: k-get($k-input-icon, default, width);
+
+        &.k-input-icon__icon--left {
+            left: 0;
+        }
+
+        &.k-input-icon__icon--right {
+            right: 0;
+        }
+
+        > span {
+            display: flex;
+            align-items: center;    
+            justify-content: center;
+            height: 100%;
+
+            i {
+                display: flex;
+                align-items: center;    
+                justify-content: center;
+                line-height: 0;
+                color: k-base-color(label, 2);
+            }
+        }
+
+        // set icon sizes
+        @include k-icons-size( k-get($k-input-icon, default, font-size) );
+    }
+
+    .form-control.form-control-lg + .k-input-icon__icon {
+        width: k-get($k-input-icon, lg, width);
+
+        // set icon sizes
+        @include k-icons-size( k-get($k-input-icon, lg, font-size) );
+    }
+
+    .form-control.form-control-sm ~ .k-input-icon__icon {
+        width: k-get($k-input-icon, sm, width);
+
+        // set icon sizes
+        @include k-icons-size( k-get($k-input-icon, sm, font-size) );
+    }
+
+    // icon input alignments
+    &.k-input-icon--left {
+        .form-control {
+            padding-left: (k-get($k-input-icon, default, width) - 0.4rem);
+
+            &.form-control-lg {
+                padding-left: (k-get($k-input-icon, lg, width) - 0.6rem);
+            }
+
+            &.form-control-sm {
+                padding-left: (k-get($k-input-icon, sm, width) - 0.2rem);
+            }
+        }
+    }
+
+    &.k-input-icon--right {
+        .form-control {
+            padding-right: (k-get($k-input-icon, default, width) - 0.4rem);
+
+            &.form-control-lg {
+                padding-right: (k-get($k-input-icon, lg, width) - 0.6rem);
+            }
+
+            &.form-control-sm {
+                padding-right: (k-get($k-input-icon, sm, width) - 0.2rem);
+            }
+        }
+    }
+
+    // fixed width icon inputs        
+    &.k-input-icon--fixed {
+        display: inline-block;
+        width: k-get($k-input-icon, default, fixed);
+    }
+
+    &.k-input-icon--fixed-large {
+        display: inline-block;
+        width: k-get($k-input-icon, lg, fixed);
+    }
+
+    &.k-input-icon--fixed-small {
+        display: inline-block;
+        width: k-get($k-input-icon, sm, fixed);
+    }  
+}

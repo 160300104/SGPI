@@ -1,0 +1,59 @@
+//
+// Form
+//
+
+
+
+.k-form {
+	.k-form__group {
+		&.k-form__group--inline {
+			display: table;
+			padding: 0;
+
+			> .k-form__label {
+				display: table-cell;
+				vertical-align: middle;
+				margin: 0;
+				padding-right: 1rem;
+
+				&.k-form__label-no-wrap {
+					white-space:nowrap;
+				}
+
+				> label {
+					margin: 0;
+				}
+			}
+
+			> .k-form__control {
+				display: table-cell;
+				vertical-align: middle;
+				margin: 0;
+				width: 100%;
+			}
+		}
+	}
+
+	// Action bar
+	.k-form__actions { 
+		&.k-form__actions--right {
+			text-align: right;
+		}
+
+		&.k-form__actions--center {
+			text-align: center;
+		}
+	}
+}
+
+@include k-desktop {
+	.k-form {
+		&.k-form--label-right {
+			.form-group {
+				label:not(.k-checkbox):not(.k-radio):not(.k-option) {
+					text-align: right;
+				}
+			}
+		}
+	}
+}

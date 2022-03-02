@@ -1,0 +1,194 @@
+//
+// Accordion
+//
+
+
+
+// Default Accordion
+.accordion {
+	.card {
+		margin: 0;
+
+		.card-header {
+			cursor: pointer;
+			margin: 0;
+			padding: 0;
+			border-bottom: 0;
+			
+			.card-title {
+				margin: 0;
+				font-size: 1.2rem;
+				font-weight: 500;
+				padding: 1.25rem 1.25rem;		
+				color: k-state-color(brand, base);
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+
+				>i  {
+					margin-right: 1rem;
+					font-size:1.5rem;
+				}
+
+				&.collapsed {
+					color: #757383;
+				}	
+
+			}		
+		}
+
+		.card-body {
+			padding: 1.25rem;
+			font-size: 1rem;
+		}
+	}
+}
+
+// Light Accordion
+.accordion.accordion-light {
+	.card {
+		border: 0;
+		border-top: 1px solid #eeeef4;
+		margin: 0;
+
+		.card-header {
+			cursor: pointer;
+			padding: 0;			
+			margin: 0;
+			background-color: transparent;
+			border: 0;
+
+			.card-title {
+				margin: 0;
+				font-size: 1.2rem;
+				padding: 1.25rem 1.2rem 1.25rem 0;
+				font-weight: 500;
+				color: k-state-color(brand, base);
+				position: relative;
+
+				&:after {
+					position: absolute;
+					right: 0;
+					@include k-la-icon-self( k-get($k-action-icons, down) );
+					font-size: 0.9rem;
+					color: k-state-color(brand, base); 
+				}
+
+				&.collapsed {
+					color: #757383;
+					
+					&:after {
+						color: #757383;
+						content: '#{k-get($k-action-icons, right)}';
+					}
+				}	
+			}					
+		}
+
+		.card-body {
+			padding: 0;
+			margin-bottom: 1.25rem;
+			font-size: 1rem;
+		}
+
+		// remove border for the last item
+		&:first-child {
+			border-top: 0;
+
+			.card-header {
+				margin: 0;
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 1.25rem;;
+
+			.card-body {
+				padding: 0;
+				margin: 0;
+			}
+		}
+	}	
+}
+
+// Outline Accordion
+.accordion.accordion-outline {
+
+	&--padded{
+		padding:1.7rem;
+	}
+
+	.card {
+		margin-bottom: 1.25rem;
+		border:0;
+
+		.card-header{
+			padding:0;
+			background-color: transparent;
+			
+			.card-title {
+				font-size: 1.4rem;
+				padding: 1.7rem;
+				border-color: lighten(k-state-color(brand, base), 20%);
+				border-top-width: 2px;
+				border-right-width: 2px;
+				border-bottom-width: 0;
+				padding-bottom: calc(1.5rem + 2px);
+				border-left-width: 2px;
+				border-style: solid;
+				border-top-left-radius: 0.65rem !important;
+				border-top-right-radius: 0.65rem !important;
+
+				&:after{
+					position: absolute;
+					right: 1.25rem;
+					@include k-la-icon-self( k-get($k-action-icons, minus) );
+					font-size: 1.7rem;
+					font-weight: bold;
+					color: k-state-color(brand, base); 
+				}
+				
+				&.collapsed{
+					color: #464457;
+					border-color: #efeff0;
+					border-bottom-width: 2px;
+					padding-bottom: 1.5rem;
+					border-bottom-left-radius: 0.65rem !important;
+					border-bottom-right-radius: 0.65rem !important;
+
+					&:after{
+						content: '#{k-get($k-action-icons, plus)}';
+						color: #efeff0;
+					}
+				}
+			}
+		}
+
+		.card-body-wrapper{
+
+			>.card-body{
+				padding: 0 2.7rem 1.7rem 1.7rem;
+				font-size:1.1rem;
+				font-weight: 400;
+				border-color: lighten(k-state-color(brand, base), 20%);
+				border-top-width: 0;
+				border-right-width: 2px;
+				border-bottom-width: 2px;
+				border-left-width: 2px;
+				border-style: solid;
+				border-bottom-left-radius: 0.65rem !important;
+				border-bottom-right-radius: 0.65rem !important;
+				color: #8d8c9b;
+
+				> p:last-child {
+					margin-bottom:0;
+				}
+			}
+		}		
+
+		// remove margin on last item
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
+}

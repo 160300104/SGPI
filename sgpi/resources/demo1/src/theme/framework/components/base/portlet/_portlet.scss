@@ -1,0 +1,483 @@
+//
+// Portlet
+//
+
+
+
+.k-portlet {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	box-shadow: $k-elevate-shadow;
+	background-color: k-get($k-portlet-config, self, bg-color);
+	margin-bottom: k-get($k-portlet-config, self, bottom-space, desktop);
+
+    @include k-rounded {
+        border-radius: k-get($k-portlet-config, self, border-radius);
+    }
+
+	// Base
+	.k-portlet__head {
+		display: flex; 
+        align-items: stretch;
+        justify-content: space-between;
+        position:relative;
+        padding: 0 k-get($k-portlet-config, self, space, desktop);
+        border-bottom: 1px solid k-get($k-portlet-config, self, border-color);
+        min-height: 60px;
+
+        &.k-portlet__head--noborder {
+            border-bottom: 0;
+        }
+
+        @include k-rounded {
+            border-top-left-radius: k-get($k-portlet-config, self, border-radius);
+            border-top-right-radius: k-get($k-portlet-config, self, border-radius);
+        }        
+        
+        .k-portlet__head-label {
+        	display: flex;
+            align-items: center;
+            align-content: flex-first;
+
+            .k-portlet__head-title {
+        		margin: 0;
+        		padding: 0;
+        		font-size: 1.3rem;
+        		font-weight: 500;
+        		color: k-base-color(label, 4);
+
+                small {
+                    font-weight: 300;
+                    padding-left: 0.5rem;
+                    font-size: 1rem;
+                    color: k-base-color(label, 2);
+                }
+        	}
+
+        	.k-portlet__head-icon {
+        		padding-right: 0.75rem;
+        		font-size: 1.3rem;
+        		color:k-base-color(label, 2);
+        	}
+        }
+
+        .k-portlet__head-toolbar {
+        	display: flex;
+            align-items: center;
+            align-content: flex-end;
+
+            .k-portlet__head-wrapper {
+                display: flex; 
+                align-items: center;
+            }
+        } 
+
+        .k-portlet__head-progress {
+            position: absolute; 
+            left: 0; 
+            right: 0; 
+        }
+
+        // Head sizing
+        &.k-portlet__head--lg {
+            min-height: 80px;
+        }
+
+        &.k-portlet__head--xl {
+            min-height: 100px;
+        }
+
+        @include k-media-below(sm) {
+            &.k-portlet__head--break-sm {
+                padding-top: k-get($k-portlet-config, self, space, mobile);
+                padding-bottom: k-get($k-portlet-config, self, space, mobile);
+                min-height: initial !important;
+                height: auto;
+                flex-wrap: wrap;          
+
+                .k-portlet__head-label {
+                    margin-bottom: 1rem;
+                }  
+            }
+        }        
+    }
+
+    &.k-portlet--sticky {
+        .k-portlet__head {
+            height: 50px;
+            min-height: 50px;
+
+            &.k-portlet__head--lg {
+                height: 70px;
+                min-height: 60px;
+            }
+
+            &.k-portlet__head--xl {
+                height: 80px;
+                min-height: 80px;
+            }
+        }
+	}
+
+	.k-portlet__body {
+		display: flex;
+		flex-direction: column;
+		padding: k-get($k-portlet-config, self, space, desktop);
+
+        @include k-rounded {
+            border-bottom-left-radius: k-get($k-portlet-config, self, border-radius);
+            border-bottom-right-radius: k-get($k-portlet-config, self, border-radius);
+        }
+
+        .k-portlet__content {
+            padding: 0;
+            margin: 0;
+        }
+	}
+
+	.k-portlet__foot {
+		padding: k-get($k-portlet-config, self, space, desktop);
+        border-top: 1px solid k-get($k-portlet-config, self, border-color);
+
+        .k-portlet__foot-wrapper {
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            .k-portlet__foot-info {
+                
+            }
+
+            .k-portlet__foot-toolbar {
+                
+            }
+        }
+        
+
+        @include k-rounded {
+            border-bottom-left-radius: k-get($k-portlet-config, self, border-radius);
+            border-bottom-right-radius: k-get($k-portlet-config, self, border-radius);
+        }
+
+        &.k-portlet__foot--sm {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        &.k-portlet__foot--md {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        &.k-portlet__foot--no-border {
+            border-top: 0;
+        }
+
+        &.k-portlet__foot--top {
+            border-top: 0;
+            border-bottom: 1px solid k-get($k-portlet-config, self, border-color);
+        }
+
+        &.k-portlet__foot--solid {
+            background-color: k-base-color(grey, 1);
+            border-top: 0;
+
+            &.k-portlet__foot--top {
+                 border-bottom: 0;
+            }
+        }
+	}
+
+	// Unelivate
+	&.k-portlet--bordered {
+		box-shadow: none;
+		border: 1px solid k-get($k-portlet-config, self, border-color);
+	}
+
+	// Unelivate
+	&.k-portlet--unelevate {
+		box-shadow: none
+	}
+
+	// Unround
+	&.k-portlet--unround {
+		.k-portlet__head {
+	        border-top-left-radius: 0;
+	        border-top-right-radius: 0;
+		}
+
+		.k-portlet__body {
+			border-bottom-left-radius: 0;
+	        border-bottom-right-radius: 0;
+		}
+
+		.k-portlet__foot {
+			border-bottom-left-radius: 0;
+	        border-bottom-right-radius: 0;
+		}
+	}
+
+    // Marginless
+    &.k-portlet--marginless {
+    	margin-bottom: 0;
+    }
+
+    // Portlet body alignment
+    .k-portlet__body {
+    	&.k-portlet__body--center {
+    		justify-content: center;
+    		align-items: center;
+    	}
+
+    	&.k-portlet__body--center-x {
+    		justify-content: center;
+    	}
+
+    	&.k-portlet__body--center-y {
+    		align-items: center;
+    	}
+
+        .k-portlet__body--hor-fit {
+            margin-left: -(k-get($k-portlet-config, self, space, desktop));
+            margin-right: -(k-get($k-portlet-config, self, space, desktop));
+        }
+
+        &.k-portlet__body--stick-bottom {
+            position: relative;
+            bottom: 0;
+        }
+
+        &.k-portlet__body--fluid {
+            height: 100%;
+            flex-direction: row;
+            flex-grow: 1;
+            width: 100%;
+        }
+    }
+
+    // Padding options
+    &.k-portlet--fit {
+    	.k-portlet__head {
+    		padding: 0;
+    	}
+
+    	.k-portlet__body {
+    		padding: 0;
+    	}
+
+    	.k-portlet__foot {
+    		padding: 0;
+    	}
+
+        &.k-portlet--height-fluid-half {
+           align-items: stretch;
+
+           .k-portlet__body {
+                height: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    }
+
+    // contain inner elements
+	&.k-portlet--contain{
+		overflow: hidden;
+	}
+
+    .k-portlet__head.k-portlet__head--fit {
+    	padding: 0;
+    }
+
+    .k-portlet__body.k-portlet__body--fit {
+    	padding: 0;
+    }
+
+    .k-portlet__body.k-portlet__body--hor-fit {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .k-portlet__foot.k-portlet__foot--fit {
+    	padding: 0;
+    }
+
+    &.k-portlet--space {
+        padding-left: k-get($k-portlet-config, self, space, desktop);
+        padding-right: k-get($k-portlet-config, self, space, desktop);
+
+        .k-portlet__head,
+        .k-portlet__body,
+        .k-portlet__foot {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &.k-portlet--tabs {
+        .k-portlet__head {
+            .k-portlet__head-toolbar {
+                display: flex;
+                align-items: stretch; 
+            }
+        }        
+    }
+
+    // Solid Style
+    @each $name, $color in $k-state-colors {
+        &.k-portlet--solid-#{$name} {
+            background: k-get($color, base);   
+
+            .k-portlet__head {    
+                color: k-get($color, inverse);
+                border-bottom: 1px solid transparent;
+
+                .k-portlet__head-title {
+                    color: k-get($color, inverse);
+
+                    small {
+                        color: darken(k-get($color, inverse), 6%);
+                    }
+                }
+                
+                .k-portlet__head-icon {
+                    i {
+                        color: darken(k-get($color, inverse), 6%);
+                    }
+                }
+            }
+
+            .k-portlet__body {  
+                padding-top: 5px;
+            }
+
+            .k-portlet__wrapper,
+            .k-portlet__body {    
+                color: k-get($color, inverse);
+            }
+
+            .k-portlet__foot {
+                color: k-get($color, inverse);
+                border-top: 1px solid transparent;
+                background: darken(k-get($color, base), 6%);
+            }
+        }
+    }
+
+    // Sortable mode
+    // jQuery UI Draggable Portlets
+    &.k-portlet--sortable {
+        .k-portlet__head {
+            cursor: move;   
+        }  
+    }
+            
+    &.k-portlet--sortable-empty {
+        visibility: hidden;
+        height: 45px;  
+        min-height: 125px; 
+    }
+
+    &.ui-sortable-helper {
+        border: 1px dashed k-base-color(grey, 2);   
+    }
+
+    // Sticky portlet head
+    .k-portlet__head  { 
+        transition: left 0.3s, right 0.3s, height 0.3s
+    }
+
+    &.k-portlet--sticky {
+        .k-portlet__head  { 
+            transition: left 0.3s, right 0.3s, height 0.3s;
+            position: fixed;
+            box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
+            z-index: 101;
+            background: #fff;
+        }
+    }  
+}
+
+// Portlet tools tooltip
+.tooltip-portlet {
+    opacity: 1;
+}
+
+@include k-desktop {
+	.k-portlet {
+		// Fluid Height
+		&.k-portlet--height-fluid {
+	       	height: calc(100% - #{k-get($k-portlet-config, self, bottom-space, desktop)});
+
+	        .k-portlet__body {
+	            flex-grow: 1;
+	        }
+	    }
+
+	    // Full height portlet mode
+	   	&.k-portlet--height-fluid-half {
+	   		height: calc(50% - #{k-get($k-portlet-config, self, bottom-space, desktop)});
+
+	        .k-portlet__body {
+	            flex-grow: 1;
+	        }
+	    }
+	}
+}
+
+@include k-tablet-and-mobile {
+	.k-portlet {
+		margin-bottom: k-get($k-portlet-config, self, bottom-space, mobile);
+
+		.k-portlet__head {
+			padding: 0 k-get($k-portlet-config, self, space, mobile);
+            min-height: 50px;         
+            
+            // Head sizing
+            &.k-portlet__head--lg {
+                min-height: 60px;
+            }
+
+            &.k-portlet__head--xl {
+                min-height: 80px;
+            }   
+		}
+
+        // Portlet body alignment
+        .k-portlet__body {
+            padding: k-get($k-portlet-config, self, space, mobile);
+            
+            .k-portlet__body--hor-fit {
+                margin-left: -(k-get($k-portlet-config, self, space, mobile));
+                margin-right: -(k-get($k-portlet-config, self, space, mobile));
+            }
+        }
+
+        .k-portlet__foot {
+            padding: k-get($k-portlet-config, self, space, mobile);
+        }
+
+		// Marginless
+	    &.k-portlet--marginless {
+	    	margin-bottom: 0;
+	    }  
+
+        // Sticky portlet
+        &.k-portlet--sticky {
+            .k-portlet__head {
+                height: 40px;
+
+                &.k-portlet__head--lg {
+                    height: 60px;
+                }
+
+                &.k-portlet__head--xl {
+                    height: 80px;
+                }
+            }
+        }
+	}
+}

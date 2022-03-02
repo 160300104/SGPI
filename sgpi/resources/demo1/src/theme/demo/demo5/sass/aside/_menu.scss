@@ -1,0 +1,14 @@
+//
+// Aside Menu
+//
+
+
+
+
+.k-aside-menu {
+	margin: 15px 0;
+}
+
+// Build menu
+@include k-menu-ver-build-layout(k-get($k-aside-config, menu));
+@include k-menu-ver-build-skin(k-get($k-aside-config, menu), default);

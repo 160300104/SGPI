@@ -1,0 +1,81 @@
+//
+// Aside
+//
+
+
+
+
+.k-aside {
+	width: k-get($k-aside-config, base, default, width);
+	background-color: k-get($k-aside-config, base, default, bg-color);
+	box-shadow: k-get($k-aside-config, base, default, shadow);
+	transition: k-get($k-aside-config, base, minimize, transition);
+	padding: 2.5rem;
+
+	.k-aside__head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.k-aside__title {
+			font-size:  1.4rem;
+			font-weight: 500;
+			color: #33323f;
+			margin: 0;
+			padding: 0;
+		}
+
+		.k-aside__close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 28px;
+			height: 28px;
+			background-color: #f4f4f8;
+			@include k-transition();
+
+			i {
+				@include k-transition();
+				font-size: 0.8rem;
+				color: #cacad7;
+			}
+
+			@include k-rounded {
+				border-radius: 4px;
+			}
+
+			&:hover {
+				@include k-transition();
+				background-color: k-brand-color();
+
+				i {
+					@include k-transition();
+					color: k-brand-color(inverse);
+				}
+			}
+		}
+	}
+}
+
+@include k-desktop {
+	.k-aside {		
+		// Scroll
+		@include k-perfect-scrollbar-ver-size( k-get($k-aside-config, base, fixed, scroll, width) );
+		@include k-perfect-scrollbar-skin( k-get($k-aside-config, base, fixed, scroll, color) );
+
+		.k-aside__body {
+			.k-aside-menu {
+				padding-right: 1rem;
+				margin-right: -1rem;
+			}
+		}
+	}
+}
+
+@include k-tablet-and-mobile {
+	.k-aside {
+		padding: 1rem;
+	}
+}
+
+@include k-offcanvas-build(k-aside, default, k-get($k-aside-config, base, offcanvas-mobile));

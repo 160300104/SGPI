@@ -1,0 +1,176 @@
+//
+// Override Bootstrap Variables
+//
+
+
+
+
+// Fonts
+$font-family-base:									k-get($k-font-families, regular);
+
+
+
+// Color System
+$primary:       									k-get($k-state-colors, primary, base) !default;
+$secondary:     									#e1e1ef !default;
+$success:       									k-get($k-state-colors, success, base) !default;
+$info:          									k-get($k-state-colors, info, base) !default;
+$warning:       									k-get($k-state-colors, warning, base) !default;
+$danger:        									k-get($k-state-colors, danger, base) !default;
+$light:         									#f8f9fa !default;
+$dark:          									#343a40 !default;
+
+$theme-colors: (
+												  	"primary":    $primary,
+												   	"secondary":  $secondary,
+												    "success":    $success,
+												    "info":       $info,
+												    "warning":    $warning,
+												    "danger":     $danger,
+												    "light":      $light,
+												    "dark":       $dark
+);
+
+
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: $k-media-breakpoints !default;
+
+
+
+// Form & Button Controls
+$btn-font-weight:             						normal !default;
+$input-plaintext-color:                 			k-base-color(label, 3) !default;
+$input-placeholder-color:               			k-base-color(label, 2) !default;
+
+$btn-secondary-hover-bg-color:						#f4f5f8 !default;
+$input-border-radius:                   			.25rem;
+$input-btn-padding-y:       						.65rem;
+$input-btn-padding-x:       						1rem;
+$input-btn-line-height:     						1.5;
+
+$input-btn-padding-y-sm:    						.35rem;
+$input-btn-padding-x-sm:    						1rem;
+$input-btn-line-height-sm:  						1.5;
+
+$input-btn-padding-y-lg:    						1.15rem;
+$input-btn-padding-x-lg:    						1.65rem;
+$input-btn-line-height-lg:  						1.5;
+
+$input-border-color:								k-base-color(grey, 2) !default;
+$input-focus-border-color:							lighten(k-state-color(brand, base), 12%);
+$input-disabled-bg:                     			k-base-color(grey, 1) !default;
+$input-readonly-bg:                     			#ffffff !default;
+$input-group-icon-color:                     		k-base-color(label, 2) !default;
+
+$input-group-addon-color:               			k-base-color(label, 2) !default;
+$input-group-addon-bg:                  			k-base-color(grey, 1) !default;
+
+// Button elevate shadows
+$btn-elevate-shadow-1:								0px 0px 11px 0px rgba(56,36,99,0.08);
+$btn-elevate-shadow-1-hover:						0px 0px 22px 0px rgba(56,36,99,0.11);
+$btn-elevate-shadow-2:								0px 0px 11px 0px rgba(56,36,99,0.10);
+$btn-elevate-shadow-2-hover:						0px 0px 22px 0px rgba(56,36,99,0.13);
+$btn-elevate-shadow-3:								0px 0px 11px 0px rgba(56,36,99,0.12);
+$btn-elevate-shadow-3-hover:						0px 0px 22px 0px rgba(56,36,99,0.15);
+
+
+// Table
+$table-bg:                      					transparent !default;
+$table-accent-bg:               					lighten(#f4f5f8, 1%);
+$table-hover-bg:                					lighten(#f4f5f8, 2%);
+$table-active-bg:               					k-state-color(primary, base);
+
+$table-border-color:            					k-base-color(grey, 1);
+
+$table-head-bg:                 					k-base-color(grey, 2);
+$table-head-color:              					k-base-color(label, 3);
+
+
+// Card
+$card-border-color:                 				k-base-color(grey, 2) !default;
+$card-cap-bg:                       				k-base-color(grey, 1) !default;
+
+
+// List group
+$list-group-border-color:           				k-base-color(grey, 2) !default;
+$list-group-hover-bg:               				k-base-color(grey, 2) !default;
+
+
+// Modal
+$modal-inner-padding:								1.25rem !default;
+$modal-header-padding:								1.25rem !default;
+
+$modal-content-border-color:        				k-base-color(grey, 2) !default;
+$modal-content-box-shadow-xs:       				0 .25rem .5rem rgba(k-base-color(grey, 2), .5) !default;
+$modal-content-box-shadow-sm-up:   	 				0 .5rem 1rem rgba(k-base-color(grey, 2), .5) !default;
+
+$modal-header-border-color:         				k-base-color(grey, 2) !default;
+$modal-footer-border-color:         				k-base-color(grey, 2) !default;
+
+
+// Pagination
+$pagination-color:                  				k-state-color(brand, base) !default;
+$pagination-border-color:           				k-base-color(grey, 2) !default;
+
+$pagination-hover-bg:              	 				k-base-color(grey, 2) !default;
+$pagination-hover-border-color:     				k-base-color(grey, 2) !default;
+
+$pagination-disabled-border-color:  				k-base-color(grey, 2) !default;
+
+
+
+// Popovers
+$popover-font-size:                 				0.9rem !default;
+$popover-max-width:                 				276px !default;
+$popover-border-width:              				1px !default;
+$popover-border-color:              				#ffffff !default;
+$popover-border-radius:             				3px !default;
+$popover-box-shadow:                				0px 0px 20px 0px rgba(0,0,0,0.15) !default;
+
+$popover-header-bg:                 				#ffffff !default;
+$popover-header-color:              				k-base-color(label, 3) !default;
+$popover-header-padding-y:          				1rem !default;
+$popover-header-padding-x:          				1.25rem !default;
+
+$popover-body-color:                				k-base-color(label, 2) !default;
+
+
+
+// Tooltips
+$tooltip-font-size:                 				0.9rem !default;
+$tooltip-max-width:                 				200px !default;
+$tooltip-color:                     				k-base-color(label, 3) !default;
+$tooltip-bg:                        				#ffffff !default;
+$tooltip-border-radius:             				3px !default;
+$tooltip-opacity:                   				1 !default;
+$tooltip-padding-y:                 				.75rem !default;
+$tooltip-padding-x:                 				1rem !default;
+$tooltip-margin:                    				0 !default;
+
+
+
+// Progress bars
+$progress-bg:                       				k-get-color() !default;
+
+
+
+// Dropdown
+$dropdown-box-shadow:								$k-dropdown-shadow !default;
+$zindex-dropdown:                   				$k-dropdown-zindex !default;
+
+
+
+// Text muted
+$text-muted:                  						k-base-color(label, 2) !default;
+
+
+
+// Badges
+$badge-padding-y:                   				.5em !default;
+$badge-padding-x:                   				.75em !default;
+$badge-font-size:                   				85% !default;

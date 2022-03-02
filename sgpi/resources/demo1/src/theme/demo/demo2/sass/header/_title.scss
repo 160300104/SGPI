@@ -1,0 +1,100 @@
+//
+// Header Title
+//
+
+
+
+@include k-desktop {
+	.k-header__title {
+		display: flex;
+		align-items: center; 
+		margin: 0 2.2rem;	
+		flex-wrap: wrap;
+
+		.k-header__title-title {	
+			padding: 0 1.25rem 0 0;		
+		}	
+
+		.k-header__title-breadcrumbs {
+			display: flex;
+			align-items: center;
+			list-style-type: none;
+			margin: 0;
+			 
+
+			.k-header__title-breadcrumb-home {				
+				@include k-transition();
+
+				> i {
+					font-size: 1.15rem;
+					color: #b2afc6;
+				}
+
+				&:hover {
+					> i {
+						@include k-transition();
+						color: k-brand-color();
+					}
+				}
+
+				&.k-title__head-breadcrumb-home--active {
+					> i {
+						color: k-brand-color();
+					}
+				}
+			}
+
+			.k-header__title-breadcrumb-link {
+				padding: 0 0.2rem 0 0;
+				font-size: 1rem;
+				font-weight: 500;
+				color: #b2afc6;
+
+				&:hover {
+					color: k-brand-color();
+				}
+
+				&.k-title__head-breadcrumb-link--active {
+					color: k-brand-color();
+				}
+
+				@include k-hover-transition();
+			}
+
+			.k-header__title-breadcrumb-separator {
+				display: flex;
+				justify-content: content;
+				align-items: center;
+				padding: 0 0.75rem;
+
+				&:after {
+					display: block;
+					width: 4px;
+					height: 4px;
+					border-radius: 50%;
+					content: " ";
+					background: #b2afc6;
+				}
+			}
+		}			
+	}
+}
+
+
+// Responsive mode(ref $k-media-breakpoints in framework\_config.scss)
+// Above 1200px(large desktop)
+@include k-media-above(xl) {
+	
+}
+
+// Above 1024px and below 1200px(mini desktop)
+@include k-media-range(lg, xl) {
+	
+}
+
+// Below 1024px(table and mobile)
+@include k-media-below(lg) {
+	.k-header__title {
+		display: none;
+	}
+}

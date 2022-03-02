@@ -1,0 +1,72 @@
+//
+// User Card v3
+//
+
+
+
+.k-user-card-v3 {
+	display: flex;
+	align-items: center;
+
+	.k-user-card-v3__avatar {
+		> img {
+			height: 120px;
+			width: 120px;
+			border-radius: 7px;
+		}
+	}
+
+	.k-user-card-v3__detalis {
+		padding-left: 1.5rem;
+
+		a.k-user-card-v3__name {
+			font-size: 1.2rem;
+			font-weight: 500;
+			color: #33323f;
+			text-decoration: none;
+			padding-bottom: 0.8rem;
+
+			@include k-transition();
+			&:hover {
+				@include k-transition();
+				color: k-brand-color();
+			}
+		}
+
+		.k-user-card-v3__desc {
+			font-size: 1rem;
+			font-weight: 400;
+			color: #b2afc6;
+			padding: 0.8rem 0;
+		}
+
+		.k-user-card-v3__info {
+			a.k-user-card-v3__item {
+				display: flex;
+				align-items: center;
+				padding-bottom: 0.8rem;
+
+				> i {
+					line-height: 0;
+					font-size: 1.4rem;
+				}
+
+				.k-user-card-v3__tag {
+					font-size: 0.9rem;
+					font-weight: 400;
+					color: #9e9bb1;
+					padding-left: 0.8rem;
+					@include k-transition();
+				}
+
+
+				&:hover {
+					.k-user-card-v3__tag {
+						@include k-transition();
+						color: k-brand-color();
+					}
+				}
+			}
+		}
+	}
+}

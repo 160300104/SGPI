@@ -1,0 +1,108 @@
+//
+// Head
+//
+
+$k-user-card-height: 70px;
+$k-user-card-height-mobile: 50px;
+
+.k-user-card {
+	position: relative;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+  	align-items: center;
+  	justify-content: center;
+
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 1rem 1rem;
+    min-height: $k-user-card-height;
+    margin-bottom: $k-user-card-height/2;
+	   
+    .k-user-card__wrapper {
+        left: 0;
+        right: 0;
+        position: absolute;
+        display: flex;
+        align-items: stretch;
+        height: 100%;
+        bottom: -($k-user-card-height/2);
+        padding: 0 1.75rem;
+
+        .k-user-card__pic {
+            display: flex;
+            align-items: center;
+
+            img {
+                border-radius: 50%;
+                max-height: $k-user-card-height - 10px;
+            }
+
+            padding-right: 1rem;
+        }
+
+        .k-user-card__details {
+            display: flex;
+            flex-direction: column;
+
+            .k-user-card__name {
+                display: flex;
+                align-items: flex-end;
+                font-size: 1.2rem;
+                height: 50%;
+                font-weight: 500;
+                padding-bottom: 0.25rem;
+                color: #fff;
+            }                
+
+            .k-user-card__position {
+                display: flex;
+                height: 50%;
+                align-items: flex-start;
+                font-size: 0.9rem;
+                font-weight: 400;
+                padding-top: 0.25rem;
+                color: k-base-color(label, 2);
+            }
+        }
+    }    
+
+    &.k-user-card--skin-light {
+        min-height: $k-user-card-height;
+
+        .k-user-card__wrapper {
+            .k-user-card__details {
+                .k-user-card__name {
+                    align-items: center;
+                    align-items: flex-end;
+                    color: k-base-color(label, 3);
+                    margin-bottom: 9;
+                }                
+
+                .k-user-card__position {
+                    margin-top: 9;
+                    align-items: flex-start;
+                    color: k-base-color(label, 2);
+                }
+            }  
+        }
+    }
+}
+
+@include k-tablet-and-mobile {
+	.k-user-card {
+    	min-height: $k-user-card-height-mobile;
+        margin-bottom: $k-user-card-height-mobile/2;
+
+        .k-user-card__wrapper {
+            bottom: -($k-user-card-height-mobile/2);
+
+            .k-user-card__pic {
+                img {
+                    max-width: $k-user-card-height-mobile;
+                }
+            }
+        }
+	}
+}

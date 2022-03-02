@@ -1,0 +1,57 @@
+//
+// Scrolltop
+//
+
+
+
+// Base
+.k-scrolltop {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 40px;  
+    right: 20px;
+    cursor: pointer;     
+    z-index: $k-dropdown-zindex - 5;        
+    border-radius: 50%;
+    background: k-brand-color();
+    box-shadow: 0 0 15px 1px rgba(69,65,78, 0.2);
+    opacity: 0;
+    @include k-transition();
+
+    > i {
+        font-size: 1.3rem;
+        color: #fff;
+    }          
+
+    &:hover {
+        > i {
+            color: #fff;
+        }
+    }
+
+    .k-scrolltop--on & {   
+        opacity: 0.3;     
+        animation: k-scrolltop-show-animation .4s ease-out 1;
+        display: flex; 
+
+        &:hover {
+            @include k-transition();
+            opacity: 1;
+        }
+    }
+}
+
+@include k-tablet-and-mobile {
+    bottom: 30px;  
+    right: 15px;
+}
+
+// Animations
+@keyframes k-scrolltop-show-animation {
+    from   { margin-bottom: -15px }
+    to { margin-bottom: 0; }
+}

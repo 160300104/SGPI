@@ -1,0 +1,66 @@
+//
+// Header Menu
+//
+
+
+
+
+// Build desktop menu
+@include k-menu-hor-build-layout(k-get($k-header-config, menu, desktop));
+@include k-menu-hor-build-skin(k-get($k-header-config, menu, desktop), default);
+
+// Build mobile menu
+@include k-menu-ver-build-layout(k-get($k-header-config, menu, tablet-and-mobile));
+@include k-menu-ver-build-skin(k-get($k-header-config, menu, tablet-and-mobile), default);
+
+// Header menu mobile offcanvas
+@include k-offcanvas-build(k-header-menu-wrapper, tablet-and-mobile, k-get($k-header-config, menu, offcanvas-mobile));
+
+@include k-desktop {
+	.k-header-menu {
+		margin-left: k-get($k-page-padding, desktop);
+		
+		.k-menu__nav {
+			> .k-menu__item {
+				> .k-menu__link {
+					border-radius: 3px;
+					padding: 0.75rem 1.1rem;
+
+					.k-menu__link-text {
+						font-size: 1.075rem;
+						font-family: k-get($k-font-families, heading);
+					}
+				}
+
+				> .k-menu__submenu {
+					> .k-menu__subnav {
+						border-top-left-radius: 0;
+						border-top-right-radius: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include k-media-range(lg, 1400px) {
+	.k-header-menu {		
+		margin-left: 10px;
+
+		.k-menu__nav {
+			> .k-menu__item {
+				padding-left: 1px;
+				padding-right: 1px;
+
+				> .k-menu__link {
+					padding-left: 0.35rem;
+					padding-right: 0.35rem;
+
+					.k-menu__link-text {
+						font-size: 0.85rem;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,176 @@
+//
+// Global Framework Config
+//
+
+
+
+
+// Base functions and mixins
+@import "lib/functions";
+@import "lib/mixins";
+@import "vendors/mixins";
+@import "components/base/mixins";
+@import "components/general/mixins";
+
+
+// Layout Breakpoints(bootstrap responsive breakpoints)
+// Define the minimum and maximum dimensions at which your layout will change, adapting to different screen sizes, for use in media queries.
+$k-media-breakpoints: (
+    // Extra small screen / phone
+    xs: 0,
+
+    // Small screen / phone
+    sm: 576px,
+    
+    // Medium screen / tablet
+    md: 768px,
+    
+    // Large screen / desktop
+    lg: 1024px, //1024px,
+    
+    // Extra large screen / wide desktop
+    xl: 1399px
+) !default;
+
+// Global rounded border mode
+$k-rounded: true !default;
+
+
+// Border Radius
+$k-border-radius: 4px !default;
+
+// Core icon codes(lineawesome icons: https://icons8.com/line-awesome)
+$k-action-icons: (
+    close: '\f191',
+    down: '\f110',
+    up: '\f113',
+    left: '\f111',  
+    right: '\f112',
+    plus: '\f2c2',
+    minus: '\f28e'
+) !default;
+
+// Elevate shadow
+$k-elevate-shadow: 0px 0px 13px 0px rgba(82,63,105,0.05);
+
+// Dropdown shadow
+$k-dropdown-shadow: 0px 0px 50px 0px rgba(82,63,105, 0.15);
+
+// Custom scrollbar color
+$k-scroll-color: darken(#ebedf2, 6%);
+
+// Transition
+$k-transition: all 0.3s !default;
+
+// Modal Z-index
+$k-modal-zindex: 1050 !default;
+
+// dropdown Z-index
+$k-dropdown-zindex: 95 !default;
+
+// State Colors
+// Brand colors
+$k-brand-color: #536be2 !default;
+$k-brand-inverse-color: #ffffff !default; 
+
+// State colors
+$k-state-colors: (
+    // Keen states
+    brand: (
+        base: $k-brand-color,
+        inverse: $k-brand-inverse-color
+    ),
+    metal: (
+        base: #d3dae6, 
+        inverse: #586272
+    ),  
+    light: (
+        base: #ffffff,
+        inverse: #282a3c 
+    ),
+    dark: (
+        base: lighten(#4c467a, 12%),
+        inverse: #ffffff 
+    ),
+    accent: (
+        base: #00c5dc,
+        inverse: #ffffff 
+    ),
+    focus: (
+        base: #9816f4,
+        inverse: #ffffff 
+    ),
+
+    // Bootstrap states
+    primary: (
+        base: #5867dd,
+        inverse: #ffffff
+    ),
+    success: (
+        base: #1dc9b7,
+        inverse: #ffffff
+    ),
+    info: (
+        base: #5578eb,
+        inverse: #ffffff
+    ),
+    warning: (
+        base: #ffb822,
+        inverse: #111111
+    ),
+    danger: (
+        base: #fd397a,
+        inverse: #ffffff
+    )    
+)!default;
+
+// Base colors
+$k-base-colors: (
+    label: (
+        1: #c5cbe3,
+        2: #a1a8c3,
+        3: #646c9a,
+        4: #3d4465
+    ),
+    shape: (
+        1: #f0f3ff,
+        2: #e8ecfa, 
+        3: #93a2dd,
+        4: #646c9a
+    ),    
+    grey: (
+        1: #f7f8fa, //#f4f5f8
+        2: #ebedf2,
+        3: darken(#ebedf2, 3%),
+        4: darken(#ebedf2, 6%)
+    )    
+) !default;
+
+// Root Font Settings
+$k-font-families: (
+    regular: 'Poppins',  
+    heading: 'Poppins'
+) !default; 
+
+// Root Font Settings
+$k-font-size: (
+    size: (
+        desktop: 13px,
+        tablet: 12px,
+        mobile: 12px
+    ), 
+    weight: 300
+) !default; 
+
+// General Link Settings
+$k-font-color: (
+    text: #646c9a,
+    link: (
+        default: k-state-color(brand),
+        hover: darken(k-state-color(brand), 6%)
+    )
+) !default; 
+
+
+// Base Component Configs
+@import "components/base/config";

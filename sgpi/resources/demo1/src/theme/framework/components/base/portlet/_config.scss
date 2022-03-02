@@ -1,0 +1,22 @@
+//
+// Config
+//
+
+
+
+$k-portlet-config: (
+	self: (
+		space: (
+			desktop: 25px,
+			mobile: 15px
+		),
+		border-radius: $k-border-radius,
+		bottom-space: (
+			desktop: 30px,
+			mobile: 20px
+		),
+		border-color: k-base-color(grey, 2),
+		bg-color: #ffffff,
+		shadow: 0px 0px 30px 0px rgba(82,63,105,0.05)
+	)	
+);

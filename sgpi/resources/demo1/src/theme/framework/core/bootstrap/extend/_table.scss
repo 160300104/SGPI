@@ -1,0 +1,21 @@
+//
+// Table
+//
+
+
+
+.table {
+	thead {
+		th, td {
+			font-weight: 500;
+		}
+	}
+
+	&.table-head-noborder {
+		thead {
+			th, td {
+				border-top: 0;
+			}
+		}
+	}
+}

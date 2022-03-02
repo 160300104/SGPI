@@ -1,0 +1,223 @@
+//
+// Blog - Post
+//
+
+
+
+// Include framework config
+@import "../../../config";
+
+$k-blog-post-title-color: #464457;
+$k-blog-post-font-color: #918ea7;
+$k-blog-post-content-color: #7b7986;
+$k-blog-post-margin-bottom: 2.5rem;
+$k-blog-post-user-image: 3rem;
+.k-blog-post{
+	display: flex;
+	flex-direction: column;
+
+	.k-blog-post__title{
+		color: $k-blog-post-title-color;
+	}
+
+	.k-blog-post__meta{
+		display: flex;
+		margin-bottom: 2rem;
+		color: $k-blog-post-font-color;
+		font-size: 1.1rem;
+
+		.k-blog-post__date{
+			padding: 0.2rem 1rem 0.2rem 0;
+			border-right: 1px solid #e9e9f1;
+		}
+
+		.k-blog-post__author{
+			padding: 0.2rem 1rem;
+			border-right: 1px solid #e9e9f1;
+
+			.k-blog-post__link{
+				@include k-transition;
+				font-weight: 500;
+			}
+		}
+
+		.k-blog-post__comments{
+			padding: 0.2rem 1rem;
+		}
+	}
+
+	.k-blog-post__hero-image{
+		flex:1;
+		flex-basis: auto;
+		margin-bottom: $k-blog-post-margin-bottom;
+
+		.k-blog-post__image{
+			width: 100%;
+			border-radius: 5px;
+		}
+	}
+
+	.k-blog-post__content{
+		font-size: 1.2rem;
+		line-height: 2rem;
+		font-weight: 400;
+		color: $k-blog-post-content-color;
+		margin-bottom: $k-blog-post-margin-bottom;
+	}
+
+	.k-blog-post__foot{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: $k-blog-post-margin-bottom;
+		flex-wrap: wrap;
+
+		.k-blog-post__author{
+			display: flex;
+			align-items: center;
+
+			.k-blog-post__profile{
+				width: $k-blog-post-user-image;
+				height: $k-blog-post-user-image;
+				flex: 0 0 $k-blog-post-user-image;
+				margin-right: 1rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				overflow: hidden;
+
+				.k-blog-post__image{
+					width:$k-blog-post-user-image;
+				}
+			}
+
+			.k-blog-post__label{
+				color: $k-blog-post-font-color;
+				font-size: 1.1rem;
+
+				span{
+					font-weight: 500;
+					color: $k-blog-post-title-color;
+				}
+			}
+		}
+
+		.k-blog-post__social{
+			display: flex;
+			align-items: center;
+
+			.k-blog-post__label{
+				font-weight: 500;
+				font-size: 1.1rem;
+				color: $k-blog-post-title-color;
+			}
+
+			.k-blog-post__link{
+				font-size: 1.7rem;
+				color: #afb0c3;
+				margin-left: 1rem;
+				@include k-transition;
+
+				&:hover,
+				&:focus{
+					color: k-state-color(brand, base);
+				}
+			}
+		}
+	}
+
+	.k-blog-post__comments{
+
+		.k-blog-post__input{
+			margin-bottom: $k-blog-post-margin-bottom;
+
+			.k-blog-post__input-title{
+				font-size: 1.7rem;
+				font-weight: 400;
+				color: $k-blog-post-font-color;
+				margin-bottom: 2rem;
+			}
+
+			.k-blog-post__form{
+				display: flex;
+				flex-direction: column;
+
+				.k-blog-post__textarea{
+					border: 1px solid #dddee7;
+					margin-bottom: 1.5rem;
+				}
+
+				.btn{
+					align-self: flex-end;
+				}
+			}
+		}
+
+		.k-blog-post__threads{
+
+			.k-blog-post__thread{
+				display: flex;
+				max-width: 60rem;
+
+				.k-blog-post__head{
+					width: $k-blog-post-user-image;
+					height: $k-blog-post-user-image;
+					flex: 0 0 $k-blog-post-user-image;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 50%;
+					overflow: hidden;
+					margin-right: 1rem;
+
+					.k-blog-post__image{
+						width: $k-blog-post-user-image;
+						height: $k-blog-post-user-image;
+					}
+				}
+
+				.k-blog-post__body{
+
+					.k-blog-post__top{
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						flex-wrap: wrap;
+						margin-bottom: 0.7rem;
+
+						.k-blog-post__author{
+
+							.k-blog-post__label{
+								color: $k-blog-post-font-color;
+								margin-right: 1rem;
+
+								span{
+									color: $k-blog-post-title-color;
+									font-weight: 500;
+									font-size: 1.1rem;
+								}
+							}
+						}
+
+						.k-blog-post__link{
+							font-weight: 500;
+							font-size: 1.1rem;
+						}
+					}
+
+					.k-blog-post__content{
+						font-size: 1.1rem;
+						font-weight: 400;
+						color: $k-blog-post-content-color;
+					}
+				}
+
+				&--sub{
+					margin-left: 5rem;
+				}
+			}
+		}
+
+	}
+}

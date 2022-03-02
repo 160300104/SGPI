@@ -1,0 +1,283 @@
+//
+// Invoice v2
+//
+
+
+
+
+// Include framework config
+@import "../../../config";
+
+// Component config
+$k-invoice-v2-title-color: #000000;
+$k-invoice-v2-subtitle-color: #a9a9b8;
+$k-invoice-v2-base-color: #7a8091;
+$k-invoice-v2-highlight-color: #fb2f73;
+$k-invoice-v2-footer-bg: #f4f4f7;
+
+.k-invoice-v2 {
+	.k-invoice-v2__header{
+		padding: 10rem 20rem 0;
+		display:flex;
+		flex:1;
+		justify-content: space-between;
+		flex-wrap: wrap;		
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 10rem 5rem 0;
+		}
+
+		@include k-tablet-and-mobile{
+			padding: 5rem 5rem 2rem;
+		}
+
+		.k-invoice-v2__header-left{
+			flex:1;
+
+			.k-invoice-v2__title{
+				font-size: 5rem;
+				font-weight: 700;
+				margin-bottom: 5rem;
+				color: $k-invoice-v2-title-color;
+			}
+
+			@include k-mobile{
+				margin-bottom:3rem;
+				text-align: center;
+				flex-basis: 100%;
+
+				.k-invoice-v2__title{
+					font-size: 2.5rem;
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.k-invoice-v2__header-right{
+			text-align: right;
+			flex:1;
+
+			@include k-mobile{
+				text-align: center;
+				flex-basis: 100%;
+			}
+			
+			.k-invoice-v2__logo{
+				margin-bottom: 1.25rem;
+
+				.k-invoice-v2__logoimage{
+					display: inline-block;
+					width: 9rem;
+				}
+			}
+
+			.k-invoice-v2__companyinfo{
+				color: $k-invoice-v2-base-color;
+				font-size: 1.25rem;
+				font-weight: 500;
+			}
+		}
+	}
+
+	.k-invoice-v2__line{
+		margin: 2rem 20rem;
+		border-bottom: 1px solid #eaebec;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			margin: 2rem 5rem;
+		}
+	}
+
+	.k-invoice-v2__details{
+		padding: 2rem 20rem 10rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 2rem 5rem 10rem;
+			padding-bottom: 0;
+		}
+
+		.k-invoice-v2__details-left,
+		.k-invoice-v2__details-right{
+
+			.k-invoice-v2__details-label{
+				font-weight: 700;
+				font-size: 1.25rem;
+				color: $k-invoice-v2-subtitle-color;
+				margin-bottom: 1.25rem;
+			}
+
+			.k-invoice-v2__details-value{
+				color: $k-invoice-v2-base-color;
+				font-size:1.25rem;
+				font-weight: 500;
+			}
+
+		}
+
+		.k-invoice-v2__details-left{
+			margin-bottom: 1.25rem;
+			margin-right: 1.25rem;
+
+			@include k-responsive-below(k-media-breakpoint(sm)) {
+				margin-right: 0;
+			}
+		}
+
+		.k-invoice-v2__details-right{
+
+			.k-invoice-v2__details-date,
+			.k-invoice-v2__details-invoiceno{
+				display: flex;
+				flex-direction:row;
+				justify-content:space-between;
+				flex-wrap:wrap;
+
+				.k-invoice-v2__details-label{
+					margin-right: 4rem;
+				}
+			}
+
+			@include k-mobile {
+				flex:1;
+			}
+		}
+	}
+
+	.k-invoice-v2__body{
+		padding: 10rem 20rem;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 10rem 5rem;
+		}
+
+		@include k-tablet-and-mobile{
+			padding: 5rem;
+		}
+
+		.k-invoice-v2__summary{
+			width:100%;
+			margin-bottom: 10rem;
+
+			.k-invoice-v2__summary-header{
+				color: $k-invoice-v2-subtitle-color;
+				font-weight: 700;
+				font-size:1rem;
+				border-bottom: 1px solid #eaebec;
+				margin-bottom: 0.75rem;
+				letter-spacing: 0.1rem;
+
+				> tr{
+
+					> td{
+						text-align: right;
+						padding-bottom: 0.75rem;
+
+						&:first-child{
+							text-align: left;
+						}
+					}
+				}
+			}
+
+			.k-invoice-v2__summary-body{
+				font-size:1.25rem;
+				font-weight: 500;
+				color: $k-invoice-v2-base-color;
+
+				> tr{
+
+					&:first-child{
+
+						> td{
+							padding-top:2.25rem;
+						}
+					}
+
+					> td{
+						text-align: right;
+						padding: 1rem 0.5rem;
+
+						&:first-child{
+							text-align: left;
+							padding-left:0;
+						}
+
+						&:last-child{
+							padding-right:0;
+							color: $k-invoice-v2-highlight-color;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.k-invoice-v2__payment{
+		padding: 10rem 20rem;
+		width:100%;
+		background-color: $k-invoice-v2-footer-bg;
+
+		@include k-responsive-below(k-media-breakpoint(xl)) {
+			padding: 10rem 5rem;
+		}
+
+		@include k-tablet-and-mobile{
+			padding: 5rem;
+		}
+
+		.k-invoice-v2__payment-header{
+			color: $k-invoice-v2-subtitle-color;
+			font-weight: 700;
+			font-size:1rem;
+			border-bottom: 1px solid #eaebec;
+			margin-bottom: 0.75rem;
+			letter-spacing: 0.1rem;
+
+			> tr{
+
+				> td{
+					padding-bottom: 0.75rem;
+
+					&:last-child{
+						text-align: right;
+					}
+				}
+			}
+		}
+
+		.k-invoice-v2__payment-body{
+			font-size:1.25rem;
+			font-weight: 500;
+			color: $k-invoice-v2-base-color;
+
+			> tr{
+
+				&:first-child{
+
+					> td{
+						padding-top:2.25rem;
+					}
+				}
+
+				> td{
+					padding: 1rem 0.5rem;
+
+					&:first-child{
+						padding-left:0;
+					}
+
+					&:last-child{
+						text-align: right;
+						padding-right:0;
+						font-size: 2.5rem;
+						color: $k-invoice-v2-highlight-color;
+						font-weight: 600;
+					}
+				}
+			}
+		}
+	}
+}

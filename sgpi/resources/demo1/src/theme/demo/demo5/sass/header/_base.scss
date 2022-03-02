@@ -1,0 +1,25 @@
+//
+// Header
+//
+
+
+
+// Desktop mode
+@include k-desktop {
+	.k-header {
+		display: flex;
+		justify-content: space-between;
+		height: k-get($k-header-config, base, desktop, default, height);
+		transition: k-get($k-header-config, base, desktop, fixed, transition);
+
+		// Fixed
+		&.k-header--fixed {
+			position: fixed;
+			transition: k-get($k-header-config, base, desktop, fixed, transition);
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: k-get($k-header-config, base, desktop, fixed, zindex);
+		}
+	}
+}

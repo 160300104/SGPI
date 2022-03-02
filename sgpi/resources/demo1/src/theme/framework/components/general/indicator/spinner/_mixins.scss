@@ -1,0 +1,38 @@
+//
+// Mixins
+//
+
+
+
+@mixin k-spinner-size($size) {
+	&:before {
+		width: k-get($k-spinner-config, size, $size);
+  		height: k-get($k-spinner-config, size, $size);
+  		margin-top: -(k-get($k-spinner-config, size, $size)/2);
+  	}
+
+	&.k-spinner--center {
+		&:before {
+			left: 50%;
+  			margin-left: -(k-get($k-spinner-config, size, $size)/2);
+		}
+	}
+
+	&.k-spinner--left {
+		&:before {
+			left: 0;
+			right: auto;
+		}
+	}
+
+	&.k-spinner--right {
+		&:before {
+			left: auto;
+			right: 0;
+		}
+	}
+}
+
+@mixin k-spinner-type-color($size) {
+	
+}

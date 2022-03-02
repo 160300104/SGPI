@@ -1,0 +1,99 @@
+//
+// Quick Panel
+//
+
+
+// Base
+.k-offcanvas-panel {
+	background-color: k-get($k-offcanvas-panel, self, bg-color);
+	box-shadow: k-get($k-offcanvas-panel, self, shadow);
+	padding: 2.5rem;
+
+	// Head
+	.k-offcanvas-panel__head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+
+		.k-offcanvas-panel__title {
+			font-size:  1.4rem;
+			font-weight: 500;
+			color: k-base-color(label, 4);
+			margin: 0;
+			padding: 0;
+
+			small {
+				color: k-base-color(label, 2);
+				font-size: 1rem;
+			}
+		}
+
+		.k-offcanvas-panel__close {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 28px;
+			height: 28px;
+			background-color: k-base-color(grey, 1);
+			@include k-transition();
+
+			i {
+				@include k-transition();
+				font-size: 0.8rem;
+				color: k-base-color(label, 2);
+			}
+
+			@include k-rounded {
+				border-radius: 4px;
+			}
+
+			&:hover {
+				@include k-transition();
+				background-color: k-brand-color();
+
+				i {
+					@include k-transition();
+					color: k-brand-color(inverse);
+				}
+			}
+		}
+	}	
+
+	// Content
+	.k-offcanvas-panel__body {
+		position: relative;
+
+		.k-offcanvas-panel__section {
+			padding: 0;
+			font-size: 1.3rem;
+			font-weight: 500;
+			color: k-base-color(label, 3);
+			margin: 2rem 0 1.5rem 0;
+
+			&.k-offcanvas-panel__section--first {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+// Build offcanvas mode
+@include k-offcanvas-build(k-offcanvas-panel, default, k-get($k-offcanvas-panel, self, offcanvas) );
+
+// Desktop view
+@include k-desktop {
+	.k-offcanvas-panel {
+		.k-offcanvas-panel__body {
+			padding-right: 1.5rem;
+			margin-right: -1.5rem;
+		}
+	}
+}
+
+// Mobile view
+@include k-tablet-and-mobile {
+	.k-offcanvas-panel {
+		padding: 1rem;
+	}
+}

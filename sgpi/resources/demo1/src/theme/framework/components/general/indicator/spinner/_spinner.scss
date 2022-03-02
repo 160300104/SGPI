@@ -1,0 +1,84 @@
+//
+// Spinner
+//
+
+
+// Spinner Default
+.k-spinner {
+	position: relative;
+
+	&:before {
+  		content: '';
+  		box-sizing: border-box;
+  		position: absolute;
+  		top: 50%;
+  		left: 0;  		
+  		border-radius: 50%;
+  	}
+
+  	// Sizes  	
+  	&.k-spinner--sm {
+  		@include k-spinner-size(sm);
+  	}
+  	
+  	@include k-spinner-size(md);
+  	
+  	&.k-spinner--lg {
+  		@include k-spinner-size(lg);
+  	}
+
+  	// Default Style
+  	&:before {
+ 		animation: k-spinner .5s linear infinite;
+  	}
+  	
+  	// State Colors 
+	@each $name, $color in $k-state-colors {
+		&.k-spinner--#{$name} {
+			&:before {
+				border: 2px solid k-get($color, base);
+ 				border-right: 2px solid transparent;
+			}
+		}
+	}
+
+    // Input mode
+    &.k-spinner--input {
+        &.k-spinner--right {
+            &:before {
+                left: auto;
+                right: $input-btn-padding-x;
+            }
+        }
+
+        &.k-spinner--left {
+            &:before {
+                right: auto;
+                left: $input-btn-padding-x;
+            }
+        }
+    }
+}
+
+// Spinner Default
+.k-spinner--v2 {
+  	// Default Style
+  	&:before {
+ 		animation: k-spinner .5s linear infinite;
+  	}
+  	
+  	// State Colors 
+	@each $name, $color in $k-state-colors {
+		&.k-spinner--#{$name} {
+			&:before {
+				border: 2px solid lighten(k-get($color, base), 30%);
+ 				border-top-color: darken(k-get($color, base), 3%); 
+			}
+		}
+	}
+}
+
+// Animations
+@keyframes k-spinner {
+ 	to {transform: rotate(360deg);}
+}

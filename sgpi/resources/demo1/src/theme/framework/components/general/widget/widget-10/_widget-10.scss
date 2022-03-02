@@ -1,0 +1,42 @@
+//
+// Widget 10
+//
+
+
+
+
+// General Mode
+.k-widget-10 {	 
+	.k-widget-10__wrapper {
+		display: flex;
+		justify-content: space-between;
+
+		.k-widget-10__details {
+			display: flex;
+			flex-direction: column;
+
+			.k-widget-10__title {
+				color: k-base-color(label, 4);
+				font-size: 1.3rem;
+				font-weight: 500;
+				margin-bottom: 0.7rem;
+			}
+
+			.k-widget-10__desc {
+				color: k-base-color(label, 2);
+				font-size: 1rem;
+				font-weight: 500;
+			}
+		}
+
+		.k-widget-10__num {
+			color: k-base-color(label, 4);
+			font-size: 1.75rem;
+			font-weight: 500;
+		}
+	}	 	
+
+	.k-widget-10__chart {
+		margin-top: 1rem;
+	}	
+}

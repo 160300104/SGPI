@@ -1,0 +1,294 @@
+//
+// Bootstrap Select
+//
+
+
+
+
+// Base
+@mixin k-bootstrap-select-base() {
+    $k-general-padding: 10px 15px; 
+    $k-title-padding: 10px 15px;
+
+    // Bootstrap select base
+   .bootstrap-select {
+        > .dropdown-toggle {
+            position: relative;
+            outline: none !important;
+            padding: $input-btn-padding-y $input-btn-padding-x;
+            padding-right: $input-btn-padding-x + 0.85rem;
+            
+            @include k-rounded {
+                border-radius: $input-border-radius !important; 
+            }
+
+            &:focus {
+                outline: none !important; 
+            }
+
+            &:after {
+                @include k-arrow-icon(down, true);   
+                border: 0;
+                top: 50%;
+                position: absolute;
+                margin-top: 0;
+                font-size: 0.85rem;
+                right: ($input-btn-padding-x + 0.85rem);
+                display: inline-block;                            
+            }
+        }
+
+        .dropdown-menu.inner {
+            display: block;
+
+            > li {
+                > a {
+                    display: block;
+                    position: relative;
+                    outline: none !important;
+                    padding: $k-general-padding;    
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+
+                    // text
+                    .text {
+                        small {
+
+                        }
+                    }
+
+                    // icons
+                    @include k-icons-size((fontawesome: 1.2rem, lineawesome: 1.2rem, flaticon: 1.1rem));
+
+                    i {
+                        vertical-align: middle;
+                    }
+                }
+
+                &.selected {
+                    > a {
+                        span.check-mark { 
+                            @include k-la-icon('\f17b');  
+                            top: 50%;
+                            position: absolute;
+                            margin-top: - (0.85rem / 2);  
+                            font-size: 0.85rem;
+                            right: $input-btn-padding-x;
+                            display: inline-block;
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                &.divider {
+                    margin: 10px 0;
+                }
+
+                &.hidden {
+                    display: none;
+                }
+
+                &.no-results {
+                    padding: $k-general-padding;   
+                }
+            }
+        }
+
+        .popover-title {
+            padding: $k-title-padding;
+            margin-bottom: 5px;
+
+            .close {
+                display: none;
+            }
+        }
+
+        .bs-searchbox, 
+        .bs-actionsbox, 
+        .bs-donebutton {
+            padding: $k-title-padding;
+        }
+        
+    }
+}
+
+// Skin
+@mixin k-bootstrap-select-skin() {
+    // Bootstrap select base
+   .bootstrap-select {
+        // dropdown button
+        > .dropdown-toggle {
+            &.btn-light,
+            &.btn-secondary {
+                background: #fff;
+                color: k-base-color(label, 3);
+                border-color: $input-border-color;
+                box-shadow: none;
+
+                &:focus,
+                &.active {
+                    background-color: transparent;
+                    border-color: $input-focus-border-color;
+                }
+
+                &.disabled,
+                &:disabled {
+                    background: $input-disabled-bg;
+                    border-color: $input-disabled-bg
+                }
+
+                .filter-option {
+                    @include k-icons {
+                        color: k-base-color(label, 1);
+                    }
+                }
+            }
+
+            &.bs-placeholder {
+                color:  k-base-color(label, 2);
+
+                // state colors
+                @each $name, $color in $k-state-colors {
+                    &.btn-#{$name} {
+                        color: k-get($color, inverse);
+
+                        > .filter-option {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+            }
+        }
+
+        // menu shown state
+        &.show {
+            > .dropdown-toggle {
+                &.btn-light,
+                &.btn-secondary {
+                    border-color: $input-focus-border-color;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        // Validation
+        &.is-invalid {
+            .btn.dropdown-toggle {
+                border-color: k-state-color(danger, base);
+                
+            }
+        }
+
+        &.is-valid {
+            .btn.dropdown-toggle {
+                border-color: k-state-color(success, base);
+            }
+        }
+
+        // menu dropdown
+        .dropdown-menu.inner {
+            > li {
+                > a {
+                    .text {
+                        color: k-base-color(label, 3);
+
+                        small {
+                            color: k-base-color(label, 1);
+                        }
+                    }
+
+                    span.check-mark {
+                        color: k-base-color(label, 2);
+                    }
+
+                    @include k-icons {
+                        color: k-base-color(label, 1);
+                    }
+                }
+
+                &.selected,
+                &:hover {
+                    > a {
+                        background: k-base-color(grey, 1);
+
+                        .text {
+                            color: k-base-color(label, 3);
+                        }
+
+                        @include k-icons {
+                            color: k-base-color(label, 1);
+                        }
+
+                        span.check-mark {
+                            color: k-base-color(label, 2);
+                        }
+                    }
+                }
+
+                &.dropdown-header {
+                     color: k-base-color(label, 2);
+                }
+
+                &.selected {
+                    > a {
+                        background: k-base-color(grey, 1);
+                    }
+                }
+
+                &.disabled {
+                    > a {
+                        opacity: 0.6;
+                    }
+                }
+
+                &.divider {
+                    border-bottom: 1px solid k-base-color(grey, 1);
+                }
+
+                &.active:not(.selected) {
+                    > a {
+                        background: k-state-color(primary, base);
+
+                        .text {
+                            color: k-state-color(primary, inverse);
+                        }
+
+                        @include k-icons {
+                            color: k-state-color(primary, inverse);
+                        }
+
+                        span.check-mark {
+                            color: k-state-color(primary, inverse);
+                        }
+                    }
+                }
+
+                &.no-results {
+                    color: k-base-color(label, 2);
+                }
+            }
+        }
+
+        // menu header
+        .popover-title {
+            background: k-base-color(grey, 1);
+            border: 0;
+        }
+
+        .dropdown-menu {
+            margin-top: 1px;
+        }
+    }
+}
+
+
+// Base
+@include k-bootstrap-select-base();
+
+// Skin
+@include k-bootstrap-select-skin();  

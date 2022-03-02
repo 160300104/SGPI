@@ -1,0 +1,126 @@
+//
+// Widget 12
+//
+
+
+
+
+.k-widget-12 {
+
+	.k-widget-12__body{
+
+		.k-widget-12__head{
+			display:flex;
+			flex-direction: row;
+			flex-wrap:wrap;
+			align-items: center;
+			margin-bottom: 1.5rem;
+
+			.k-widget-12__date {
+				width:5rem;
+				height:5rem;
+				border-radius: 50%;
+				overflow: hidden;
+				background-color: rgba(k-state-color(brand, base), 0.1);
+				color: k-state-color(brand, base);
+				display:flex;
+				flex: 0 0 5rem;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin-right:1.25rem;
+				text-transform: uppercase;
+				line-height: 1.3rem;
+
+				.k-widget-12__day{
+					font-weight: 600;
+					font-size: 1.6rem;
+					margin-top: 0.2rem;
+				}
+
+				.k-widget-12__month{
+					font-weight: 500;
+				}
+
+				// States
+				@each $name, $color in $k-state-colors {
+			 		&.k-widget-12__date--#{$name}{
+			 			background-color: rgba(k-get($color, base), 0.1);
+						color: k-get($color, base);
+			 		}
+				}	
+			}
+
+			.k-widget-12__label {
+				flex:1;
+
+				.k-widget-12__title{
+					font-size: 1.4rem;
+					font-weight: 500;
+					color: k-base-color(label, 4);
+				}
+
+				.k-widget-12__desc{
+					font-size: 1rem;
+					font-weight: 500;
+					color: k-base-color(label, 2);
+				}
+			}
+		}		
+
+		.k-widget-12__info{
+			font-size: 1rem;
+			font-weight: 400;
+			color: k-base-color(label, 2);
+		}
+	}
+
+	.k-widget-12__members{
+		flex:1;
+		display:flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+
+		.k-widget-12__member{
+			border-radius:50%;
+			width:2.7rem;
+			height:2.7rem;
+			overflow:hidden;
+			margin-left:-0.7rem;
+			border:1px solid k-state-color(brand, inverse);
+			background-color: k-base-color(shape, 1);
+			color: k-base-color(label, 2);
+			display:flex;
+			align-items:center;
+			justify-content: center;
+			font-weight: 500;
+			position: relative;
+
+			&:first-child{
+				margin-left:0;
+			}
+
+			img {
+				width:100%;
+			}
+
+			&.k-widget-12__member--last {
+				padding-right: 0.2rem;
+				@include k-transition();
+
+				&:hover {
+					@include k-transition();
+					background-color: k-brand-color();
+					color:k-brand-color(inverse);
+				}
+			}
+		}
+
+		@for $i from 1 through 6{
+			.k-widget-12__member:nth-child(#{$i}){
+				z-index: #{$i};
+			}
+		}
+	}	 	
+}

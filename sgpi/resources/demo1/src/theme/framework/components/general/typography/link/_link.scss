@@ -1,0 +1,57 @@
+//
+// Link
+//
+
+
+
+
+// Base
+@mixin k-link-base() {
+    .k-link {
+    	text-decoration: none;
+  		position: relative;
+  		display: inline-block;
+
+    	&:after {
+    		display: block;
+    		content: '';
+			position: absolute;
+			bottom: 0;
+            top: 1rem;  
+			left: 0;
+			width: 0%;
+			transition: width 0.3s ease;
+    	}
+
+    	&:hover {
+    		text-decoration: none !important;
+
+    		&:after {				
+    			width: 100%;
+    		}
+    	}
+
+        @include k-link-color( k-get($k-font-color, link, default), k-get($k-font-color, link, hover) );
+
+        &.k-link--general {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+@mixin k-link-state() {
+    @each $name, $color in $k-state-colors {
+        .k-link.k-link--#{$name} {
+            @include k-link-color(k-get($color, base), darken(k-get($color, base), 10%));
+        }
+    }
+}
+
+// Build
+// Base
+@include k-link-base();
+
+// States
+@include k-link-state();
