@@ -57,7 +57,10 @@
 	<!-- end::Head -->
 	
 	<!-- begin::Body -->
+
 	<body class="k-header--fixed k-header-mobile--fixed k-aside--enabled k-aside--fixed">
+
+		
 
 		<!-- begin:: Page -->
 
@@ -93,7 +96,6 @@
 								<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-layers-1"></i><span class="k-menu__link-text">Proveedores</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 									<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 										<ul class="k-menu__subnav">
-											<li class="k-menu__item  k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">Proovedores</span></span></li>
 											<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('provider') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text" >Gestionar Proveedores</span></a></li>
 											<li class="k-menu__item " aria-haspopup="true"><a href="components_base_badge.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Badge</span></a></li>
 											</li>                                          
@@ -104,7 +106,7 @@
 								<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-rocket-travelling-space-transport"></i><span class="k-menu__link-text">Materiales</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 									<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 										<ul class="k-menu__subnav">
-											<li class="k-menu__item " aria-haspopup="true"><a href="components_custom_colors.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Colors</span></a></li>
+											<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('provider') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
 											<li class="k-menu__item " aria-haspopup="true"><a href="components_custom_typography.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Typography</span></a></li>
 										</ul>
 									</div>
@@ -140,6 +142,19 @@
 					<!-- begin:: Header -->
 					<div id="k_header" class="k-header k-grid__item  k-header--fixed ">
 
+                            <div class="border-t border-gray-100"></div>
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-jet-dropdown-link>
+                            </form>
+                        
 						<!-- begin:: Header Topbar -->
 						<div class="k-header__topbar">
 							
@@ -151,7 +166,7 @@
 					<div class="k-content	k-grid__item k-grid__item--fluid k-grid k-grid--hor" id="k_content">
 					<div class="k-content__head	k-grid__item">
 						<div class="k-content__head-main">
-							<h3 class="k-content__head-title">@yield('title')</h3>
+							<h3 class="display-4">@yield('title')</h3>
 						</div>
 					</div>
                          @yield('content')
