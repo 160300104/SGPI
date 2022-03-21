@@ -1,5 +1,9 @@
 @extends('dash.index');
 
+@section('styles')
+  <link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('title')
 AGREGAR UN NUEVO PROVEEDOR
 @endsection
@@ -60,11 +64,3 @@ AGREGAR UN NUEVO PROVEEDOR
     </div>
    </form>
 @endsection
-
-
-<style type="text/css">
-    small {
-      color: #ff0015;
-    }
-  
-</style>

@@ -53,7 +53,7 @@ class ProviderController extends Controller
 
         if($image=$request->file('image')){
 
-            $name = $image->getClientOriginalName();
+            $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
             $image->move('img/provider', $name);
             $provider['image'] = $name;
 
@@ -111,7 +111,7 @@ class ProviderController extends Controller
 
         if($image=$request->file('image')){
 
-            $name = $image->getClientOriginalName();
+            $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
             $image->move('img/provider', $name);
             $provider['image'] = $name;
 
