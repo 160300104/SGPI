@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Materials;
 use App\Models\Labs;
+use App\Models\Categories;
 use Illuminate\Http\Request;
-use App\Models\Provider;
-use DebugBar\DebugBar;
-use Symfony\Component\ErrorHandler\Debug;
 
-use function PHPSTORM_META\map;
-
-class ProviderController extends Controller
+class MaterialsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +16,10 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return view('provider.index')->with('providers', $providers);
+        $labs = Labs::all();
+        $categories = Categories::all();
+        $materials = Materials::all();
+        return view('materials.index')->with('materials', $materials)->with('labs',$labs)->with('categories',$categories);;
     }
 
     /**
@@ -31,7 +29,9 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        return view('provider.create');
+        $labs = Labs::all();
+        $categories = Categories::all();
+        return view('materials.create')->with('labs',$labs)->with('categories',$categories);
     }
 
     /**
@@ -42,29 +42,28 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'image' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-            'location' => 'required'
+            'quantity' => 'required',
+            'register_date' => 'required',
+            'id_lab' => 'required',
+            'id_category' => 'required'
         ]);
 
-        $provider=$request->all();
+        $materials=$request->all();
 
         if($image=$request->file('image')){
 
             $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
-            $image->move('img/provider', $name);
-            $provider['image'] = $name;
+            $image->move('img/materials', $name);
+            $materials['image'] = $name;
 
         }
         
-        Provider::create($provider);
+        Materials::create($materials);
 
-        return redirect('/provider');
-
+        return redirect('/materials');
     }
 
     /**
@@ -86,8 +85,10 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        $provider = Provider::find($id);
-        return view('provider.edit')->with('provider',$provider);
+        $labs = Labs::all();
+        $categories = Categories::all();
+        $materials = Materials::find($id);
+        return view('materials.edit')->with('materials',$materials)->with('labs',$labs)->with('categories',$categories);
     }
 
     /**
@@ -102,26 +103,27 @@ class ProviderController extends Controller
         $request->validate([
             'name' => 'required',
             'image' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-            'location' => 'required'
+            'quantity' => 'required',
+            'register_date' => 'required',
+            'id_lab' => 'required',
+            'id_category' => 'required'
         ]);
 
-        $user = Provider::find($id);
+        $user = Materials::find($id);
 
-        $provider=$request->all();
+        $materials=$request->all();
 
         if($image=$request->file('image')){
 
             $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
-            $image->move('img/provider', $name);
-            $provider['image'] = $name;
+            $image->move('img/materials', $name);
+            $materials['image'] = $name;
 
         }
         
-        $user->update($provider);
+        $user->update($materials);
 
-        return redirect('/provider');
+        return redirect('/materials');
     }
 
     /**
@@ -132,9 +134,9 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        $provider = Provider::find($id);
-        $provider->delete(); 
+        $materials = Materials::find($id);
+        $materials->delete(); 
 
-        return redirect('/provider');
+        return redirect('/materials');
     }
 }

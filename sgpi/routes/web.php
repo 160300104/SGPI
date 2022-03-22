@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\UserController;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/provider', ProviderController::class);
     Route::resource('/statistics', StatisticsController::class);
+    Route::resource('/materials', MaterialsController::class);
     Route::resource('/user', UserController::class);
     Route::get('/dash',function(){
         return view('dash.index');

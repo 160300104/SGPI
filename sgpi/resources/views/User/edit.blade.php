@@ -31,12 +31,14 @@ ASIGNAR UN ROL
         {!! Form::model($user, ['route' => ['user.update', $user], 'method' => 'put']) !!}
             @foreach ($roles as $role)
                 <div>
-                    <label for="">
+                    <label>
                         {!! Form::checkbox('roles[]',$role->id, null, ['class' => 'mr-1'])!!}
-                        {{$role->name}}
+                         {{$role->name}}
                     </label>
                 </div>
             @endforeach
+
+            {!! Form::submit('Asignar rol', ['class' => 'btn btn-primary mt-2']) !!}
         {!! Form::close() !!}
     </div>
    
