@@ -152,6 +152,8 @@ return [
         'phone_number' => 'numero telefonico',
         'location'=> 'ubicacion',
         'image'=> 'imagen',
+        'register'=>'registrarse',
     ],
+    
 
 ];

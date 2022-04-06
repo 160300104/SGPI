@@ -19,7 +19,9 @@
                 }
             });
         </script>
+		@yield('styles');
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css"/>
 		<link href="{{asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/vendors/general/tether/dist/css/tether.css')}}" rel="stylesheet" type="text/css" />
@@ -97,7 +99,6 @@
 									<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 										<ul class="k-menu__subnav">
 											<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('provider') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text" >Gestionar Proveedores</span></a></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="components_base_badge.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Badge</span></a></li>
 											</li>                                          
 										</ul>
 									</div>
@@ -106,27 +107,28 @@
 								<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-rocket-travelling-space-transport"></i><span class="k-menu__link-text">Materiales</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 									<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 										<ul class="k-menu__subnav">
-											<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('provider') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="components_custom_typography.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Typography</span></a></li>
+											<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('materials') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
 										</ul>
 									</div>
 								</li>
                                 
 								<li class="k-menu__section ">
-									<h4 class="k-menu__section-text">Mantenimientos</h4>
+									<h4 class="k-menu__section-text">Estadisticas</h4>
 									<i class="k-menu__section-icon flaticon-more-v2"></i>
 								</li>
-								<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-chat-1"></i><span class="k-menu__link-text">Blog</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
+								<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-chat-1"></i><span class="k-menu__link-text">Reportes</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 									<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 										<ul class="k-menu__subnav">
-											<li class="k-menu__item  k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">Blog</span></span></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="custom_blog_grid.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Blog Grid</span></a></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="custom_blog_grid-v2.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Blog Grid v2</span></a></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="custom_blog_list.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Blog List</span></a></li>
-											<li class="k-menu__item " aria-haspopup="true"><a href="custom_blog_post.html" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Blog Post</span></a></li>
+											<li class="k-menu__item  k-menu__item--parent" aria-haspopup="true"><span class="k-menu__link"><span class="k-menu__link-text">Metricas</span></span></li>
 										</ul>
 									</div>
 								</li>
+
+								<li class="k-menu__section ">
+									<h4 class="k-menu__section-text">Usuarios</h4>
+									<i class="k-menu__section-icon flaticon-more-v2"></i>
+								</li>
+								<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text" >Gestionar Usuarios</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -145,14 +147,15 @@
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" class="btn-logout" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
+                                <button class="btn btn-secondary" href="{{ route('logout') }}"
+									
+										 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
-                                </x-jet-dropdown-link>
+							</button>
                             </form>
                         
 						<!-- begin:: Header Topbar -->

@@ -1,5 +1,9 @@
 @extends('dash.index');
 
+@section('styles')
+  <link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('title')
 PROVEEDORES
 @endsection
@@ -46,42 +50,3 @@ PROVEEDORES
     </tbody>
   </table>
 @endsection
-
-<style type="text/css">
-  .tabla {
-    color: #c0c4d1;
-    background-color: #242939;
-    font-weight: 900;
-  }
-
-  .block {
-  padding: 1rem 0rem !important;
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #04AA6D;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 1rem;
-  }
-
-  .block:last-child{
-    margin-bottom: 0rem;
-  }
-
-  .proveedor{
-    border-radius: 15px !important;
-    padding: 2rem !important;
-  }
-
-  .seccion_proveedor{
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .seccion_proveedor i{
-    margin-right: 1rem;
-  }
-  </style>
