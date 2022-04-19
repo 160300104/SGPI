@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Materials;
 use Illuminate\Http\Request;
 
 class StatisticsController extends Controller
@@ -13,7 +13,28 @@ class StatisticsController extends Controller
      */
     public function index()
     {
-        return view('statistics.index');
+        // GRAFICA DE INVENTARIO POR LABPRATORIO
+        $mat_electronica = Materials::where('id_lab',1)->sum('quantity');
+        $mat_LAMA = Materials::where('id_lab',2)->sum('quantity');
+        $mat_mecanica = Materials::where('id_lab',3)->sum('quantity');
+        $mat_fisicoquimica = Materials::where('id_lab',5)->sum('quantity');
+
+        $data=[
+            array('name'=>'Electrónica','y'=>intval($mat_electronica)),
+            array('name'=>'Fisicoquímica','y'=>intval($mat_fisicoquimica)),
+            array('name'=>'Mecánica','y'=>intval($mat_mecanica)),
+            array('name'=>'LAMA','y'=>intval($mat_LAMA))
+        ];
+
+        // GRAFICA DE INVENTARIO POR CATEGORIAS
+        $categoria_herramienta = Materials::where('id_category',1)->sum('quantity');
+        $categoria_consumible = Materials::where('id_category',2)->sum('quantity');
+        $data2=[
+            array('name'=>'Herramientas','y'=>intval($categoria_herramienta)),
+            array('name'=>'Consumibles','y'=>intval($categoria_consumible)),
+        ];
+
+        return view("Statistics.index", ["data" => json_encode($data), "data2" => json_encode($data2)]);
     }
 
     /**

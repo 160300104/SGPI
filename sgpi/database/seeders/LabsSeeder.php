@@ -16,7 +16,7 @@ class LabsSeeder extends Seeder
     public function run()
     {
         Labs::create([
-            'name' => 'Electronica',
+            'name' => 'Electrónica',
         ]);
 
         Labs::create([
@@ -29,6 +29,10 @@ class LabsSeeder extends Seeder
 
         Labs::create([
             'name' => 'Tecnologías Ambientales',
+        ]);
+
+        Labs::create([
+            'name' => 'Fisicoquímica',
         ]);
     }
 }

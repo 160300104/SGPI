@@ -49,4 +49,9 @@ PROVEEDORES
       @endforeach
     </tbody>
   </table>
+
+  <!-- Paginación de Bootstrap -->
+  <div class="d-flex justify-content-end">
+    {!! $providers->links() !!}
+  </div>
 @endsection
