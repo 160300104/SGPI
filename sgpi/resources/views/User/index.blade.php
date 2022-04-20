@@ -26,7 +26,7 @@ USUARIOS
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>
-                    <a href="{{route('user.edit',$user->id)}}" class="btn btn-info block">Editar</a>
+                    <a href="{{route('user.edit',$user)}}" class="btn btn-info block">Editar</a>
               </td>
           </tr>
       @endforeach

@@ -94,11 +94,13 @@
 				<div class="k-aside-menu-wrapper	k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
 					<div id="k_aside_menu" class="k-aside-menu " data-kmenu-vertical="1" data-kmenu-scroll="1" data-kmenu-dropdown-timeout="500">
 						<ul class="k-menu__nav ">
+						@can('home.index')
 							<li class="k-menu__section ">
-								<h4 class="k-menu__section-text">Prestamo de Materiales</h4>
+								<h4 class="k-menu__section-text">Materiales</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
 							</li>
 
+							@can('provider.index')
 							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon fa fa-truck"></i><span class="k-menu__link-text">Proveedores</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 									<ul class="k-menu__subnav">
@@ -106,15 +108,19 @@
 									</ul>
 								</div>
 							</li>
+							@endcan
 
 							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon fa fa-box"></i><span class="k-menu__link-text">Materiales</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
+							@can('materials.index')
 								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 									<ul class="k-menu__subnav">
 										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('materials') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
 									</ul>
 								</div>
-							</li>
+							@endcan
+						@endcan
 
+							@can('statistics.index')
 							<li class="k-menu__section ">
 								<h4 class="k-menu__section-text">Estadisticas</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
@@ -127,13 +133,16 @@
 									</ul>
 								</div>
 							</li>
+							@endcan
 
+							@can('user.index')
 							<li class="k-menu__section ">
 								<h4 class="k-menu__section-text">Usuarios</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
 							</li>
 							
-							<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
+							@endcan
 						</ul>
 					</div>
 				</div>

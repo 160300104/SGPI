@@ -9,12 +9,15 @@ MATERIALES
 @endsection
 
 @section('content')
+
+@can('materials.create')
 <div class="seccion_proveedor">
   <a href="{{route('materials.create')}}" class="btn btn-primary proveedor">
     <i class="fa fa-plus"></i>Agregar un Material
   </a>
 </div>
 <br>
+@endcan
 
 <div class="">
   <div class="row">
@@ -196,36 +199,78 @@ MATERIALES
               "data": "Imagen",
               "render": function(data, type, row, meta) {
                 return `<img src="/img/materials/${row.image}" width="100%">`;
+                // return i++;
               }
             },
             {
               "data": "Nombre",
               "render": function(data, type, row, meta) {
                 return `${row.name}`;
+                // return i++;
               }
             },
             {
               "data": "Cantidad",
               "render": function(data, type, row, meta) {
                 return `${row.quantity}`;
+                // return i++;
               }
             },
             {
               "data": "Fecha de registro",
               "render": function(data, type, row, meta) {
                 return `${row.register_date}`;
+                // return i++;
               }
             },
             {
               "data": "Laborario",
               "render": function(data, type, row, meta) {
-                return `${row.id_lab}`;
+                // return `${row.id_lab}`;
+                // return row.id_lab;
+                
+                switch(row.id_lab){
+                  case 1:
+                    return 'Electrónica';
+                    break;
+                  case 2:
+                    return 'Manufactura y Automatización';
+                    break;
+                  case 3:
+                    return 'Mecánica';
+                    break;
+                  case 4:
+                    return 'Tecnologías Ambientales';
+                    break;
+                  case 5:
+                    return 'Fisicoquímica';
+                    break;
+                  default:
+                    return `${row.id_lab}`;
+                }
+
+                // return "<?php
+                // $abc = "<script>document.write(row.id_lab)</script>";
+                // echo $abc;
+                // echo App\Models\Materials::find($abc)->lab->name;
+                ?>";
               }
             },
             {
               "data": "Categoria",
               "render": function(data, type, row, meta) {
-                return `${row.id_category}`;
+                switch(row.id_category){
+                  case 1:
+                    return 'Herramientas';
+                    break;
+                  case 2:
+                    return 'Consumibles';
+                    break;
+                  default:
+                    return `${row.id_category}`;
+                }
+                // return `${row.id_category}`;
+                // return i++;
               }
             },
             {
@@ -233,12 +278,18 @@ MATERIALES
               "render": function(data, type, row, meta) {
                 var route = `materials/${row.id}`;
                 var route2 = `materials/${row.id}/edit`;
-                return `<a href="${route2}" class="btn btn-info block">Editar</a> 
+                return `
+                      @can('materials.edit')
+                      <a href="${route2}" class="btn btn-info block">Editar</a> 
+                      @endcan
+                      
+                      @can('materials.destroy')
                       <form action="${route}" method="POST" class="formEliminar">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger block" >Eliminar </button>
-                      </form>`;
+                        <button type="submit" class="btn btn-danger block" >Eliminar</button>
+                      </form>
+                      @endcan`;
               }
             }
           ]
