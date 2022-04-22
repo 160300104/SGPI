@@ -38,5 +38,7 @@ class UserSeeder extends Seeder
             'email' => 'estudiante1@ucaribe.edu.mx',
             'password' => bcrypt('12345678') 
         ])->assignRole('Estudiante');
+
+        // User::factory(99)->create();
     }
 }

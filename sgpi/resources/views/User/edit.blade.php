@@ -25,7 +25,7 @@ ASIGNAR UN ROL
         <label>Email address:</label>
         <a type="email" class="form-control form-control-solid"> {{$user->email}}</a>
     </div>
-
+    
     {!! Form::model($user, ['route' => ['user.update', $user], 'method' => 'put']) !!}
     @foreach ($roles as $role)
     <div>

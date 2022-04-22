@@ -17,42 +17,40 @@ class StatisticsController extends Controller
      */
     public function index()
     {
-        // GRAFICA DE INVENTARIO POR LABPRATORIO
-        $total_labs = Labs::all()->count('id');
-        for($i=1; $i<=$total_labs; $i++){
-            ${"mat_lab" . $i} = Materials::where('id_lab',$i)->sum('quantity');
-            ${"lab_name" . $i} = Labs::where('id', $i)->value('name');
-            $data[] = ['name' => ${"lab_name" . $i},'y'=>intval(${"mat_lab" . $i})];
-        }
-        
-        // $mat_electronica = Materials::where('id_lab',1)->sum('quantity');
-        // $mat_LAMA = Materials::where('id_lab',2)->sum('quantity');
-        // $mat_mecanica = Materials::where('id_lab',3)->sum('quantity');
-        // $mat_fisicoquimica = Materials::where('id_lab',5)->sum('quantity');
-
-        // $data=[
-        //     array('name'=>'Electrónica','y'=>intval($mat_electronica)),
-        //     array('name'=>'Fisicoquímica','y'=>intval($mat_fisicoquimica)),
-        //     array('name'=>'Mecánica','y'=>intval($mat_mecanica)),
-        //     array('name'=>'LAMA','y'=>intval($mat_LAMA))
-        // ];
-
         // GRAFICA DE INVENTARIO POR CATEGORIAS
         $total_cats = Categories::all()->count('id');
         for($i=1; $i<=$total_cats; $i++){
             ${"mat_cat" . $i} = Materials::where('id_category',$i)->sum('quantity');
             ${"cat_name" . $i} = Categories::where('id', $i)->value('name');
-            $data2[] = ['name' => ${"cat_name" . $i},'y'=>intval(${"mat_cat" . $i})];
+            $data[] = ['name' => ${"cat_name" . $i},'y'=>intval(${"mat_cat" . $i})];
         }
-
         // $categoria_herramienta = Materials::where('id_category',1)->sum('quantity');
         // $categoria_consumible = Materials::where('id_category',2)->sum('quantity');
-        // $data2=[
+        // $data=[
         //     array('name'=>'Herramientas','y'=>intval($categoria_herramienta)),
         //     array('name'=>'Consumibles','y'=>intval($categoria_consumible)),
         // ];
 
-        return view("Statistics.index", ["data" => json_encode($data), "data2" => json_encode($data2)]);
+        // GRAFICA DE INVENTARIO POR LABORATORIO
+        $total_labs = Labs::all()->count('id');
+        $total_cats = Categories::all()->count('id');
+        for($i=1; $i<=$total_labs; $i++){
+            $labs_name[] = [Labs::where('id', $i)->value('name')];
+            for($j=1; $j<=$total_cats; $j++){
+                if (($j % 2) == 0) {
+                    ${"cat_mat" . $i} = Materials::where('id_category', $j)->where('id_lab', $i)->sum('quantity');
+                    $cons_mat_arr[] = [intval(${"cat_mat" . $i})];
+                } else{
+                    ${"cat_mat" . $i} = Materials::where('id_category', $j)->where('id_lab', $i)->sum('quantity');
+                    $herr_mat_arr[] = [intval(${"cat_mat" . $i})];
+                }
+            }
+        }
+
+        // MÉTRICAS
+        $metrica_mats_almacenados = intval(Materials::sum('quantity'));
+
+        return view("Statistics.index", ["data" => json_encode($data), "herr_mat_arr" => json_encode($herr_mat_arr), "cons_mat_arr" => json_encode($cons_mat_arr), "labs_name" => json_encode($labs_name), "metrica_mats_almacenados" => json_encode($metrica_mats_almacenados)]);
     }
 
     /**
