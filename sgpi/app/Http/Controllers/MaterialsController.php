@@ -16,28 +16,7 @@ class MaterialsController extends Controller
      */
     public function index(Request $request)
     {
-        $materials = Materials::all();
-        $labs = Labs::all();
-        $categories = Categories::all();
-
-        $id_lab = Materials::select('id_lab')
-            ->groupBy('id_lab')
-            ->get();
-
-        $id_category = Materials::select('id_category')
-            ->groupBy('id_category')
-            ->get();
-
-        return view('materials.index', compact('id_lab', 'id_category', 'materials', 'labs', 'categories'));
-
-        // $laboratorio = $request->laboratorio;
-        // $categoria = $request->categoria;
-        // $labs = Labs::all();
-        // $categories = Categories::all();
-        // $materials = Materials::where('id_lab','LIKE','%'.$laboratorio.'%')
-        // -> Where('id_category', 'LIKE', '%'.$categoria.'%')
-        // ->paginate(10);
-        // return view('materials.index')->with('materials', $materials)->with('labs',$labs)->with('categories',$categories)->with('laboratorio',$laboratorio)->with('categoria',$categoria);
+        return view('materials.index');
     }
 
     public function getStandard(Request $request)
@@ -63,27 +42,18 @@ class MaterialsController extends Controller
         if ($request->ajax()) {
 
             if (request('std') && request('res')) {
-                $students = Materials::where('id_lab', '=', request('std'))->where('id_category', '=', request('res'))
-                    // ->latest()
-                    ->get();
+                $students = Materials::with(['lab','category'])->where('id_lab', '=', request('std'))->where('id_category', '=', request('res'))->get();
             } else {
-                $students = Materials::when(request('std'), function ($query) {
+                $students = Materials::with(['lab','category'])->when(request('std'), function ($query) {
                     $query->where('id_lab', '=', request('std'));
                 })
                     ->when(request('res'), function ($query) {
                         $query->where('id_category', '=', request('res'));
                     })
-                    // ->latest()
                     ->get();
             }
 
-            // if(request('res')){
-                // $cats = Categories::where('id', '=', request('res'))->get();
-                $cats = Categories::all();
-            // }
-
             return response()->json([
-                'cats' => $cats,
                 'students' => $students
             ]);
         } else {

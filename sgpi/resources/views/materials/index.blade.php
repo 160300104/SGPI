@@ -157,8 +157,6 @@ MATERIALES
         var i = 1;
         $('#record_table').DataTable({
           "data": data.students,
-          // "data": {students: data.students, cats: data.cats},
-          // "data": [data.students, data.cats],
           "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -166,8 +164,8 @@ MATERIALES
             {
               extend: 'pdf',
               exportOptions: {
-                columns: [1,2,3,4,5],
-                alignment: 'center'
+                alignment: 'center',
+                columns: [1,2,3,4,5]
               }
             },
             {
@@ -227,51 +225,14 @@ MATERIALES
             {
               "data": "Laborario",
               "render": function(data, type, row, meta) {
-                // return `${row.id_lab}`;
-                // return row.id_lab;
-                
-                switch(row.id_lab){
-                  case 1:
-                    return 'Electrónica';
-                    break;
-                  case 2:
-                    return 'Manufactura y Automatización';
-                    break;
-                  case 3:
-                    return 'Mecánica';
-                    break;
-                  case 4:
-                    return 'Tecnologías Ambientales';
-                    break;
-                  case 5:
-                    return 'Fisicoquímica';
-                    break;
-                  default:
-                    return `${row.id_lab}`;
-                }
-
-                // return "<?php
-                // $abc = "<script>document.write(row.id_lab)</script>";
-                // echo $abc;
-                // echo App\Models\Materials::find($abc)->lab->name;
-                ?>";
+                return `${row.lab.name}`;
               }
             },
             {
               "data": "Categoria",
               "render": function(data, type, row, meta) {
-                switch(row.id_category){
-                  case 1:
-                    return 'Herramientas';
-                    break;
-                  case 2:
-                    return 'Consumibles';
-                    break;
-                  default:
-                    return `${row.id_category}`;
-                }
-                // return `${row.id_category}`;
-                // return i++;
+                return `${row.category.name}`;
+
               }
             },
             {

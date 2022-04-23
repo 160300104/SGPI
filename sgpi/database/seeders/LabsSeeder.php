@@ -17,22 +17,27 @@ class LabsSeeder extends Seeder
     {
         Labs::create([
             'name' => 'Electrónica',
+            'id_user' => 1
         ]);
 
         Labs::create([
             'name' => 'Manufactura y Automatización',
+            'id_user' => 2
         ]);
 
         Labs::create([
             'name' => 'Mecánica',
+            'id_user' => 3
         ]);
 
         Labs::create([
             'name' => 'Tecnologías Ambientales',
+            'id_user' => 4
         ]);
 
         Labs::create([
             'name' => 'Fisicoquímica',
+            'id_user' => 5
         ]);
     }
 }

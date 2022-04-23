@@ -13,17 +13,28 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('labs', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->date('loan_date');
+            $table->date('delivery_date')->nullable();
+            $table->string('observations', 100)->nullable();
 
-            $table->string('name', 100);
+            $table->unsignedBigInteger('id_lab')->nullable();
             $table->unsignedBigInteger('id_user')->nullable();
+            $table->unsignedBigInteger('id_status')->nullable();
+
+            $table->foreign('id_lab')
+                    ->references('id')->on('labs')
+                    ->onDelete('set null');
 
             $table->foreign('id_user')
                     ->references('id')->on('users')
                     ->onDelete('set null');
             $table->timestamps();
 
+            $table->foreign('id_status')
+                    ->references('id')->on('statuses')
+                    ->onDelete('set null'); 
         });
     }
 
@@ -34,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labs');
+        Schema::dropIfExists('loans');
     }
 };

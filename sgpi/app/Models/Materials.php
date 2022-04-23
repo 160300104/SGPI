@@ -11,6 +11,11 @@ class Materials extends Model
 
     protected $fillable=["name","image","quantity","register_date","id_lab","id_category"];
 
+    //Relacion uno a muchos 
+    public function tickets(){
+        return $this->hasMany(Tickets::class, 'id');
+    }
+
     //Relacion uno a muchos (inversa)
 
     public function lab(){

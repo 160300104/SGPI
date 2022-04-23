@@ -116,6 +116,9 @@
 									<ul class="k-menu__subnav">
 										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('materials') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
 									</ul>
+									<ul class="k-menu__subnav">
+										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('loans') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Prestamo de Materiales</span></a></li>
+									</ul>
 								</div>
 							@endcan
 						@endcan
@@ -143,6 +146,13 @@
 							
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
 							@endcan
+
+							<li class="k-menu__section ">
+								<h4 class="k-menu__section-text">Laboratorios</h4>
+								<i class="k-menu__section-icon flaticon-more-v2"></i>
+							</li>
+							
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('labs') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Laboratorios</span></a></li>
 						</ul>
 					</div>
 				</div>

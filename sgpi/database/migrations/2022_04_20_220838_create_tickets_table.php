@@ -13,16 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('labs', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity');
+            $table->unsignedBigInteger('id_material')->nullable();
+            $table->unsignedBigInteger('id_loan')->nullable();
 
-            $table->string('name', 100);
-            $table->unsignedBigInteger('id_user')->nullable();
-
-            $table->foreign('id_user')
-                    ->references('id')->on('users')
+            $table->foreign('id_material')
+                    ->references('id')->on('materials')
                     ->onDelete('set null');
+
+            $table->foreign('id_loan')
+                    ->references('id')->on('loans')
+                    ->onDelete('set null');
+
             $table->timestamps();
+
 
         });
     }
@@ -34,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labs');
+        Schema::dropIfExists('tickets');
     }
 };

@@ -39,6 +39,36 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678') 
         ])->assignRole('Estudiante');
 
-        // User::factory(99)->create();
+        User::create([
+            'name' => 'Francisco Lopez Monzalvo',
+            'email' => 'flopezm@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Encargado');
+
+        User::create([
+            'name' => 'Jarmen Said Virgen Suarez',
+            'email' => 'jvirgen@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Encargado');
+
+        User::create([
+            'name' => 'Marina García Rosas',
+            'email' => 'mgrosas@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Encargado');
+
+        User::create([
+            'name' => 'Víctor Manuel Romero Medina',
+            'email' => 'vromero@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Encargado');
+
+        User::create([
+            'name' => 'Yarely Baez Lopez',
+            'email' => 'ybaez@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Encargado');
+
+
     }
 }

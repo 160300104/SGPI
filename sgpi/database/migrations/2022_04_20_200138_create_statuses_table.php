@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('labs', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
 
             $table->string('name', 100);
-            $table->unsignedBigInteger('id_user')->nullable();
-
-            $table->foreign('id_user')
-                    ->references('id')->on('users')
-                    ->onDelete('set null');
+            
             $table->timestamps();
-
         });
     }
 
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labs');
+        Schema::dropIfExists('statuses');
     }
 };
