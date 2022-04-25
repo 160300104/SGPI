@@ -9,12 +9,14 @@ PROVEEDORES
 @endsection
 
 @section('content')
+@can('provider.create')
 <div class="seccion_proveedor">
   <a href="{{route('provider.create')}}" class="btn btn-primary proveedor">
     <i class="fa fa-plus"></i>Agregar un Proveedor
   </a>
 </div>
 <br>
+@endcan
 
 <table class="table table-hover table-striped table-bordered rounded">
     <thead class="tabla">
@@ -38,15 +40,25 @@ PROVEEDORES
               <td>{{$provider->phone_number}}</td>
               <td>{{$provider->location}}</td>
               <td>
+                  @can('provider.edit')
                   <a href="{{route('provider.edit',$provider->id)}}" class="btn btn-info block">Editar</a>
+                  @endcan
+
+                  @can('provider.destroy')
                   <form action="{{route('provider.destroy', $provider->id)}}" method="POST" class="formEliminar">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger block">Eliminar</button>
                   </form>
+                  @endcan
               </td>
           </tr>
       @endforeach
     </tbody>
   </table>
+
+  <!-- Paginación de Bootstrap -->
+  <div class="d-flex justify-content-end">
+    {!! $providers->links() !!}
+  </div>
 @endsection

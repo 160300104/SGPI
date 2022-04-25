@@ -3,9 +3,12 @@
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\MaterialsController;
+use App\Http\Controllers\LoansController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LabsController;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Chart1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +29,15 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/provider', ProviderController::class);
-    Route::resource('/statistics', StatisticsController::class);
+    Route::resource('/statistics', statisticsController::class);
     Route::resource('/materials', MaterialsController::class);
+    Route::resource('/loans', LoansController::class);
     Route::resource('/user', UserController::class);
+    Route::resource('/labs', LabsController::class);
+    Route::post('/loans/saveticket',[LoansController::class, 'saveticket'])->name('loans.saveticket');
+    Route::get('standards', [MaterialsController::class, 'getStandard'])->name('standards');
+    Route::get('results', [MaterialsController::class, 'getResult'])->name('results');
+    Route::get('records', [MaterialsController::class, 'records'])->name('records');
     Route::get('/dash',function(){
         return view('dash.index');
     })->name('dash');
@@ -36,3 +45,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group( function () {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('Statistics', [Chart1Controller::class, 'index']);

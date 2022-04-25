@@ -14,12 +14,51 @@ class MaterialsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $labs = Labs::all();
-        $categories = Categories::all();
-        $materials = Materials::all();
-        return view('materials.index')->with('materials', $materials)->with('labs',$labs)->with('categories',$categories);;
+        return view('materials.index');
+    }
+
+    public function getStandard(Request $request)
+    {
+        if ($request->ajax()) {
+            $id_lab = Labs::all();
+
+            return response()->json($id_lab);
+        }
+    }
+
+    public function getResult(Request $request)
+    {
+        if ($request->ajax()) {
+            $id_category = Categories::all();
+
+            return response()->json($id_category);
+        }
+    }
+
+    public function records(Request $request)
+    {
+        if ($request->ajax()) {
+
+            if (request('std') && request('res')) {
+                $students = Materials::with(['lab','category'])->where('id_lab', '=', request('std'))->where('id_category', '=', request('res'))->get();
+            } else {
+                $students = Materials::with(['lab','category'])->when(request('std'), function ($query) {
+                    $query->where('id_lab', '=', request('std'));
+                })
+                    ->when(request('res'), function ($query) {
+                        $query->where('id_category', '=', request('res'));
+                    })
+                    ->get();
+            }
+
+            return response()->json([
+                'students' => $students
+            ]);
+        } else {
+            abort(403);
+        }
     }
 
     /**

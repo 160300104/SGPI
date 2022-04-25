@@ -20,7 +20,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
+        $providers = Provider::paginate(5);
         return view('provider.index')->with('providers', $providers);
     }
 

@@ -17,8 +17,13 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 100);
+            $table->unsignedBigInteger('id_user')->nullable();
 
+            $table->foreign('id_user')
+                    ->references('id')->on('users')
+                    ->onDelete('set null');
             $table->timestamps();
+
         });
     }
 
