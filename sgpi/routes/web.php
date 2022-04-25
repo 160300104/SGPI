@@ -6,6 +6,7 @@ use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\UserController;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
+#Route::get('statistics',[TestController::class,'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/provider', ProviderController::class);
-    Route::resource('/statistics', StatisticsController::class);
+    #Route::resource('/statistics', StatisticsController::class);
+    Route::resource('/statistics',StatisticsController::class);
     Route::resource('/materials', MaterialsController::class);
     Route::resource('/user', UserController::class);
     Route::get('/dash',function(){

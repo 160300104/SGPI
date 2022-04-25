@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Provider extends Model
+class Statistics extends Model
 {
     use HasFactory;
-
-    protected $fillable=["name","email","phone_number","location","image","latitude","length"];
+    public $timestamps=false;
+    protected $fillable=["latitud","longitud"];
 }

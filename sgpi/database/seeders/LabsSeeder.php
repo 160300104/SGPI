@@ -30,5 +30,9 @@ class LabsSeeder extends Seeder
         Labs::create([
             'name' => 'Tecnologías Ambientales',
         ]);
+
+        Labs::create([
+            'name' => 'Fisico-Quimica',
+        ]);
     }
 }

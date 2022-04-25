@@ -20,5 +20,17 @@ class UserSeeder extends Seeder
             'email' => '160300104@ucaribe.edu.mx',
             'password' => bcrypt('12345678') 
         ])->assignRole('Admin');
+
+        User::create([
+            'name' => 'Jose Manuel Cazan Segura',
+            'email' => '170300768@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Admin');
+
+        User::create([
+            'name' => 'Maurico De Leon Mercado',
+            'email' => '170300104@ucaribe.edu.mx',
+            'password' => bcrypt('12345678') 
+        ])->assignRole('Admin');
     }
 }

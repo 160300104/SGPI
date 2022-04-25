@@ -20,7 +20,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
+        $providers = Provider::paginate(2);
         return view('provider.index')->with('providers', $providers);
     }
 
@@ -48,7 +48,9 @@ class ProviderController extends Controller
             'image' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
         ]);
 
         $provider=$request->all();
@@ -73,9 +75,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        return view('provider.show');
     }
 
     /**
@@ -104,7 +106,9 @@ class ProviderController extends Controller
             'image' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
         ]);
 
         $user = Provider::find($id);

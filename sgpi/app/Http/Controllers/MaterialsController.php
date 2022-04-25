@@ -18,7 +18,7 @@ class MaterialsController extends Controller
     {
         $labs = Labs::all();
         $categories = Categories::all();
-        $materials = Materials::all();
+        $materials = Materials::paginate(10);
         return view('materials.index')->with('materials', $materials)->with('labs',$labs)->with('categories',$categories);;
     }
 

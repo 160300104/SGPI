@@ -32,6 +32,11 @@ small {
 
   .seccion_proveedor{
     display: flex;
+    justify-content: space-between;
+  }
+
+  .seccion_proveedores{
+    display: flex;
     justify-content: flex-end;
   }
 

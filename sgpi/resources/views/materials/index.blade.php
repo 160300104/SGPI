@@ -51,4 +51,10 @@ MATERIALES
       @endforeach
     </tbody>
   </table>
+
+<!-- Paginación de Bootstrap -->
+<div class="d-flex justify-content-end">
+    {!! $materials->links() !!}
+</div>
+
 @endsection

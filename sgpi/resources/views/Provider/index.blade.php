@@ -9,7 +9,13 @@ PROVEEDORES
 @endsection
 
 @section('content')
+
 <div class="seccion_proveedor">
+
+  <a href="/provider/show" class="btn btn-primary proveedor">
+  <i class="fa fa-map-marker" ></i>Localizacion de proveedores
+  </a>
+
   <a href="{{route('provider.create')}}" class="btn btn-primary proveedor">
     <i class="fa fa-plus"></i>Agregar un Proveedor
   </a>
@@ -46,7 +52,13 @@ PROVEEDORES
                   </form>
               </td>
           </tr>
-      @endforeach
+      @endforeach      
     </tbody>
   </table>
+
+  <!-- Paginación de Bootstrap -->
+<div class="d-flex justify-content-end">
+    {!! $providers->links() !!}
+</div>
 @endsection
+
