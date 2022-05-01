@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class MaterialsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:materials.index')->only('index');
+        $this->middleware('can:materials.create')->only('create', 'store');
+        $this->middleware('can:materials.edit')->only('edit', 'update');
+        $this->middleware('can:materials.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +26,7 @@ class MaterialsController extends Controller
         return view('materials.index');
     }
 
-    public function getStandard(Request $request)
+    public function getLab(Request $request)
     {
         if ($request->ajax()) {
             $id_lab = Labs::all();
@@ -28,7 +35,7 @@ class MaterialsController extends Controller
         }
     }
 
-    public function getResult(Request $request)
+    public function getCategory(Request $request)
     {
         if ($request->ajax()) {
             $id_category = Categories::all();
@@ -42,9 +49,9 @@ class MaterialsController extends Controller
         if ($request->ajax()) {
 
             if (request('std') && request('res')) {
-                $students = Materials::with(['lab','category'])->where('id_lab', '=', request('std'))->where('id_category', '=', request('res'))->get();
+                $filter = Materials::with(['lab','category'])->where('id_lab', '=', request('std'))->where('id_category', '=', request('res'))->get();
             } else {
-                $students = Materials::with(['lab','category'])->when(request('std'), function ($query) {
+                $filter = Materials::with(['lab','category'])->when(request('std'), function ($query) {
                     $query->where('id_lab', '=', request('std'));
                 })
                     ->when(request('res'), function ($query) {
@@ -54,7 +61,7 @@ class MaterialsController extends Controller
             }
 
             return response()->json([
-                'students' => $students
+                'filter' => $filter
             ]);
         } else {
             abort(403);

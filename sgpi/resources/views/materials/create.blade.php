@@ -32,7 +32,7 @@ AGREGAR UN NUEVO MATERIAL
 
             <div class="form-group">
                 <label>Cantidad</label>
-                <input id="quantity" name="quantity" type="number" class="form-control form-control-solid" value="{{old('quantity')}}"/>
+                <input id="quantity" name="quantity" type="number" min="1" class="form-control form-control-solid" value="{{old('quantity')}}"/>
                 @error('quantity')
                     <small>*{{$message}}</small>
                 @enderror

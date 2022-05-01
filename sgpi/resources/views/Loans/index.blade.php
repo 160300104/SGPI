@@ -19,6 +19,26 @@ PRESTAMO DE MATERIALES
 <br>
 @endcan
 
+<div class="row mb-3">
+  <div class="col-md-2">
+    <label>Fecha de prestamo</label>
+    <input type="text" name="start_date" class="form-control start_date" readonly/>
+  </div>  
+  <div class="col-md-2">
+    <label>Laborario</label>
+    <select class="form-control id_lab" id="id_lab">
+      <option value="">Seleccionar...</option>
+      @foreach($labs as $lab)
+        <option value="{{$lab->id}}">{{$lab->name}}</option>
+      @endforeach
+    </select>
+  </div>  
+  <div class="col-md-1 mt-4">
+      <button id="filtrar" class="btn btn-danger">Filtrar</button>
+  </div>
+</div>
+
+
 <div class="">
   <div class="row">
     <div class="col-md-12">
@@ -59,9 +79,9 @@ PRESTAMO DE MATERIALES
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> --}}
 
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
@@ -81,15 +101,29 @@ PRESTAMO DE MATERIALES
 <!-- Momentjs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
 
-        $('.tickets_table').DataTable({
+        $(".start_date").flatpickr();
+        $(".id_lab").select2();
+
+      const table =  $('.tickets_table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{route('loans.index')}}",
+            ajax: {
+              url: "{{route('loans.index')}}",
+              data: function(d){
+                  d.start_date = $('.start_date').val(),
+                  d.id_lab = $('.id_lab').val()
+              },
+
+            },
             dataType: 'json',
             type: "POST",
             columns: [{
@@ -117,11 +151,15 @@ PRESTAMO DE MATERIALES
                     name: 'quantity'   
                 },
                 {
-                    data: 'loan.status.name',
-                    name: 'loan.status.name'   
+                    data: 'loan.status.id',
+                    name: 'loan.status.id'   
                 },
             ]           
-        });
+        })
+
+        $('#filtrar').click(function(){
+          table.draw();
+        })
     })
 </script>
 @endsection

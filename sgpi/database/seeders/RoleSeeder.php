@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
         $role3 = Role::create(['name' => 'Becario']);
         $role4 = Role::create(['name' => 'Estudiante']);
 
-        // SECCION MATERIALES
+        // SECCION DE INICIO
         Permission::create(['name' => 'home.index'])->syncRoles([$role1,$role2,$role3,$role4]);
         
         // SECCION PROVIDER
@@ -37,6 +37,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'materials.create'])->syncRoles([$role1,$role2]);
         Permission::create(['name' => 'materials.edit'])->syncRoles([$role1,$role2,$role3]); 
         Permission::create(['name' => 'materials.destroy'])->syncRoles([$role1,$role2]);
+
+        // SECCION PRÉSTAMO DE MATERIALES
+        Permission::create(['name' => 'loans.index'])->syncRoles([$role1,$role2,$role3,$role4]);
+        // Permission::create(['name' => 'loans.create'])->syncRoles([$role1,$role2,$role3,$role4]);
         
         // SECCION ESTASÍSTICAS
         Permission::create(['name' => 'statistics.index'])->syncRoles([$role1,$role2,$role3]);
@@ -44,6 +48,9 @@ class RoleSeeder extends Seeder
         // SECCION DE USUARIOS
         Permission::create(['name' => 'user.index'])->syncRoles([$role1]);
         Permission::create(['name' => 'user.edit'])->syncRoles([$role1]); 
-        Permission::create(['name' => 'user.update'])->syncRoles([$role1]);
+        
+        // SECCION DE LABORATORIOS
+        Permission::create(['name' => 'labs.index'])->syncRoles([$role1]);
+        Permission::create(['name' => 'labs.edit'])->syncRoles([$role1]); 
     }
 }

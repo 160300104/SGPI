@@ -10,6 +10,13 @@ LABORATORIOS
 
 @section('content')
 
+<div class="seccion_proveedor">
+  <a href="{{route('labs.create')}}" class="btn btn-primary proveedor">
+    <i class="fa fa-plus"></i>Agregar un Laboratorio
+  </a>
+</div>
+<br>
+
 <table class="table table-hover table-striped table-bordered rounded">
     <thead class="tabla">
       <tr>

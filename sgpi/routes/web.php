@@ -31,16 +31,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/provider', ProviderController::class);
     Route::resource('/statistics', statisticsController::class);
     Route::resource('/materials', MaterialsController::class);
-    Route::resource('/loans', LoansController::class);
+    Route::resource('/loans', LoansController::class)->middleware('can:loans.index');
     Route::resource('/user', UserController::class);
     Route::resource('/labs', LabsController::class);
     Route::post('/loans/saveticket',[LoansController::class, 'saveticket'])->name('loans.saveticket');
-    Route::get('standards', [MaterialsController::class, 'getStandard'])->name('standards');
-    Route::get('results', [MaterialsController::class, 'getResult'])->name('results');
+    Route::get('/loans/datatable',[LoansController::class, 'datatable'])->name('loans.datatable');
+    Route::get('getLab', [MaterialsController::class, 'getLab'])->name('getLab');
+    Route::get('getCategory', [MaterialsController::class, 'getCategory'])->name('getCategory');
     Route::get('records', [MaterialsController::class, 'records'])->name('records');
     Route::get('/dash',function(){
         return view('dash.index');
-    })->name('dash');
+    })->middleware('can:home.index')->name('dash');
 });
 
 

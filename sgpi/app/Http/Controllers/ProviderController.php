@@ -13,6 +13,13 @@ use function PHPSTORM_META\map;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:provider.index')->only('index');
+        $this->middleware('can:provider.create')->only('create', 'store');
+        $this->middleware('can:provider.edit')->only('edit', 'update');
+        $this->middleware('can:provider.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -19,17 +19,40 @@ class LoansController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $labs = Labs::all();
 
-        if($request->ajax()){
+        $user = auth()->user();
 
-            $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->get();
+        if(request()->ajax()){
 
-            return DataTables::of($tickets)->make(true);
+            $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->where('loan.user.id',auth()->user()->id);
+            
+            if($user->hasRole('Encargado')  || $user->hasRole('Admin')){
+                $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user']);
+            }
+
+            return DataTables::of($tickets)    
+                ->filter(function($query) use ($request) {
+                    if($request->has('id_lab') && !empty($request->get('id_lab'))){
+                       $query->where('lab.', '=', request('id_lab'));
+                    }
+                })       
+                ->editColumn('loan.status.id', function($query){
+                    return $query->loan->status->id == 1 ? '<span class="badge rounded-pill bg-warning text-dark">En Prestamo</span>' : '<span class="badge bg-success">Finalizado</span>';
+                })
+                ->rawColumns(['loan.status.id'])
+                
+                ->make(true);
 
         }
 
-        return view('loans.index');
+        return view('loans.index',compact('labs'));
+    }
+
+    public function datatable(Request $request){
+        
+        
     }
 
     /**

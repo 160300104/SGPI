@@ -16,9 +16,9 @@ ELIJA EL O LOS MATERIALES A PRESTAR
         <button type="button" class="btn btn-primary mr-2" id="nuevo_material">Agregar un material</button>
         <div class="card-body" id="material">
             <div class="material">
-                <div class="form-group">
+                <div class="form-group" id="mat">
                     <label>Material:</label>
-                    <select class="form-select" name="id_material1"  id="id_material1" aria-label="Default select example">
+                    <select class="form-select" name="id_material"  id="id_material" aria-label="Default select example">
                         <option selected hidden></option>
                             @foreach ($materials as $material)
                                 <option value="{{$material->id}}">{{$material->name}}</option>
@@ -26,7 +26,11 @@ ELIJA EL O LOS MATERIALES A PRESTAR
                     </select>
                     <br>
                     <label>Cantidad</label>
-                    <input id="quantity1" name="quantity1" type="number" class="form-control form-control-solid" value="{{old('quantity')}}"/>
+                    <input id="quantity" name="quantity" type="number" class="form-control form-control-solid" value="{{old('quantity')}}"/>
+                    <br>
+                    <p align="right">
+                        <button type="button" class="btn btn btn-danger mr-2" id="" onclick="eliminarMaterial(this)" >Borrar Material</button>
+                    </p>
                 </div>
             </div>           
             <input hidden id="id_loan" name="id_loan" type="number" class="form-control form-control-solid" value="{{$loancurrent->id}}"/>
@@ -42,12 +46,17 @@ ELIJA EL O LOS MATERIALES A PRESTAR
 
 @section('script')
 <script>
-var nextinput = 1;
+var nextinput = 0;
     $("#nuevo_material").click(function(e) {
         nextinput++;
-        var campo = '<li id="rut'+nextinput+'">Campo: <input type="text" size="20" id="campo' + nextinput + '" name="campo' + nextinput + '"&nbsp; /></li>';
-        var material = '<div class="form-group"><label>Material '+nextinput+':</label><select class="form-select" name="id_material'+nextinput+'"  id="id_material'+nextinput+'" aria-label="Default select example"><option selected hidden></option>@foreach ($materials as $material)<option value="{{$material->id}}">{{$material->name}}</option>@endforeach</select><br><label>Cantidad</label><input id="quantity'+nextinput+'" name="quantity'+nextinput+'" type="number" class="form-control form-control-solid" value="{{old('quantity')}}"/></div>'
+        var material = '<div class="form-group" id="mat'+nextinput+'"><label>Material '+nextinput+':</label><select class="form-select" name="id_material'+nextinput+'"  id="id_material'+nextinput+'" aria-label="Default select example"><option selected hidden></option>@foreach ($materials as $material)<option value="{{$material->id}}">{{$material->name}}</option>@endforeach</select><br><label>Cantidad</label><input id="quantity'+nextinput+'" name="quantity'+nextinput+'" type="number" class="form-control form-control-solid" value="{{old('quantity')}}"/><br><p align="right"><button type="button" class="btn btn btn-danger mr-2" id="'+nextinput+'" onclick="eliminarMaterial(this)">Borrar Material</button></p></div>'
         $("#material").append(material);
     });
+
+    function eliminarMaterial(mat) {
+        var id = mat.id;
+        var d = document.getElementById('mat'+id+'');
+        d.remove();
+    }
 </script>
 @endsection

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:labs.index')->only('index');
+        $this->middleware('can:labs.edit')->only('edit', 'update');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,9 @@ class LabsController extends Controller
      */
     public function create()
     {
-        //
+        $labs = Labs::all();
+        $users = User::role('Encargado')->get();
+        return view('labs.create')->with('labs',$labs)->with('users',$users);
     }
 
     /**
@@ -37,7 +44,11 @@ class LabsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $provider=$request->all();
+        
+        Labs::create($provider);
+
+        return redirect('/labs');
     }
 
     /**
