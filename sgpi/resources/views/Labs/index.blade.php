@@ -34,6 +34,14 @@ LABORATORIOS
               <td>{{$lab->user->name}}</td>
               <td>
                     <a href="{{route('labs.edit',$lab->id)}}" class="btn btn-info block">Editar</a>
+
+                      @can('labs.destroy')
+                      <form action="{{route('labs.destroy', $lab->id)}}" method="POST" class="formEliminar">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger block">Eliminar</button>
+                      </form>
+                      @endcan
               </td>
           </tr>
       @endforeach

@@ -9,6 +9,8 @@ class Categories extends Model
 {
     use HasFactory;
 
+    protected $fillable=["name"];
+
     //Relacion uno a muchos 
     public function materials(){
         return $this->hasMany(Materials::class, 'id');

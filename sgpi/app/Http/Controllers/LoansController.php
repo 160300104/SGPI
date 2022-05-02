@@ -8,6 +8,8 @@ use Yajra\DataTables\DataTables;
 use App\Models\Labs;
 use App\Models\Loan;
 use App\Models\Materials;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Promise\Create;
 use LengthException;
 
@@ -20,22 +22,37 @@ class LoansController extends Controller
      */
     public function index(Request $request)
     {   
+        // $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->getQuery();
+        // return $tickets->where('loan.lab.id',1);
         $labs = Labs::all();
 
+        return view('loans.index',compact('labs'));
+    }
+
+    public function getDatatable(Request $request){
+        
         $user = auth()->user();
 
         if(request()->ajax()){
-
-            $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->where('loan.user.id',auth()->user()->id);
             
             if($user->hasRole('Encargado')  || $user->hasRole('Admin')){
-                $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user']);
+                $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->join('loans', 'tickets.id_loan', '=', 'loans.id');
+            }else{
+                $tickets = Tickets::with(['loan','material','loan.user','loan.lab','loan.status','loan.lab.user'])->join('loans', 'tickets.id_loan', '=', 'loans.id')->where('loans.id_user', auth()->user()->id);
             }
-
+            
             return DataTables::of($tickets)    
                 ->filter(function($query) use ($request) {
-                    if($request->has('id_lab') && !empty($request->get('id_lab'))){
-                       $query->where('lab.', '=', request('id_lab'));
+                    if($request->has('id_lab') && !empty($request->get('id_lab')) && !empty($request->get('start_date'))){
+                        $query->where('loans.id_lab', $request->get('id_lab'))->where('loans.loan_date', $request->get('start_date'));
+                    }
+                    
+                    elseif($request->has('id_lab') && !empty($request->get('id_lab'))){
+                       $query->where('loans.id_lab', $request->get('id_lab'));
+                    }
+
+                    elseif(!empty($request->get('start_date'))){
+                        $query->where('loans.loan_date', $request->get('start_date'));
                     }
                 })       
                 ->editColumn('loan.status.id', function($query){
@@ -44,15 +61,8 @@ class LoansController extends Controller
                 ->rawColumns(['loan.status.id'])
                 
                 ->make(true);
-
         }
 
-        return view('loans.index',compact('labs'));
-    }
-
-    public function datatable(Request $request){
-        
-        
     }
 
     /**
@@ -74,10 +84,13 @@ class LoansController extends Controller
      */
     public function store(Request $request)
     {
-
-        $loan=$request->all();
-        
-        $loancurrent = Loan::create($loan);
+        date_default_timezone_set('America/Mexico_City');
+        $loancurrent = Loan::create([
+            'loan_date' => date("Y-m-d"),
+            'id_user'=> Auth::id(),
+            'id_status' => 1,
+            'id_lab' => $request->id_lab
+        ]);
 
         $materials = Materials::where('id_lab',$loancurrent->id_lab)->get();
 
@@ -102,15 +115,22 @@ class LoansController extends Controller
                         'quantity' => implode($tickets[$x]),
                         'id_loan'=> $loan
                     ]);
-
+                    
                     $material = Materials::find(implode($tickets[$i]));
+                    if($material->quantity - implode($tickets[$x]) < 0){
+                        return redirect()->route('loans.create')->with('info', 'El material '.$material->name.' no tiene suficiente existencia en almacen.');
+                    }
                     $material->quantity = $material->quantity - implode($tickets[$x]);
                     $material->save();
+                    
             }     
             $i++;
         }
        
-        return view('loans.index');
+        $labs = Labs::all();
+
+        return redirect('/loans');
+
     }
 
     /**
@@ -155,6 +175,18 @@ class LoansController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loan = Loan::find($id);
+
+        $tickets = Tickets::all()->where('id_loan', $loan->id);
+
+        foreach($tickets as $ticket){
+            $current = Materials::find($ticket->id_material);
+            $quantity = $current->quantity + $ticket->quantity;
+            $current->update(['quantity' => $quantity]);
+        }
+
+        $loan->update(['id_status' => 2]);
+
+        return redirect('/loans');
     }
 }

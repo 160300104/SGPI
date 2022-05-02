@@ -42,3 +42,7 @@ small {
   td{
     text-align: center;
   }
+  
+  .dataTables_filter{
+    display: none;
+  }

@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Labs;
-use App\Models\User;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
-class LabsController extends Controller
+class CategoriesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:labs.index')->only('index');
-        $this->middleware('can:labs.edit')->only('edit', 'update');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +14,8 @@ class LabsController extends Controller
      */
     public function index()
     {
-        $labs = Labs::all();
-        return view('labs.index', compact('labs'));
+        $categories = Categories::all();
+        return view('categories.index')->with('categories',$categories);
     }
 
     /**
@@ -31,9 +25,8 @@ class LabsController extends Controller
      */
     public function create()
     {
-        $labs = Labs::all();
-        $users = User::role('Encargado')->get();
-        return view('labs.create')->with('labs',$labs)->with('users',$users);
+        return view('categories.create');
+        
     }
 
     /**
@@ -46,9 +39,9 @@ class LabsController extends Controller
     {
         $provider=$request->all();
         
-        Labs::create($provider);
+        Categories::create($provider);
 
-        return redirect('/labs');
+        return redirect('/categories');
     }
 
     /**
@@ -70,9 +63,7 @@ class LabsController extends Controller
      */
     public function edit($id)
     {
-        $lab = Labs::find($id);
-        $users = User::role('Encargado')->get();
-        return view('labs.edit')->with('lab',$lab)->with('users',$users);
+        //
     }
 
     /**
@@ -84,14 +75,7 @@ class LabsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $lab = Labs::find($id);
-
-        $Labs=$request->all();
-        
-        $lab->update($Labs);
-
-        return redirect('/labs');
+        //
     }
 
     /**
@@ -102,9 +86,9 @@ class LabsController extends Controller
      */
     public function destroy($id)
     {
-        $lab = Labs::find($id);
-        $lab->delete(); 
+        $categories = Categories::find($id);
+        $categories->delete(); 
 
-        return redirect('/labs');
+        return redirect('/categories');
     }
 }

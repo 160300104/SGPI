@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Labs;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Labs;
+use App\Models\Tickets;
+use App\Models\Materials;
+use Yajra\DataTables\DataTables;
 
-class LabsController extends Controller
+class MetodologiaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:labs.index')->only('index');
-        $this->middleware('can:labs.edit')->only('edit', 'update');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +17,40 @@ class LabsController extends Controller
      */
     public function index()
     {
+        $materiales = Materials::selectRaw('COUNT(name) AS quantity, name, id_lab as acumulado')
+            ->join('tickets', 'tickets.id_material', '=', 'materials.id')
+            ->groupBy('name')
+            ->get();
+
+            $contador = 0;
+
+            foreach($materiales as $material){
+                $contador += $material->quantity;
+                $material->acumulado = $contador;
+
+            }
+
+
+            return $materiales;
         $labs = Labs::all();
-        return view('labs.index', compact('labs'));
+
+        return view('metodologia.index', compact('labs'));
+    }
+
+    public function getMetodologia(Request $request){
+        
+        
+        if(request()->ajax()){
+
+            
+
+
+            return DataTables::of($materiales) 
+            ->make(true);
+
+        }
+
+
     }
 
     /**
@@ -31,9 +60,7 @@ class LabsController extends Controller
      */
     public function create()
     {
-        $labs = Labs::all();
-        $users = User::role('Encargado')->get();
-        return view('labs.create')->with('labs',$labs)->with('users',$users);
+        //
     }
 
     /**
@@ -44,11 +71,7 @@ class LabsController extends Controller
      */
     public function store(Request $request)
     {
-        $provider=$request->all();
-        
-        Labs::create($provider);
-
-        return redirect('/labs');
+        //
     }
 
     /**
@@ -70,9 +93,7 @@ class LabsController extends Controller
      */
     public function edit($id)
     {
-        $lab = Labs::find($id);
-        $users = User::role('Encargado')->get();
-        return view('labs.edit')->with('lab',$lab)->with('users',$users);
+        //
     }
 
     /**
@@ -84,14 +105,7 @@ class LabsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $lab = Labs::find($id);
-
-        $Labs=$request->all();
-        
-        $lab->update($Labs);
-
-        return redirect('/labs');
+        //
     }
 
     /**
@@ -102,9 +116,6 @@ class LabsController extends Controller
      */
     public function destroy($id)
     {
-        $lab = Labs::find($id);
-        $lab->delete(); 
-
-        return redirect('/labs');
+        //
     }
 }

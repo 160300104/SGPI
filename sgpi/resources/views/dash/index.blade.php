@@ -59,6 +59,19 @@
 
 </head>
 
+<style>
+	.header_style{
+		display: flex;
+		align-items: center;
+		justify-content: end;
+	}
+	.header_style_2{
+		width: 12%;
+		justify-content: center;
+		margin: 0;
+	}
+</style>
+
 <!-- end::Head -->
 
 <!-- begin::Body -->
@@ -149,6 +162,11 @@
 										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('statistics') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Estadísticas</span></a></li>
 									</ul>
 								</div>
+								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+									<ul class="k-menu__subnav">
+										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('metodologia') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Metodologia ABC</span></a></li>
+									</ul>
+								</div>
 							</li>
 							@endcan
 
@@ -161,6 +179,7 @@
 							
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('labs') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Laboratorios</span></a></li>
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('categories') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Categorias</span></a></li>
 							@endcan
 						</ul>
 					</div>
@@ -175,29 +194,29 @@
 			<div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper" id="k_wrapper">
 
 				<!-- begin:: Header -->
-				<div id="k_header" class="k-header k-grid__item  k-header--fixed ">
+				<div id="k_header" class="k-header k-griditem  k-header--fixed header_style">
 
-					<div class="border-t border-gray-100"></div>
+                    <div class="border-t border-gray-100"></div>
 
-					<button class="text-success">{{auth()->user()->name}}   </button>
-					<!-- Authentication -->
-					<form method="POST" class="btn-logout" action="{{ route('logout') }}">
-						@csrf
+                    <span class="text-success">{{auth()->user()->name}}</span>
+                    <!-- Authentication -->
+                    <form method="POST" class="btn-logout header_style_2" action="{{ route('logout') }}">
+                        @csrf
 
-						<button class="btn btn-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <button class="btn btn-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-							{{ __('Log Out') }}
-						</button>
-					</form>
+                            {{ ('Log Out') }}
+                        </button>
+                    </form>
 
-					<!-- begin:: Header Topbar -->
-					<div class="k-header__topbar">
+                    <!-- begin:: Header Topbar -->
+                    <div class="k-header__topbar">
 
-					</div>
+                    </div>
 
-					<!-- end:: Header Topbar -->
+                    <!-- end:: Header Topbar -->
 
-				</div>
+                </div>
 				<div class="k-content	k-grid__item k-grid__item--fluid k-grid k-grid--hor" id="k_content">
 					<div class="k-content__head	k-grid__item">
 						<div class="k-content__head-main">

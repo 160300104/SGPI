@@ -9,6 +9,8 @@ ELIJA EL O LOS MATERIALES A PRESTAR
 @endsection
 
 @section('content')
+
+
 <form class="form" action="{{ route('loans.saveticket')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
     @csrf
     <div class="container">

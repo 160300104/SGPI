@@ -158,7 +158,11 @@ class StatisticsController extends Controller
         if(empty($loan_date_arr) || count($loan_date_arr) < 5){
             $prediccion = [];
             $datosPrediccion = [];
-            $x_pred = [];
+            $x_pred = $x;
+            $final_date = end($x);
+            for ($i=1; $i <= 5; $i++) { 
+                $x_pred[] = date("Y-m-d",strtotime($final_date."+ ". $i ."days")); 
+            }
         }else{
             $prediccion = regresionLineal($x, $y);
             // regresionLineal($x, $y);

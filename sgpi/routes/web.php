@@ -6,9 +6,11 @@ use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LabsController;
+use App\Http\Controllers\CategoriesController;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Chart1Controller;
+use App\Http\Controllers\MetodologiaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +36,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/loans', LoansController::class)->middleware('can:loans.index');
     Route::resource('/user', UserController::class);
     Route::resource('/labs', LabsController::class);
+    Route::resource('/categories', CategoriesController::class);
+    Route::resource('/metodologia', MetodologiaController::class);
     Route::post('/loans/saveticket',[LoansController::class, 'saveticket'])->name('loans.saveticket');
-    Route::get('/loans/datatable',[LoansController::class, 'datatable'])->name('loans.datatable');
+    Route::get('getDatatable',[LoansController::class, 'getDatatable'])->name('getDatatable');
+    Route::get('getMetodologia',[MetodologiaController::class, 'getMetodologia'])->name('getMetodologia');
     Route::get('getLab', [MaterialsController::class, 'getLab'])->name('getLab');
     Route::get('getCategory', [MaterialsController::class, 'getCategory'])->name('getCategory');
     Route::get('records', [MaterialsController::class, 'records'])->name('records');
