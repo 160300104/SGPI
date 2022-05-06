@@ -1,7 +1,7 @@
 @extends('dash.index');
 
 @section('styles')
-<link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('css/materials/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('title')

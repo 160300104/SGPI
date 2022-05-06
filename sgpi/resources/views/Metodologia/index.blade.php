@@ -9,6 +9,51 @@ METODOLOGIA ABC
 @endsection
 
 @section('content')
+  {{-- Fila 1 --}}
+  <div class="row mb-3">
+      {{-- Tarjeta 1 --}}
+      <div class="col">
+          <div class="card bg-success text-white">
+              <div class="font-weight-normal card-header text-center bg-success h3">Categoria A </div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos">Materiales indispensables en almacen.</span></h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      {{-- Tarjeta 2 --}}
+      <div class="col">
+          <div class="card bg-primary text-white">
+              <div class="font-weight-normal card-header text-center bg-primary h3">Categoria B</div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos">Materiales con consumo moderado.</span></h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      {{-- Tarjeta 3 --}}
+      <div class="col">
+          <div class="card bg-info text-white">
+              <div class="font-weight-normal card-header text-center bg-info h3">Categoria C</div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos"></span>Materiales a considerar su rotacion por bajo consumo.</h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
 
 <div class="row mb-3">
   <div class="col-md-2">
@@ -21,7 +66,7 @@ METODOLOGIA ABC
     </select>
   </div>  
   <div class="col-md-1 mt-4">
-      <button id="filtrar" class="btn btn-danger">Filtrar</button>
+      <button id="filter" class="btn btn-danger">Filtrar</button>
   </div>
 </div>
 
@@ -98,10 +143,17 @@ METODOLOGIA ABC
         $(".id_lab").select2();
 
       const table =  $('.tickets_table').DataTable({
+            order: [[ 2, "desc" ]],
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{route('getMetodologia')}}",
+            ajax: {
+              url: "{{route('getMetodologia')}}",
+              data: function(d){
+                  d.id_lab = $('.id_lab').val()
+              },
+
+            },
             dataType: 'json',
             type: "POST",
             columns: [{
@@ -109,13 +161,29 @@ METODOLOGIA ABC
                     name: 'name'
                 },    
                 {
-                    data: 'quantity',
-                    name: 'quantity'   
+                    data: 'frecuencia',
+                    name: 'frecuencia'   
+                },
+                {
+                    data: 'porcentaje',
+                    name: 'porcentaje'   
+                },
+                {
+                    data: 'acumulado',
+                    name: 'acumulado'   
+                },
+                {
+                    data: 'porcentaje_acumulado',
+                    name: 'porcentaje_acumulado'   
+                },
+                {
+                    data: 'clasificacion',
+                    name: 'clasificacion'   
                 },
             ]           
         })
 
-        $('#filtrar').click(function(){
+        $('#filter').click(function(){
           table.draw();
         })
     })

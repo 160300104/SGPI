@@ -7,6 +7,7 @@ use App\Models\Labs;
 use App\Models\Tickets;
 use App\Models\Materials;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class MetodologiaController extends Controller
 {
@@ -17,21 +18,7 @@ class MetodologiaController extends Controller
      */
     public function index()
     {
-        $materiales = Materials::selectRaw('COUNT(name) AS quantity, name, id_lab as acumulado')
-            ->join('tickets', 'tickets.id_material', '=', 'materials.id')
-            ->groupBy('name')
-            ->get();
 
-            $contador = 0;
-
-            foreach($materiales as $material){
-                $contador += $material->quantity;
-                $material->acumulado = $contador;
-
-            }
-
-
-            return $materiales;
         $labs = Labs::all();
 
         return view('metodologia.index', compact('labs'));
@@ -40,14 +27,60 @@ class MetodologiaController extends Controller
     public function getMetodologia(Request $request){
         
         
+        function metodologia_materiales($materiales){
+            $contador = 0;
+
+            foreach($materiales as $material){
+                $contador += $material->frecuencia;
+                $material->acumulado = $contador;
+
+            }
+            $acumulado_final = $materiales[count($materiales)-1];
+
+            $contador2 = 0;
+            foreach($materiales as $material){
+                $material->porcentaje = number_format((($material->frecuencia / $acumulado_final->acumulado) * 100),3);
+                $contador2 += $material->porcentaje;
+                $material->porcentaje_acumulado = number_format($contador2,3);
+                if($material->porcentaje_acumulado <= 80){
+                    $material->clasificacion = 'A';
+                }
+                elseif($material->porcentaje_acumulado <= 95){
+                    $material->clasificacion = 'B';
+                }
+                else{
+                    $material->clasificacion = 'C';
+                }
+            }
+        }
+        
         if(request()->ajax()){
 
+            $materiales = Tickets::join('materials', 'tickets.id_material', '=', 'materials.id')
+            ->selectRaw('materials.name, COUNT(materials.name) AS frecuencia, materials.id_lab')
+            ->groupBy('materials.name')
+            ->orderBy('frecuencia', 'desc')
+            ->get();
+
+            metodologia_materiales($materiales);
             
-
-
             return DataTables::of($materiales) 
+            ->filter(function($query) use ($request) {
+                if($request->has('id_lab') && !empty($request->get('id_lab'))){
+                    // $lab = $request->get('id_lab');
+                    $query->collection = Tickets::join('materials', 'tickets.id_material', '=', 'materials.id')
+                    ->selectRaw('materials.name, COUNT(materials.name) AS frecuencia, materials.id_lab')
+                    ->groupBy('materials.name')
+                    ->orderBy('frecuencia', 'desc')
+                    ->where('id_lab', $request->get('id_lab'))
+                    ->get();
+                    metodologia_materiales($query->collection);
+                    $query->collection = $query->collection->filter(function ($row) use ($request) {
+                        return Str::contains($row['id_lab'], $request->get('id_lab')) ? true : false;
+                    });
+                }
+            })
             ->make(true);
-
         }
 
 

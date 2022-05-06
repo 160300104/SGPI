@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone_number', 50);
             $table->string('location', 100);
             $table->string('image',100);
+            $table->string('latitude',50);
+            $table->string('length',50);
             $table->timestamps();
         });
     }

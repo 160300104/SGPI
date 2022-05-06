@@ -11,12 +11,16 @@ PROVEEDORES
 @section('content')
 @can('provider.create')
 <div class="seccion_proveedor">
+  <a href="/provider/show" class="btn btn-primary proveedor">
+    <i class="fa fa-map-marker" ></i>Localizacion de proveedores
+  </a>
   <a href="{{route('provider.create')}}" class="btn btn-primary proveedor">
     <i class="fa fa-plus"></i>Agregar un Proveedor
   </a>
 </div>
 <br>
 @endcan
+
 
 <table class="table table-hover table-striped table-bordered rounded">
     <thead class="tabla">

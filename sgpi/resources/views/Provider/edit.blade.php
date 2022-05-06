@@ -1,7 +1,7 @@
 @extends('dash.index');
 
 @section('styles')
-  <link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css"/>
+  <link href="{{asset('css/materials/style.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('title')
@@ -58,6 +58,29 @@ EDITAR UN PROVEEDOR
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label style="">Latitud:</label>
+                <input id="latitude" name="latitude"  type="text" class="form-control form-control-solid" placeholder="Latitud" value="{{old('latitude', $provider->latitude)}}"/>
+                @error('latitude')
+                    <small>*{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label style="">Longitud:</label>
+                <input id="length" name="length"  type="text" class="form-control form-control-solid" placeholder="Longitud" value="{{old('length', $provider->length)}}"/>
+                @error('length')
+                    <small>*{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="mapa" style="width: 50%; height: 500px;"></div>
+                </div>
+            </div>
+            <br>
+
             <div class="card-footer">
             <button type="submit" class="btn btn-primary mr-2">Guardar</button>
             <a href="{{route('provider.index')}}" type="reset" class="btn btn-secondary" >Cancelar</a>
@@ -65,4 +88,41 @@ EDITAR UN PROVEEDOR
         </div>
     </div>
    </form>
+@endsection
+
+@section('script')
+<script>
+    function iniciarMapa(){
+        var latitud = 21.169039292053693;
+        var longitud = -86.84992262268078;
+
+        coordenadas = {
+            lng: longitud,
+            lat: latitud
+        }
+ 
+        generarMapa(coordenadas);
+    }
+
+    function generarMapa(coordenadas){
+        var mapa = new google.maps.Map(document.getElementById('mapa'),
+        {
+            zoom: 12,
+            center: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
+        });
+
+        marcador= new google.maps.Marker({
+            map:mapa,
+            draggable: true,
+            position: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
+        });
+
+        marcador.addListener('dragend', function(event){
+            document.getElementById('latitude').value = this.getPosition().lat();
+            document.getElementById('length').value = this.getPosition().lng();
+        })
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeBjVUoOZFBL8HiLSJVIEZAghk5-Tn3g&callback=iniciarMapa"></script>
 @endsection
