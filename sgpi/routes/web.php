@@ -6,9 +6,11 @@ use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LabsController;
+use App\Http\Controllers\CategoriesController;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Chart1Controller;
+use App\Http\Controllers\MetodologiaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,16 +33,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group( function () {
     Route::resource('/provider', ProviderController::class);
     Route::resource('/statistics', statisticsController::class);
     Route::resource('/materials', MaterialsController::class);
-    Route::resource('/loans', LoansController::class);
+    Route::resource('/loans', LoansController::class)->middleware('can:loans.index');
     Route::resource('/user', UserController::class);
     Route::resource('/labs', LabsController::class);
+    Route::resource('/categories', CategoriesController::class);
+    Route::resource('/metodologia', MetodologiaController::class);
     Route::post('/loans/saveticket',[LoansController::class, 'saveticket'])->name('loans.saveticket');
-    Route::get('standards', [MaterialsController::class, 'getStandard'])->name('standards');
-    Route::get('results', [MaterialsController::class, 'getResult'])->name('results');
+    Route::get('getDatatable',[LoansController::class, 'getDatatable'])->name('getDatatable');
+    Route::get('getMetodologia',[MetodologiaController::class, 'getMetodologia'])->name('getMetodologia');
+    Route::get('getLab', [MaterialsController::class, 'getLab'])->name('getLab');
+    Route::get('getCategory', [MaterialsController::class, 'getCategory'])->name('getCategory');
     Route::get('records', [MaterialsController::class, 'records'])->name('records');
     Route::get('/dash',function(){
         return view('dash.index');
-    })->name('dash');
+    })->middleware('can:home.index')->name('dash');
 });
 
 

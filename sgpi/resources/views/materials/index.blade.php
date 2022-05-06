@@ -1,7 +1,7 @@
 @extends('dash.index');
 
 @section('styles')
-<link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('css/materials/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('title')
@@ -111,7 +111,7 @@ MATERIALES
 <script>
   function fetch_std() {
     $.ajax({
-      url: "{{ route('standards') }}",
+      url: "{{ route('getLab') }}",
       type: "GET",
       dataType: "json",
       success: function(data) {
@@ -129,7 +129,7 @@ MATERIALES
 
   function fetch_res() {
     $.ajax({
-      url: "{{ route('results') }}",
+      url: "{{ route('getCategory') }}",
       type: "GET",
       dataType: "json",
       success: function(data) {
@@ -156,7 +156,7 @@ MATERIALES
       success: function(data) {
         var i = 1;
         $('#record_table').DataTable({
-          "data": data.students,
+          "data": data.filter,
           "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",

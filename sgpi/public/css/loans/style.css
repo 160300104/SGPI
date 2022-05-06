@@ -32,7 +32,7 @@ small {
 
   .seccion_proveedor{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 
   .seccion_proveedor i{
@@ -41,4 +41,8 @@ small {
 
   td{
     text-align: center;
+  }
+  
+  .dataTables_filter{
+    display: none;
   }

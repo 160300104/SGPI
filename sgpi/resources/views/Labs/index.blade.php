@@ -10,6 +10,13 @@ LABORATORIOS
 
 @section('content')
 
+<div class="seccion_proveedor">
+  <a href="{{route('labs.create')}}" class="btn btn-primary proveedor">
+    <i class="fa fa-plus"></i>Agregar un Laboratorio
+  </a>
+</div>
+<br>
+
 <table class="table table-hover table-striped table-bordered rounded">
     <thead class="tabla">
       <tr>
@@ -27,6 +34,14 @@ LABORATORIOS
               <td>{{$lab->user->name}}</td>
               <td>
                     <a href="{{route('labs.edit',$lab->id)}}" class="btn btn-info block">Editar</a>
+
+                      @can('labs.destroy')
+                      <form action="{{route('labs.destroy', $lab->id)}}" method="POST" class="formEliminar">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger block">Eliminar</button>
+                      </form>
+                      @endcan
               </td>
           </tr>
       @endforeach

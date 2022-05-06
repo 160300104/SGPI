@@ -9,14 +9,15 @@ NUEVO PRESTAMO DE MATERIAL
 @endsection
 
 @section('content')
+@if (session('info'))
+<div class="alert alert-danger">
+    <strong>{{session('info')}}</strong>
+</div>
+@endif
 <form class="form" action="{{ route('loans.store')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
     @csrf
     <div class="container">
         <div class="card-body">
-
-            <div class="form-group">
-                <input type="date" id="loan_date" name="loan_date" value="">
-            </div>
 
             <div class="form-group">
                 <label>Laboratorio:</label>
@@ -29,14 +30,6 @@ NUEVO PRESTAMO DE MATERIAL
                 @error('id_lab')
                     <small>*{{$message}}</small>
                 @enderror
-            </div>
-
-            <div class="form-group">
-                <input hidden type="text" id="id_user" name="id_user" value="{{Auth::id();}}" >
-            </div>
-
-            <div class="form-group">
-                <input hidden type="text" id="id_status" name="id_status" value="{{'1'}}" >
             </div>
 
             <div class="card-footer">

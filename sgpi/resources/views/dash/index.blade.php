@@ -59,6 +59,19 @@
 
 </head>
 
+<style>
+	.header_style{
+		display: flex;
+		align-items: center;
+		justify-content: end;
+	}
+	.header_style_2{
+		width: 12%;
+		justify-content: center;
+		margin: 0;
+	}
+</style>
+
 <!-- end::Head -->
 
 <!-- begin::Body -->
@@ -94,13 +107,14 @@
 				<div class="k-aside-menu-wrapper	k-grid__item k-grid__item--fluid" id="k_aside_menu_wrapper">
 					<div id="k_aside_menu" class="k-aside-menu " data-kmenu-vertical="1" data-kmenu-scroll="1" data-kmenu-dropdown-timeout="500">
 						<ul class="k-menu__nav ">
-						@can('home.index')
+
+							{{-- SECCION DE PROVEEDORES --}}
+							@can('provider.index')
 							<li class="k-menu__section ">
-								<h4 class="k-menu__section-text">Materiales</h4>
+								<h4 class="k-menu__section-text">Proveedores</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
 							</li>
 
-							@can('provider.index')
 							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon fa fa-truck"></i><span class="k-menu__link-text">Proveedores</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 									<ul class="k-menu__subnav">
@@ -109,50 +123,64 @@
 								</div>
 							</li>
 							@endcan
-
+							
+							{{-- SECCION DE MATERIALES --}}
+							@can('home.index')
+							<li class="k-menu__section ">
+								<h4 class="k-menu__section-text">Materiales</h4>
+								<i class="k-menu__section-icon flaticon-more-v2"></i>
+							</li>
+							
 							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon fa fa-box"></i><span class="k-menu__link-text">Materiales</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
-							@can('materials.index')
 								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+									{{-- GESTIONAR MATERIALES --}}
+									@can('materials.index')
 									<ul class="k-menu__subnav">
 										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('materials') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Gestionar Materiales</span></a></li>
 									</ul>
+									@endcan
+
+									{{-- PRÉSTAMO DE MATERIALES --}}
+									@can('loans.index')
 									<ul class="k-menu__subnav">
-										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('loans') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Prestamo de Materiales</span></a></li>
+										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('loans') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Préstamo de Materiales</span></a></li>
 									</ul>
+									@endcan
 								</div>
 							@endcan
-						@endcan
 
+							{{-- SECCION DE ESTADÍSTICAS --}}
 							@can('statistics.index')
 							<li class="k-menu__section ">
 								<h4 class="k-menu__section-text">Estadisticas</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
 							</li>
 
-							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon flaticon2-analytics-1"></i><span class="k-menu__link-text">Reportes</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
+							<li class="k-menu__item  k-menu__item--submenu" aria-haspopup="true" data-kmenu-submenu-toggle="hover"><a href="javascript:;" class="k-menu__link k-menu__toggle"><i class="k-menu__link-icon fa fa-chart-pie"></i><span class="k-menu__link-text">Reportes</span><i class="k-menu__ver-arrow la la-angle-right"></i></a>
 								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
 									<ul class="k-menu__subnav">
 										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('statistics') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Estadísticas</span></a></li>
 									</ul>
 								</div>
+								<div class="k-menu__submenu "><span class="k-menu__arrow"></span>
+									<ul class="k-menu__subnav">
+										<li class="k-menu__item " aria-haspopup="true"><a href="{{ url('metodologia') }}" class="k-menu__link "><i class="k-menu__link-bullet k-menu__link-bullet--dot"><span></span></i><span class="k-menu__link-text">Metodologia ABC</span></a></li>
+									</ul>
+								</div>
 							</li>
 							@endcan
 
+							{{-- SECCION DE ADMIN --}}
 							@can('user.index')
 							<li class="k-menu__section ">
-								<h4 class="k-menu__section-text">Usuarios</h4>
+								<h4 class="k-menu__section-text">Panel de Control</h4>
 								<i class="k-menu__section-icon flaticon-more-v2"></i>
 							</li>
 							
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('labs') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Laboratorios</span></a></li>
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('categories') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Categorias</span></a></li>
 							@endcan
-
-							<li class="k-menu__section ">
-								<h4 class="k-menu__section-text">Laboratorios</h4>
-								<i class="k-menu__section-icon flaticon-more-v2"></i>
-							</li>
-							
-								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('labs') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Laboratorios</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -166,28 +194,29 @@
 			<div class="k-grid__item k-grid__item--fluid k-grid k-grid--hor k-wrapper" id="k_wrapper">
 
 				<!-- begin:: Header -->
-				<div id="k_header" class="k-header k-grid__item  k-header--fixed ">
+				<div id="k_header" class="k-header k-griditem  k-header--fixed header_style">
 
-					<div class="border-t border-gray-100"></div>
+                    <div class="border-t border-gray-100"></div>
 
-					<!-- Authentication -->
-					<form method="POST" class="btn-logout" action="{{ route('logout') }}">
-						@csrf
+                    <span class="text-success">{{auth()->user()->name}}</span>
+                    <!-- Authentication -->
+                    <form method="POST" class="btn-logout header_style_2" action="{{ route('logout') }}">
+                        @csrf
 
-						<button class="btn btn-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <button class="btn btn-secondary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-							{{ __('Log Out') }}
-						</button>
-					</form>
+                            {{ ('Log Out') }}
+                        </button>
+                    </form>
 
-					<!-- begin:: Header Topbar -->
-					<div class="k-header__topbar">
+                    <!-- begin:: Header Topbar -->
+                    <div class="k-header__topbar">
 
-					</div>
+                    </div>
 
-					<!-- end:: Header Topbar -->
+                    <!-- end:: Header Topbar -->
 
-				</div>
+                </div>
 				<div class="k-content	k-grid__item k-grid__item--fluid k-grid k-grid--hor" id="k_content">
 					<div class="k-content__head	k-grid__item">
 						<div class="k-content__head-main">

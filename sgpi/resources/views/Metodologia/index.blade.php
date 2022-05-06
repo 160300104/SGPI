@@ -1,41 +1,75 @@
 @extends('dash.index');
 
 @section('styles')
-<link href="{{asset('css/loans/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('title')
-PRESTAMO DE MATERIALES
+METODOLOGIA ABC
 @endsection
 
 @section('content')
+  {{-- Fila 1 --}}
+  <div class="row mb-3">
+      {{-- Tarjeta 1 --}}
+      <div class="col">
+          <div class="card bg-success text-white">
+              <div class="font-weight-normal card-header text-center bg-success h3">Categoria A </div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos">Materiales indispensables en almacen.</span></h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-<div class="seccion_proveedor">
-  <a href="{{route('loans.create')}}" class="btn btn-primary proveedor">
-    <i class="fa fa-plus"></i>  Realizar un prestamo
-  </a>
-</div>
-<br>
+      {{-- Tarjeta 2 --}}
+      <div class="col">
+          <div class="card bg-primary text-white">
+              <div class="font-weight-normal card-header text-center bg-primary h3">Categoria B</div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos">Materiales con consumo moderado.</span></h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-<div class="row align-items-end">
-    <div class="col-md-3">
-      <label>Fecha de prestamo</label>
-      <input type="text" name="start_date" class="form-control start_date" readonly/>
-    </div>
-    <div class="col-md-3">
-      <label>Laborario</label>
-      <select class="form-control id_lab" id="id_lab">
-        <option value="">Seleccionar...</option>
-        @foreach($labs as $lab)
-          <option value="{{$lab->id}}">{{$lab->name}}</option>
-        @endforeach
-      </select>
-    </div>
-    <div class="col-md-6">
-        <button id="filter" class="btn btn-danger">Filtrar</button>
-        <button id="reset"  class="btn btn-warning">Reset</button>
-    </div>
+      {{-- Tarjeta 3 --}}
+      <div class="col">
+          <div class="card bg-info text-white">
+              <div class="font-weight-normal card-header text-center bg-info h3">Categoria C</div>
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <p class=" card-title mb-0"><span id="id_vendidos"></span>Materiales a considerar su rotacion por bajo consumo.</h5>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+<div class="row mb-3">
+  <div class="col-md-2">
+    <label>Laborario</label>
+    <select class="form-control id_lab" id="id_lab">
+      <option value="">Seleccionar...</option>
+      @foreach($labs as $lab)
+        <option value="{{$lab->id}}">{{$lab->name}}</option>
+      @endforeach
+    </select>
+  </div>  
+  <div class="col-md-1 mt-4">
+      <button id="filter" class="btn btn-danger">Filtrar</button>
+  </div>
 </div>
+
 
 <div class="">
   <div class="row">
@@ -46,14 +80,12 @@ PRESTAMO DE MATERIALES
             <table class="table table-hover table-striped table-bordered tickets_table">
               <thead class="tabla">
                 <tr>
-                  <th style="width: 5%; text-align: center;" scope="col">Fecha del prestamo</th>
-                  <th style="width: 10%; text-align: center;" scope="col">Nombre</th>
-                  <th style="width: 10%; text-align: center;" scope="col">Laborario</th>
-                  <th style="width: 10%; text-align: center;" scope="col">Encargado</th>
-                  <th style="width: 10%; text-align: center;" scope="col">Material</th>
-                  <th style="width: 5%; text-align: center;" scope="col">Cantidad</th>
-                  <th style="width: 5%; text-align: center;" scope="col">Estado</th>
-                  <th style="width: 5%; text-align: center;" scope="col">Acciones</th>
+                  <th style="width: 10%" scope="col">Materiales</th>
+                  <th style="width: 10%" scope="col">Frecuencia de Prestamos</th>
+                  <th style="width: 10%" scope="col">% Frec</th>
+                  <th style="width: 10%" scope="col">Acumulado Prestamos</th>
+                  <th style="width: 10%" scope="col">% Acum</th>
+                  <th style="width: 10%" scope="col">Metodologia ABC</th>
                 </tr>
               </thead>
               <tbody>
@@ -108,17 +140,16 @@ PRESTAMO DE MATERIALES
 <script>
     $(document).ready(function() {
 
-        $(".start_date").flatpickr();
         $(".id_lab").select2();
 
       const table =  $('.tickets_table').DataTable({
+            order: [[ 2, "desc" ]],
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: {
-              url: "{{route('getDatatable')}}",
+              url: "{{route('getMetodologia')}}",
               data: function(d){
-                  d.start_date = $('.start_date').val(),
                   d.id_lab = $('.id_lab').val()
               },
 
@@ -126,46 +157,28 @@ PRESTAMO DE MATERIALES
             dataType: 'json',
             type: "POST",
             columns: [{
-                    data: 'loan.loan_date',
-                    name: 'loan.loan_date'
-                    
+                    data: 'name',
+                    name: 'name'
                 },    
                 {
-                    data: 'loan.user.name',
-                    name: 'loan.user.name'  
+                    data: 'frecuencia',
+                    name: 'frecuencia'   
                 },
                 {
-                    data: 'loan.lab.name',
-                    name: 'loan.lab.name'   
+                    data: 'porcentaje',
+                    name: 'porcentaje'   
                 },
                 {
-                    data: 'loan.lab.user.name',
-                    name: 'loan.lab.user.name'   
+                    data: 'acumulado',
+                    name: 'acumulado'   
                 },
                 {
-                    data: 'material.name',
-                    name: 'material.name'   
+                    data: 'porcentaje_acumulado',
+                    name: 'porcentaje_acumulado'   
                 },
                 {
-                    data: 'quantity',
-                    name: 'quantity'   
-                },
-                {
-                    data: 'loan.status.id',
-                    name: 'loan.status.id'   
-                },
-                {
-                    data: 'action',
-                    "render": function(data, type, row, meta) {
-                      return `                   
-                      @can('loans.destroy')
-                      <form action="loans/${row.id_loan}" method="POST" class="formEliminar">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger block" >Finalizar Prestamo</button>
-                      </form>
-                      @endcan`;
-              }
+                    data: 'clasificacion',
+                    name: 'clasificacion'   
                 },
             ]           
         })
@@ -173,14 +186,6 @@ PRESTAMO DE MATERIALES
         $('#filter').click(function(){
           table.draw();
         })
-
-        $(document).on("click", "#reset", function(e) {
-          e.preventDefault();
-          $(".start_date").val("");
-          $('.id_lab').val(null).trigger('change');
-          table.draw();
-        });
-
     })
 </script>
 @endsection

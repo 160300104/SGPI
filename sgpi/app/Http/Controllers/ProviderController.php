@@ -13,6 +13,13 @@ use function PHPSTORM_META\map;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:provider.index')->only('index');
+        $this->middleware('can:provider.create')->only('create', 'store');
+        $this->middleware('can:provider.edit')->only('edit', 'update');
+        $this->middleware('can:provider.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +55,9 @@ class ProviderController extends Controller
             'image' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
         ]);
 
         $provider=$request->all();
@@ -73,9 +82,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        return view('provider.show');
     }
 
     /**
@@ -104,7 +113,9 @@ class ProviderController extends Controller
             'image' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
         ]);
 
         $user = Provider::find($id);
