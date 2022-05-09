@@ -27,5 +27,21 @@ Los paquetes de Laravel que se deben instalar por medio de la línea de comandos
 * composer require fideloper/proxy:*
 * composer require athari/yalinqo
 
+## Instrucciones
+Primero debemos de crear nuestro proyecto con Laravel desde la terminal de comandos. Escribimos lo siguiente:
+* laravel new *nombre_proyecto* --jet
+
+Nos aparecerá el siguiente mensaje: *Which jetstream stack do you prefer?*
+Escogemos la opción que diga **livewire**
+
+El siguiente mensaje es: *Will your application use teams?*
+Escogemos la opción que diga **no** y comenzará la creación del proyecto
+
+En caso de estar utilizando XAMPP de preferencia crearlo directamente en la carpeta **htdocs** ubicada en la carpeta donde se instaló xampp.
+
+Al tener nuestra carpeta de laravel creada, ya podemos pasar todos los archivos que se encuentran dentro de este repositorio a la carpeta que acabamos de crear.
+
 Una vez teniendo todas las tecnologías y paquetes necesarios, se debe ejecutar XAMPP e iniciar el servicio de Apache y MySQL ubicados en el panel de control de XAMPP. Posteriormente en nuestro editor de código debemos ejecutar el siguiente comando: **php artisan serve**, este comando mandará un enlace para que podamos acceder al sistema.
+
+
 
