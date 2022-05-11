@@ -179,7 +179,7 @@
 							
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('user') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-user"></i><span class="k-menu__link-text">Gestionar Usuarios</span></a></li>
 								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('labs') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Laboratorios</span></a></li>
-								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('categories') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-flask"></i><span class="k-menu__link-text">Gestionar Categorias</span></a></li>
+								<li class="k-menu__item" aria-haspopup="true"><a href="{{ url('categories') }}" class="k-menu__link"><i class="k-menu__link-icon fa fa-list"></i><span class="k-menu__link-text">Gestionar Categorias</span></a></li>
 							@endcan
 						</ul>
 					</div>
