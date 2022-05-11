@@ -14,6 +14,7 @@ NUEVO PRESTAMO DE MATERIAL
     <strong>{{session('info')}}</strong>
 </div>
 @endif
+
 <form class="form" action="{{ route('loans.store')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
     @csrf
     <div class="container">

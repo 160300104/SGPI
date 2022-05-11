@@ -117,7 +117,8 @@ class LoansController extends Controller
                     ]);
                     
                     $material = Materials::find(implode($tickets[$i]));
-                    if($material->quantity - implode($tickets[$x]) < 0){
+                    if($material->quantity - implode($tickets[$x]) < 0){                       
+                        Loan::find($loan)->delete();
                         return redirect()->route('loans.create')->with('info', 'El material '.$material->name.' no tiene suficiente existencia en almacen.');
                     }
                     $material->quantity = $material->quantity - implode($tickets[$x]);
