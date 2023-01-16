@@ -1,23 +1,36 @@
 @extends('dash.index');
 
+@section('styles')
+  <link href="{{asset('css/provider/style.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('title')
 PROVEEDORES
 @endsection
 
 @section('content')
-<div><a href="{{route('provider.create')}}" class="btn btn-primary">Agregar un Proveedor</a></div>
-
+@can('provider.create')
+<div class="seccion_proveedor">
+  <a href="/provider/show" class="btn btn-primary proveedor">
+    <i class="fa fa-map-marker" ></i>Localizacion de proveedores
+  </a>
+  <a href="{{route('provider.create')}}" class="btn btn-primary proveedor">
+    <i class="fa fa-plus"></i>Agregar un Proveedor
+  </a>
+</div>
 <br>
+@endcan
+
 
 <table class="table table-hover table-striped table-bordered rounded">
-    <thead class="thead-dark">
+    <thead class="tabla">
       <tr>
-        <th scope="col" class="col-1">Logo</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Ubicacion</th>
-        <th scope="col">Acciones</th>
+        <th style="width: 20%" scope="col" class="col-1">Logo</th>
+        <th style="width: 20%" scope="col">Nombre</th>
+        <th style="width: 20%" scope="col">Email</th>
+        <th style="width: 10%" scope="col">Telefono</th>
+        <th style="width: 25%" scope="col">Ubicacion</th>
+        <th style="width: 5%" scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -31,15 +44,25 @@ PROVEEDORES
               <td>{{$provider->phone_number}}</td>
               <td>{{$provider->location}}</td>
               <td>
-                  <a href="{{route('provider.edit',$provider->id)}}" class="btn btn-info">Editar</a>
+                  @can('provider.edit')
+                  <a href="{{route('provider.edit',$provider->id)}}" class="btn btn-info block">Editar</a>
+                  @endcan
+
+                  @can('provider.destroy')
                   <form action="{{route('provider.destroy', $provider->id)}}" method="POST" class="formEliminar">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger block">Eliminar</button>
                   </form>
+                  @endcan
               </td>
           </tr>
       @endforeach
     </tbody>
   </table>
+
+  <!-- Paginación de Bootstrap -->
+  <div class="d-flex justify-content-end">
+    {!! $providers->links() !!}
+  </div>
 @endsection

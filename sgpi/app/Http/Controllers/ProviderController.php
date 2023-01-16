@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\Labs;
 use Illuminate\Http\Request;
 use App\Models\Provider;
 use DebugBar\DebugBar;
 use Symfony\Component\ErrorHandler\Debug;
 
+use function PHPSTORM_META\map;
+
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:provider.index')->only('index');
+        $this->middleware('can:provider.create')->only('create', 'store');
+        $this->middleware('can:provider.edit')->only('edit', 'update');
+        $this->middleware('can:provider.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
+        $providers = Provider::paginate(5);
         return view('provider.index')->with('providers', $providers);
     }
 
@@ -38,17 +49,30 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $provider = new Provider();
-        $provider->name = $request->get('name');
-        $provider->image = $request->get('image');
-        $provider->email = $request->get('email');
-        $provider->phone_number = $request->get('phone_number');
-        $provider->location = $request->get('location');
 
-        $provider->save();
-        return redirect()->route('provider.index');
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
+        ]);
+
+        $provider=$request->all();
+
+        if($image=$request->file('image')){
+
+            $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
+            $image->move('img/provider', $name);
+            $provider['image'] = $name;
+
+        }
         
+        Provider::create($provider);
+
+        return redirect('/provider');
 
     }
 
@@ -58,9 +82,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        return view('provider.show');
     }
 
     /**
@@ -84,14 +108,29 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $provider = Provider::find($id);
-        $provider->name = $request->get('name');
-        $provider->image = $request->get('image');
-        $provider->email = $request->get('email');
-        $provider->phone_number = $request->get('phone_number');
-        $provider->location = $request->get('location');
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'location' => 'required',
+            'latitude' => 'required',
+            'length' => 'required'
+        ]);
 
-        $provider->save();
+        $user = Provider::find($id);
+
+        $provider=$request->all();
+
+        if($image=$request->file('image')){
+
+            $name = date('ymdHis'). "." . $image->getClientOriginalExtension();
+            $image->move('img/provider', $name);
+            $provider['image'] = $name;
+
+        }
+        
+        $user->update($provider);
 
         return redirect('/provider');
     }
